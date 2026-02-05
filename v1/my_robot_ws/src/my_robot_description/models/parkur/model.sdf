@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+<model name="parkur">
+<static>true</static>
+<link name="link">
+  <!-- VISUAL (Görsel) -->
+  <visual name="visual">
+    <geometry>
+      <mesh>
+        <uri>file:///home/gauss/Desktop/my_robot_ws/src/my_robot_description/models/parkur/meshes/parkur.dae</uri>
+        <scale>1 1 1</scale>
+      </mesh>
+    </geometry>
+    <!-- Material kısmı KALDIRILDI - DAE dosyasının kendi renkleri kullanılacak -->
+  </visual>
+  <!-- COLLISION (Çarpışma) -->
+  <collision name="collision">
+    <geometry>
+      <mesh>
+        <uri>file:///home/gauss/Desktop/my_robot_ws/src/my_robot_description/models/parkur/meshes/parkur.dae</uri>
+        <scale>1 1 1</scale>
+      </mesh>
+    </geometry>
+  </collision>
+</link>
+</model>
+</sdf>

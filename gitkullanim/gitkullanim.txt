@@ -1,0 +1,70 @@
+================================================================
+                GIT KULLANIM REHBERİ (PUSH & PULL)
+================================================================
+
+1. GÜNCELLEMELERİ ALMAK (PULL)
+----------------------------------------------------------------
+Kod yazmaya başlamadan önce, arkadaşının yaptığı değişiklikleri
+kendi bilgisayarına indirmek için kullanılır.
+Komut:
+    git pull
+
+* İpucu: Bunu yapmadan kod yazmaya başlarsan, sonrasında "çakışma"
+  (conflict) yaşama ihtimalin artar. Güne bununla başla.
+
+
+2. DEĞİŞİKLİKLERİ SEÇMEK (ADD) - KRİTİK KISIM
+----------------------------------------------------------------
+Yaptığın değişiklikleri paketlemek üzere "sahneye" alır.
+
+YÖNTEM A: Her şeyi eklemek (Klasik)
+Bütün değişen dosyaları tek seferde ekler.
+Komut:
+    git add .
+
+YÖNTEM B: Sadece Belli Dosyayı Eklemek (Spesifik)
+Diyelim ki 5 dosyada değişiklik yaptın ama sadece birini veya
+ikisini sunucuya göndermek istiyorsun (diğerleri deneme/yanılma
+kodlarıysa).
+Komut:
+    git add dosya_adi.uzanti
+
+Örnekler:
+    git add main.py              (Sadece main.py'yi ekler)
+    git add src/motor_kontrol.c  (Sadece o klasördeki C dosyasını ekler)
+    git add *.py                 (Sonu .py ile biten her şeyi ekler)
+
+git add src/ 
+src dosyasını seçer sadece
+
+3. PAKETLEMEK (COMMIT)
+----------------------------------------------------------------
+Seçtiğin (add yaptığın) dosyaları bir paket haline getirir ve
+üzerine not yapıştırır. Bu işlem henüz sunucuya bir şey yollamaz,
+sadece senin bilgisayarına kaydeder.
+Komut:
+git commit -m "Sadece src klasorundeki degisiklikler eklendi" vs gibi bir mesaj
+
+
+4. SUNUCUYA GÖNDERMEK (PUSH)
+----------------------------------------------------------------
+Paketlediğin (commitlediğin) değişiklikleri GitHub'a yükler.
+Komut:
+    git push
+
+
+5. DURUM KONTROLÜ (STATUS)
+----------------------------------------------------------------
+Hangi dosyalar değişmiş? Hangileri eklenmiş? Hangileri gönderilmeyi
+bekliyor? Kafan karıştığında bu komutu kullan.
+Komut:
+    git status
+
+================================================================
+ÖZET İŞ AKIŞI:
+1. git pull               (Güncel hali çek)
+2. git status             (Ne değişmiş bak)
+3. git add dosya_adi.py   (İstediğini seç)
+4. git commit -m "mesaj"  (Paketle)
+5. git push               (Yolla)
+================================================================

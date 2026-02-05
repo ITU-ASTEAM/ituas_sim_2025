@@ -1,0 +1,17 @@
+# ROS2/Colcon klasörleri
+build/
+install/
+log/
+
+# Python derleme dosyaları
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Sistem ve Editör dosyaları
+.DS_Store
+.vscode/
+.idea/
+*.swp
+**/golet.dae

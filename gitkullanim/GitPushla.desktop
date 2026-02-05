@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=GitHub'a Yolla
+Comment=Ros2 kodlarını pushlar
+Exec=/home/gauss/Desktop/githubsal/ros2_codes/gitkullanim/git_yolla.sh
+Icon=git-gui
+Terminal=false
+Type=Application
+Categories=Utility;Development;
