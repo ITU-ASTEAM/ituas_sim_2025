@@ -1,0 +1,263 @@
+<?xml version="1.0" ?>
+<sdf version='1.11'>
+  <model name='boat'>
+    <link name='base_link'>
+      <inertial>
+        <pose>0.11 0 -0.5 0 0 0</pose>
+        <mass>99.2</mass>
+        <inertia>
+          <ixx>0.567</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.042</iyy>
+          <iyz>0</iyz>
+          <izz>1.542</izz>
+        </inertia>
+      </inertial>
+      
+      <!-- SOL PONTOON - VRX GİBİ YUKARDA! -->
+      <collision name='hull_left'>
+        <pose>0.11 0.314 -0.05 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.15 0.22 0.20</size>
+          </box>
+        </geometry>
+      </collision>
+      
+      <!-- SAĞ PONTOON - VRX GİBİ YUKARDA! -->
+      <collision name='hull_right'>
+        <pose>0.11 -0.314 -0.05 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.15 0.22 0.20</size>
+          </box>
+        </geometry>
+      </collision>
+      
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>2 2 2</scale>
+            <uri>/home/gauss/Desktop/my_robot_ws/src/my_robot_description/models/boat/meshes/stl/denemeas.003.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2 0.4 0.8 1</ambient>
+          <diffuse>0.3 0.5 0.9 1</diffuse>
+          <specular>0.8 0.8 0.8 1</specular>
+        </material>
+      </visual>
+    </link>
+    
+    <!-- SOL PERVANE MAHFAZAsı -->
+    <link name='left_housing_link'>
+      <pose>-0.3 0.33 -0.15 0 0 0</pose>
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.002</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.002</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+    </link>
+    
+    <!-- SOL PERVANE -->
+    <link name='leftmotor_link'>
+      <pose>-0.301 0.330 -0.15 1.5708 0.0 -1.5708</pose>
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.0001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0001</iyy>
+          <iyz>0</iyz>
+          <izz>0.0002</izz>
+        </inertia>
+      </inertial>
+      <visual name='leftmotor_visual'>
+        <pose>0 0 0 -1.5708 0.0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/gauss/Desktop/my_robot_ws/src/my_robot_description/models/boat/meshes/stl/denemeas.001.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    
+    <!-- SAĞ PERVANE MAHFAZAsı -->
+    <link name='right_housing_link'>
+      <pose>-0.3 -0.33 -0.15 0 0 0</pose>
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.002</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.002</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+    </link>
+    
+    <!-- SAĞ PERVANE -->
+    <link name='rightmotor_link'>
+      <pose>-0.301 -0.330 -0.15 1.5708 0.0 -1.5708</pose>
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.0001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0001</iyy>
+          <iyz>0</iyz>
+          <izz>0.0002</izz>
+        </inertia>
+      </inertial>
+      <visual name='rightmotor_visual'>
+        <pose>0 0 0 -1.5708 0.0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/gauss/Desktop/my_robot_ws/src/my_robot_description/models/boat/meshes/stl/denemeas.002.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <!-- EKLEMLER -->
+    <joint name='left_chassis_engine_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>left_housing_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+        </limit>
+      </axis>
+    </joint>
+    
+    <joint name='right_chassis_engine_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>right_housing_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+        </limit>
+      </axis>
+    </joint>
+    
+<joint name='leftmotor_link_joint' type='revolute'>
+  <parent>left_housing_link</parent>
+  <child>leftmotor_link</child>
+  <axis>
+    <xyz>0 0 1</xyz>  <!-- 1 0 0 yerine 0 0 1 -->
+    <limit>
+      <effort>100</effort>
+      <velocity>100</velocity>
+    </limit>
+    <dynamics>
+      <friction>1.0</friction>
+      <damping>2.0</damping>
+    </dynamics>
+  </axis>
+</joint>
+
+<joint name='rightmotor_link_joint' type='revolute'>
+  <parent>right_housing_link</parent>
+  <child>rightmotor_link</child>
+  <axis>
+    <xyz>0 0 1</xyz>  <!-- 1 0 0 yerine 0 0 1 -->
+    <limit>
+      <effort>100</effort>
+      <velocity>100</velocity>
+    </limit>
+    <dynamics>
+      <friction>1.0</friction>
+      <damping>2.0</damping>
+    </dynamics>
+  </axis>
+</joint>
+
+    <!-- THRUSTER PLUGINS -->
+    <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+      <joint_name>leftmotor_link_joint</joint_name>
+      <thrust_coefficient>0.0001</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.11</propeller_diameter>
+      <velocity_control>true</velocity_control>
+    </plugin>
+
+    <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+      <joint_name>rightmotor_link_joint</joint_name>
+      <thrust_coefficient>0.0001</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.11</propeller_diameter>
+      <velocity_control>true</velocity_control>
+    </plugin>
+
+    <!-- VRX SURFACE - SOL PONTOON -->
+    <plugin filename="libSurface.so" name="vrx::Surface">
+      <link_name>base_link</link_name>
+      <hull_length>1.15</hull_length>
+      <hull_radius>0.11</hull_radius>
+      <fluid_level>0.0</fluid_level>
+      <points>
+        <point>0.68 0.314 -0.05</point>
+        <point>-0.465 0.314 -0.05</point>
+      </points>
+    </plugin>
+
+    <!-- VRX SURFACE - SAĞ PONTOON -->
+    <plugin filename="libSurface.so" name="vrx::Surface">
+      <link_name>base_link</link_name>
+      <hull_length>1.15</hull_length>
+      <hull_radius>0.11</hull_radius>
+      <fluid_level>0.0</fluid_level>
+      <points>
+        <point>0.68 -0.314 -0.05</point>
+        <point>-0.465 -0.314 -0.05</point>
+      </points>
+    </plugin>
+    
+    
+    
+
+    <!-- VRX HYDRODYNAMICS -->
+    <plugin filename="libSimpleHydrodynamics.so" name="vrx::SimpleHydrodynamics">
+      <link_name>base_link</link_name>
+      <xDotU>0.0</xDotU>
+      <yDotV>0.0</yDotV>
+      <nDotR>0.0</nDotR>
+      
+    <xU>100.0</xU>
+      
+      <xUU>150.0</xUU>
+      
+      <yV>50.0</yV>
+      <yVV>100.0</yVV>
+      
+      <zW>200.0</zW>
+      
+      <kP>12.0</kP>
+      <kPP>24.0</kPP>
+      <mQ>36.0</mQ>
+      <mQQ>35.0</mQQ>
+      
+      <nR>30.0</nR>
+      <nRR>50.0</nRR>
+    </plugin>
+    
+  </model>
+</sdf>
