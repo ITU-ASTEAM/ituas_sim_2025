@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<sdf version="1.10">
+
+<world name="ocean_world">
+
+
+<plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+
+
+
+<!-- PHYSICS - DART -->
+<physics name="default" type="dart">
+  <max_step_size>0.004</max_step_size>
+  <real_time_factor>1.0</real_time_factor>
+  <dart>
+    <collision_detector>bullet</collision_detector>
+  </dart>
+</physics>
+
+<plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+<plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+<plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+
+<!-- BUOYANCY -->
+<plugin filename="gz-sim-buoyancy-system" name="gz::sim::systems::Buoyancy">
+  <uniform_fluid_density>1000</uniform_fluid_density>
+</plugin>
+
+<gravity>0 0 -9.8</gravity>
+
+<!-- GÖKYÜZÜ -->
+<scene>
+  <ambient>0.4 0.4 0.4 1</ambient>
+  <background>0.7 0.8 1.0 1</background>
+  <shadows>true</shadows>
+  <sky>
+    <time>12</time>
+  </sky>
+</scene>
+
+<!-- GÜNEŞ -->
+<light name="sun" type="directional">
+  <cast_shadows>true</cast_shadows>
+  <pose>0 0 10 0 0 0</pose>
+  <diffuse>0.8 0.8 0.8 1</diffuse>
+  <specular>0.6 0.6 0.6 1</specular>
+  <direction>-0.5 0.1 -0.9</direction>
+</light>
+
+<!-- DENİZ YÜZEYİ -->
+<model name="ocean_surface">
+  <static>true</static>
+  <link name="link">
+    <visual name="visual">
+      <pose>0 0 0 0 0 0</pose>
+      <geometry>
+        <plane>
+          <normal>0 0 1</normal>
+          <size>1000 1000</size>
+        </plane>
+      </geometry>
+      <material>
+        <ambient>0.0 0.3 0.5 0.8</ambient>
+        <diffuse>0.0 0.4 0.6 0.9</diffuse>
+        <specular>0.8 0.8 1.0 1</specular>
+      </material>
+    </visual>
+  </link>
+</model>
+
+<!-- ROBOT -->
+<include>
+  <uri>file:///home/gauss/Desktop/my_robot_ws/src/my_robot_description/models/boat</uri>
+  <name>boat</name>
+  <pose>0 0 0.3 0 0 0</pose>
+</include>
+
+
+
+<!-- .dae
+<include>
+  <uri>model://golet</uri>
+  <name>golet_parkur</name>
+  <pose>0 20 -20 +1.5708 0 0</pose> 
+</include>
+
+-->
+
+<!-- parkur.dae-->
+<include>
+      <uri>file:///home/gauss/Desktop/my_robot_ws/src/my_robot_description/models/parkur</uri>
+      <name>parkur_engeli</name>
+      <pose>10 0 0 0 0 0</pose> </include>
+      
+      
+</world>
+</sdf>
