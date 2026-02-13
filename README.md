@@ -29,7 +29,7 @@ sudo pkill -9 -f 'ign|gazebo|ruby|gz' && sudo rm -rf /dev/shm/ign-* /dev/shm/gz-
 
 
 Golet.dae githubın 100 mb limitini aştığı için drive linki ekledim isteyen indirebilir.
-
+https://drive.google.com/drive/folders/1548BU8YdyO9oBsV8xFsSzGwSMaZHzrnU?usp=sharing
 
 
 https://drive.google.com/drive/folders/1XHSol1CxVLURtLInUD2BIfSHCaRn7t5O?usp=drive_link
