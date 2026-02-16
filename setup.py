@@ -57,14 +57,11 @@ def step_1_repos():
     run_command("apt-get update", shell=True)
 
 def step_2_packages():
-    print(f"\n{Colors.HEADER}--- 2. TEMEL PAKETLER ---{Colors.ENDC}")
-    pkgs = ["ros-humble-desktop", "python3-colcon-common-extensions", "python3-rosdep", "gz-harmonic", 
-            "ros-humble-ros-gz", "ros-humble-xacro", "ros-humble-robot-state-publisher"]
-    install_apt(pkgs)
-    if not os.path.exists("/etc/ros/rosdep/sources.list.d/20-default.list"):
-        try: run_command("rosdep init", shell=True)
-        except: pass
-    run_command("rosdep update", shell=True, as_user=get_real_user())
+
+    essential_tools = ["ros-humble-desktop", "python3-colcon-common-extensions", "python3-rosdep", "python3-pip"]
+    install_apt(essential_tools)
+    sim_packages = ["gz-harmonic", "ros-humble-ros-gz", "ros-humble-xacro", "ros-humble-robot-state-publisher"]
+    install_apt(sim_packages)
 
 def step_3_vrx_download():
     print(f"\n{Colors.HEADER}--- 3. VRX KAYNAK KODU ---{Colors.ENDC}")
@@ -78,9 +75,16 @@ def step_3_vrx_download():
         print(f"{Colors.OKGREEN}[TAMAM] VRX zaten mevcut.{Colors.ENDC}")
 
 def step_4_vision():
-    print(f"\n{Colors.HEADER}--- 4. VISION (YOLO/DEPTHAI) ---{Colors.ENDC}")
-    run_command([sys.executable, "-m", "pip", "install", "ultralytics==8.4.6", "depthai", "opencv-python"])
-
+    run_command([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
+    
+    packages = ["ultralytics==8.4.6", "depthai", "opencv-python"]
+    
+    # KRİTİK EKLEME: "--ignore-installed" ve "--break-system-packages"
+    # Bu sayede sistemdeki eski sympy silinmeye çalışılmıyor, direkt üstüne yazılıyor.
+    cmd = [sys.executable, "-m", "pip", "install"] + packages + ["--ignore-installed", "--break-system-packages"]
+    
+    run_command(cmd)
+    
 def step_5_build():
     print(f"\n{Colors.HEADER}--- 5. WORKSPACE DERLEME ---{Colors.ENDC}")
     ws_path, _, real_user = get_workspace_paths()
