@@ -2,7 +2,7 @@ import os
 import subprocess
 import sys
 import shutil
-
+import re
 # --- RENKLENDİRME ---
 class Colors:
     HEADER = '\033[95m'
@@ -50,7 +50,7 @@ def install_apt(packages):
 def step_1_repos():
     print(f"\n{Colors.HEADER}--- 1. SİSTEM REPOLARI ---{Colors.ENDC}")
     run_command("apt-get update", shell=True)
-    install_apt(["curl", "wget", "git", "lsb-release", "gnupg", "software-properties-common", "tree"])
+    install_apt(["curl", "wget", "lsb-release", "gnupg", "software-properties-common", "tree"])
     if not os.path.exists("/etc/apt/sources.list.d/ros2.list"):
         run_command("curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg", shell=True)
         run_command('echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null', shell=True)
@@ -78,9 +78,6 @@ def step_4_vision():
     run_command([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
     
     packages = ["ultralytics==8.4.6", "depthai", "opencv-python"]
-    
-    # KRİTİK EKLEME: "--ignore-installed" ve "--break-system-packages"
-    # Bu sayede sistemdeki eski sympy silinmeye çalışılmıyor, direkt üstüne yazılıyor.
     cmd = [sys.executable, "-m", "pip", "install"] + packages + ["--ignore-installed", "--break-system-packages"]
     
     run_command(cmd)
@@ -91,7 +88,7 @@ def step_5_build():
     cmd = f"source /opt/ros/humble/setup.bash && cd {ws_path} && colcon build --symlink-install"
     run_command(cmd, shell=True, as_user=real_user)
 
-def step_6_rename(auto=False):
+def step_6_rename():
     print(f"\n{Colors.HEADER}--- 6. İSİM VE YOL DÜZENLEME ---{Colors.ENDC}")
     _, src_path, real_user = get_workspace_paths()
     target = os.path.join(src_path, "my_robot_description")
@@ -100,25 +97,37 @@ def step_6_rename(auto=False):
         print(f"{Colors.FAIL}Hata: {target} bulunamadı!{Colors.ENDC}")
         return
 
-    if auto:
-        old_n, new_n = "gauss", real_user
-    else:
-        old_n = input(f"{Colors.OKBLUE}Aranacak Eski İsim (gauss): {Colors.ENDC}") or "gauss"
-        new_n = input(f"{Colors.OKBLUE}Yeni İsim ({real_user}): {Colors.ENDC}") or real_user
+    # Kullanıcıdan isimleri alıyoruz
+    old_n = input(f"{Colors.OKBLUE}Dosyalarda kayıtlı olan eski kullanıcı adı (varsayılan: gauss): {Colors.ENDC}") or "gauss"
+    new_n = input(f"{Colors.OKBLUE}Senin bilgisayarındaki kullanıcı adın (varsayılan: {real_user}): {Colors.ENDC}") or real_user
 
-    old_p, new_p = f"/home/{old_n}/", f"/home/{new_n}/"
+    # Regex Güvencesi: Sadece tam yol eşleşmelerini (örn: /home/gauss/) yakalar.
+    # Bu sayede dosya içindeki 'thruster' veya 'joint' gibi kelimeler ASLA bozulmaz.
+    home_pattern = re.compile(rf'/home/{old_n}/')
+    new_home = f'/home/{new_n}/'
+    
     count = 0
     for r, d, files in os.walk(target):
         for f in files:
-            if f.endswith(('.sdf', '.launch.py', '.xml', '.yaml', '.config')):
+            if f.endswith(('.sdf', '.launch.py', '.xml', '.yaml', '.config', '.urdf', '.xacro')):
                 path = os.path.join(r, f)
-                with open(path, 'r', encoding='utf-8') as file: content = file.read()
-                if old_p in content or "gaussas" in content:
-                    # Hem ev dizini yolunu hem de yanlış isimlendirilmiş meshleri düzelt
-                    new_content = content.replace(old_p, new_p).replace("gaussas", "denemeas")
-                    with open(path, 'w', encoding='utf-8') as file: file.write(new_content)
+                
+                with open(path, 'r', encoding='utf-8') as file:
+                    content = file.read()
+                
+                # Değişiklik kontrolü
+                if home_pattern.search(content) or "gaussas" in content:
+                    # Sadece /home/eski_isim/ formatını senin yeni isminle değiştirir
+                    new_content = home_pattern.sub(new_home, content)
+                    
+                    # Varsa özel mesh isimlendirmelerini düzeltir
+                    new_content = new_content.replace("gaussas", "denemeas")
+                    
+                    with open(path, 'w', encoding='utf-8') as file:
+                        file.write(new_content)
                     count += 1
-    print(f"{Colors.OKGREEN}[TAMAM] {count} dosyada düzenleme yapıldı.{Colors.ENDC}")
+
+    print(f"{Colors.OKGREEN}[TAMAM] {count} dosyada yollar '{new_n}' olarak güncellendi.{Colors.ENDC}")
 
 def step_7_bashrc_fix():
     print(f"\n{Colors.HEADER}--- 7. KALICI BASHRC AYARLARI ---{Colors.ENDC}")
@@ -162,6 +171,40 @@ def step_8_run_simulation():
                        shell=True, cwd=world_dir, env=env)
     except Exception as e:
         print(f"Hata: {e}")
+        
+def clean_gazebo_basic():
+    """Donan veya çakışan temel Gazebo süreçlerini öldürür."""
+    print(f"\n{Colors.WARNING}--- TEMEL GAZEBO TEMİZLİĞİ ---{Colors.ENDC}")
+    # Süreç bulunamazsa hata dönmemesi için || true kullanıyoruz
+    commands = [
+        "pkill -9 -f ign || true",
+        "pkill -9 -f gazebo || true",
+        "pkill -9 -f ruby || true"
+    ]
+    for cmd in commands:
+        run_command(cmd, shell=True)
+    print(f"{Colors.OKGREEN}Süreçler sonlandırıldı.{Colors.ENDC}")
+
+def clean_gazebo_deep():
+    """Süreçlerle birlikte paylaşımlı hafıza ve geçici dosyaları da temizler."""
+    print(f"\n{Colors.FAIL}--- KÖKTEN GAZEBO TEMİZLİĞİ (DEEP CLEAN) ---{Colors.ENDC}")
+    
+    # 1. Tüm ilgili süreçleri tek seferde uçur
+    run_command("pkill -9 -f 'ign|gazebo|ruby|gz' || true", shell=True)
+    
+    # 2. Gazebo'nun ulaşım katmanı (transport layer) artıklarını temizle
+    # /dev/shm altındaki dosyalar temizlenmezse yeni simülasyon eski portlara bağlanmaya çalışabilir
+    cleanup_files = [
+        "/dev/shm/ign-*",
+        "/dev/shm/gz-*",
+        "/tmp/.ignition",
+        "/tmp/.gz"
+    ]
+    
+    # Dosyaları sil
+    run_command(f"rm -rf {' '.join(cleanup_files)} || true", shell=True)
+    
+    print(f"{Colors.OKGREEN}Sistem tamamen temizlendi ve yeni simülasyona hazır!{Colors.ENDC}")
 
 def full_auto_setup():
     print(f"\n{Colors.WARNING}!!! FULL OTOMATİK KURULUM BAŞLIYOR !!!{Colors.ENDC}")
@@ -192,7 +235,9 @@ def main():
         print("5. Workspace Derle (Build)")
         print("6. İsim/Yol Düzenle")
         print("7. Bashrc Kalıcı Yap")
-        print("8. Simülasyonu Başlat")
+        print("8. Simülasyonu Başlat")    
+        print("9. Temel Temizlik (pkill)")
+        print("10. Sağlam Temizlik (Deep Wipe)")  
         print("Q. Çıkış")
         
         choice = input(f"\n{Colors.OKBLUE}Seçiminiz: {Colors.ENDC}").strip().lower()
@@ -206,6 +251,8 @@ def main():
         elif choice == '6': step_6_rename()
         elif choice == '7': step_7_bashrc_fix()
         elif choice == '8': step_8_run_simulation()
+        elif choice == '9': clean_gazebo_basic()
+        elif choice == '10': clean_gazebo_deep()
         elif choice == 'q': break
         else: print(f"{Colors.FAIL}Geçersiz seçenek!{Colors.ENDC}")
 
