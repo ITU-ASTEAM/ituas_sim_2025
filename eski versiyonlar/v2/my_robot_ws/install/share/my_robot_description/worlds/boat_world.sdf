@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+
+  <world name="boat_world">
+
+    <!-- ================= SYSTEMS ================= -->
+    <plugin filename="libgz-sim-physics-system.so"
+            name="gz::sim::systems::Physics"/>
+    <plugin filename="libgz-sim-user-commands-system.so"
+            name="gz::sim::systems::UserCommands"/>
+    <plugin filename="libgz-sim-scene-broadcaster-system.so"
+            name="gz::sim::systems::SceneBroadcaster"/>
+    
+    <!-- BUOYANCY SYSTEM - BU ÇOK ÖNEMLİ! BU OLMADAN SPAWN EDİLEN GEMİLER UÇAR! -->
+    <plugin filename="libgz-sim-buoyancy-system.so"
+            name="gz::sim::systems::Buoyancy">
+      <uniform_fluid_density>1000</uniform_fluid_density>
+    </plugin>
+
+    <!-- ================= GRAVITY ================= -->
+    <gravity>0 0 -9.81</gravity>
+
+    <!-- ================= PHYSICS ================= -->
+    <physics name="default" type="ode">
+      <max_step_size>0.002</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <ode>
+        <solver>
+          <type>world</type>
+          <iters>100</iters>
+          <sor>1.0</sor>
+        </solver>
+      </ode>
+    </physics>
+
+    <!-- ================= LIGHT ================= -->
+    <light type="directional" name="sun">
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- ================= WATER ================= -->
+    <model name="water_plane">
+      <static>true</static>
+      <link name="link">
+        <visual name="water_visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>200 200</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.0 0.3 0.6 0.4</ambient>
+            <diffuse>0.0 0.4 0.8 0.6</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

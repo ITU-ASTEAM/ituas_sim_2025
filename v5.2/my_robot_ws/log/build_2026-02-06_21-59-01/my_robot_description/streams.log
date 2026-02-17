@@ -1,0 +1,81 @@
+[0.114s] Invoking command in '/home/gauss/Desktop/my_robot_ws/build/my_robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/gauss/Desktop/my_robot_ws/src/my_robot_description -DCMAKE_INSTALL_PREFIX=/home/gauss/Desktop/my_robot_ws/install/my_robot_description
+[2.356s] -- The C compiler identification is GNU 11.4.0
+[4.088s] -- The CXX compiler identification is GNU 11.4.0
+[4.222s] -- Detecting C compiler ABI info
+[4.598s] -- Detecting C compiler ABI info - done
+[4.602s] -- Check for working C compiler: /usr/bin/cc - skipped
+[4.620s] -- Detecting C compile features
+[4.669s] -- Detecting C compile features - done
+[4.744s] -- Detecting CXX compiler ABI info
+[4.961s] -- Detecting CXX compiler ABI info - done
+[4.965s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[4.965s] -- Detecting CXX compile features
+[4.965s] -- Detecting CXX compile features - done
+[5.134s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[5.733s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[7.165s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[8.158s] -- Added test 'flake8' to check Python code syntax and style conventions
+[8.173s] -- Added test 'lint_cmake' to check CMake code style
+[8.198s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[8.242s] -- Added test 'xmllint' to check XML markup files
+[8.317s] -- Configuring done
+[8.322s] -- Generating done
+[8.323s] -- Build files have been written to: /home/gauss/Desktop/my_robot_ws/build/my_robot_description
+[8.329s] Invoked command in '/home/gauss/Desktop/my_robot_ws/build/my_robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/gauss/Desktop/my_robot_ws/src/my_robot_description -DCMAKE_INSTALL_PREFIX=/home/gauss/Desktop/my_robot_ws/install/my_robot_description
+[8.329s] Invoking command in '/home/gauss/Desktop/my_robot_ws/build/my_robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/gauss/Desktop/my_robot_ws/build/my_robot_description -- -j16 -l16
+[8.353s] Invoked command in '/home/gauss/Desktop/my_robot_ws/build/my_robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/gauss/Desktop/my_robot_ws/build/my_robot_description -- -j16 -l16
+[8.359s] Invoking command in '/home/gauss/Desktop/my_robot_ws/build/my_robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/gauss/Desktop/my_robot_ws/build/my_robot_description
+[8.363s] -- Install configuration: ""
+[8.363s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models
+[8.363s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet
+[8.363s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/meshes
+[8.363s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/meshes/golet.dae
+[8.475s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/materials
+[8.475s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/materials/textures
+[8.475s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/materials/textures/overlay.png
+[9.478s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/materials/textures/2diffuse.jpg
+[9.663s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/materials/textures/lavender_flower.jpg
+[9.663s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/materials/textures/lavender_trunk.jpg
+[9.665s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/materials/textures/COLOR.JPG
+[9.665s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/materials/textures/21208336.jpg
+[9.665s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/materials/textures/2_bump.jpg
+[9.753s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/materials/textures/Kashtan.jpg
+[9.753s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/model.sdf
+[9.753s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/golet/model.config
+[9.756s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/parkur
+[9.756s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/parkur/meshes
+[9.756s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/parkur/meshes/parkur12.dae
+[9.756s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/parkur/meshes/parkur.dae
+[9.770s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/parkur/model.sdf
+[9.771s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/parkur/model.config
+[9.771s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/boat
+[9.771s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/boat/meshes
+[9.771s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/boat/meshes/stl
+[9.771s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/boat/meshes/stl/denemeas.002.stl
+[9.777s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/boat/meshes/stl/denemeas.001.stl
+[9.784s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/boat/meshes/stl/denemeas.003.stl
+[9.789s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/boat/model.sdf
+[9.789s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/boat/model.config
+[9.789s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//models/boat/boat_world.sdf
+[9.789s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//worlds
+[9.789s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//worlds/final_boat_hydro.sdf
+[9.789s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//worlds/boat_world.sdf
+[9.789s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//launch
+[9.789s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//launch/spawn_robot.launch.py
+[9.789s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description//launch/spawn_boat.launch.py
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/ament_index/resource_index/package_run_dependencies/my_robot_description
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/ament_index/resource_index/parent_prefix_path/my_robot_description
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/environment/ament_prefix_path.sh
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/environment/ament_prefix_path.dsv
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/environment/path.sh
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/environment/path.dsv
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/local_setup.bash
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/local_setup.sh
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/local_setup.zsh
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/local_setup.dsv
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/package.dsv
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/ament_index/resource_index/packages/my_robot_description
+[9.790s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/cmake/my_robot_descriptionConfig.cmake
+[9.791s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/cmake/my_robot_descriptionConfig-version.cmake
+[9.791s] -- Installing: /home/gauss/Desktop/my_robot_ws/install/my_robot_description/share/my_robot_description/package.xml
+[9.791s] Invoked command in '/home/gauss/Desktop/my_robot_ws/build/my_robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/gauss/Desktop/my_robot_ws/build/my_robot_description

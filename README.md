@@ -1,5 +1,11 @@
 # gazebo
 Merhabalar:
+setup.py ile kurulum aşamaları:
+1) Bilgisayarınızda Git ile SSH bağlantısı olduğuna emin olun.
+2) my_robot_ws dosyasının masaüstünde olduğuna emin olunuz ayrıca src/ içindeki vrx klasörünü siliniz. (vrx dosyalarını githubdan çekerken klasör var diye çekmez yoksa)
+
+
+
 final_boat_hydro.sdf: Ortam ve fiziklerin olduğu ana dünya dosyası.
 model.sdf: Teknenin kendi model dosyası.
 
@@ -10,7 +16,7 @@ source install/setup.bash
 simülasyonu başlatmak için
 gz sim -v 4 -r Desktop/my_robot_ws/src/my_robot_description/worlds/final_boat_hydro.sdf
 
-Gemiyi hareket ettirmek için kontrol scriptini çalıştır. Terminalde açık kalsın, WASD ile sürüyorsun:
+Gemiyi hareket ettirmek için kontrol.py scriptini çalıştır. Terminalde açık kalsın, WASD ile sürüyorsun:
 python3 Scripts/kontrol.py
 
 
@@ -34,3 +40,4 @@ https://drive.google.com/drive/folders/1548BU8YdyO9oBsV8xFsSzGwSMaZHzrnU?usp=sha
 
 https://drive.google.com/drive/folders/1XHSol1CxVLURtLInUD2BIfSHCaRn7t5O?usp=drive_link
 simülasyon görüntü işleme eğitim datası
+
