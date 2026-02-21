@@ -1,1 +1,0 @@
-/home/gauss/Desktop/my_robot_ws/src/my_robot_description/launch/spawn_boat.launch.py

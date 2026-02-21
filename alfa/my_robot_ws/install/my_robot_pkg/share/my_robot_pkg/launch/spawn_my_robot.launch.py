@@ -1,1 +1,0 @@
-/home/gauss/Desktop/my_robot_ws/build/my_robot_pkg/launch/spawn_my_robot.launch.py

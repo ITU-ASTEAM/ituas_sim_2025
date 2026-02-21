@@ -1,1 +1,0 @@
-/home/gauss/Desktop/my_robot_ws/src/vrx/vrx_gz/src/vrx_gz/payload_bridges.py

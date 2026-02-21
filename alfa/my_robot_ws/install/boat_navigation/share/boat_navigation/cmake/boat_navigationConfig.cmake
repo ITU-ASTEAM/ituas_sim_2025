@@ -1,1 +1,0 @@
-/home/gauss/Desktop/my_robot_ws/build/boat_navigation/ament_cmake_core/boat_navigationConfig.cmake

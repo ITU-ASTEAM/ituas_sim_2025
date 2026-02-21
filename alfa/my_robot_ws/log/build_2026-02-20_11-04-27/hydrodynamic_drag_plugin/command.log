@@ -1,6 +1,0 @@
-Invoking command in '/home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin': /usr/bin/cmake /home/gauss/Desktop/my_robot_ws/src/hydrodynamic_drag_plugin -DCMAKE_INSTALL_PREFIX=/home/gauss/Desktop/my_robot_ws/install/hydrodynamic_drag_plugin
-Invoked command in '/home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin' returned '0': /usr/bin/cmake /home/gauss/Desktop/my_robot_ws/src/hydrodynamic_drag_plugin -DCMAKE_INSTALL_PREFIX=/home/gauss/Desktop/my_robot_ws/install/hydrodynamic_drag_plugin
-Invoking command in '/home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin': /usr/bin/cmake --build /home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin -- -j16 -l16
-Invoked command in '/home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin' returned '0': /usr/bin/cmake --build /home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin -- -j16 -l16
-Invoking command in '/home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin': /usr/bin/cmake --install /home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin
-Invoked command in '/home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin' returned '0': /usr/bin/cmake --install /home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin

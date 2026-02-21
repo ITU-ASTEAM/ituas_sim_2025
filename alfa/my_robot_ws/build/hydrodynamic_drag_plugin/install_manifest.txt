@@ -1,1 +1,0 @@
-/home/gauss/Desktop/my_robot_ws/install/hydrodynamic_drag_plugin/lib/libHydrodynamicDrag.so
