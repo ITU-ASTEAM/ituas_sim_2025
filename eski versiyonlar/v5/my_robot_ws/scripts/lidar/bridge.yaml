@@ -1,4 +1,0 @@
-- topic_name: "/lidar"
-  ros_type_name: "sensor_msgs/msg/LaserScan"
-  gz_type_name: "ignition.msgs.LaserScan"
-  direction: GZ_TO_ROS
