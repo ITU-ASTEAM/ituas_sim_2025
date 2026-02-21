@@ -1,0 +1,1 @@
+/home/gauss/Desktop/my_robot_ws/build/vrx_ros/ament_cmake_core/vrx_rosConfig.cmake

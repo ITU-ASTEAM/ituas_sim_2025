@@ -1,0 +1,1 @@
+/home/gauss/Desktop/my_robot_ws/src/vrx/vrx_urdf/vrx_gazebo/hooks/resource_paths.sh

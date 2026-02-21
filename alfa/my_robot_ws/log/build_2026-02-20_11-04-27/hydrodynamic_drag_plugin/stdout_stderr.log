@@ -1,0 +1,25 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") 
+-- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+-- Looking for gz-plugin2 -- found version 2.0.4
+-- Using gz-sim8
+-- Using gz-math7
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/gauss/Desktop/my_robot_ws/build/hydrodynamic_drag_plugin
+[ 50%] [32mBuilding CXX object CMakeFiles/HydrodynamicDrag.dir/HydrodynamicDrag.cc.o[0m
+[100%] [32m[1mLinking CXX shared library libHydrodynamicDrag.so[0m
+[100%] Built target HydrodynamicDrag
+-- Install configuration: ""
+-- Installing: /home/gauss/Desktop/my_robot_ws/install/hydrodynamic_drag_plugin/lib/libHydrodynamicDrag.so

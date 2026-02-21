@@ -1,32 +1,27 @@
-# config.py
+# ~/Desktop/my_robot_ws/scripts/config.py
 
-# --- DEĞİŞKENLER (Sadece burayı değiştireceksin) ---
-WORLD_NAME = "ocean_world"  # Simülasyondaki dünya ismi
-ROBOT_NAME = "boat"         # SDF/URDF dosyasındaki robot ismi
-# ---------------------------------------------------
+# --- AYARLAR ---
+WORLD_NAME = "ocean_world"  
+ROBOT_NAME = "boat"        
 
-# Gazebo/Ignition Simülasyonu için Dinamik Prefix Oluşturucu
-# Genelde yapı şöyledir: /world/{WORLD}/model/{ROBOT}/...
-SIM_PREFIX = f"/world/{WORLD_NAME}/model/{ROBOT_NAME}"
-
-# Link isimleri (URDF/SDF dosyanda tanımlı olanlar)
-BASE_LINK = "base_link"
-LIDAR_LINK = "lidar_link"
-CAMERA_LINK = "camera_link"
+# --- OTOMATİK PATH OLUŞTURUCU ---
+# Gazebo topic yapısı genelde şöyledir: /world/{WORLD}/model/{ROBOT}/...
+BASE_TOPIC = f"/world/{WORLD_NAME}/model/{ROBOT_NAME}"
 
 class Topics:
-    # 1. Navigasyon & Pozisyon
-    POSE = f"{SIM_PREFIX}/pose"
-    ODOMETRY = f"{SIM_PREFIX}/link/{BASE_LINK}/sensor/imu/imu" # Örnek IMU yolu
+    # Simülasyon Pozisyonu (Ground Truth)
+    POSE = f"{BASE_TOPIC}/pose"
     
-    # 2. Lidar (Genelde link ve sensor ismiyle uzar)
-    # Örn: /world/ocean_world/model/boat/link/lidar_link/sensor/lidar/scan
-    LIDAR_SCAN = f"{SIM_PREFIX}/link/{LIDAR_LINK}/sensor/lidar/scan"
-    LIDAR_POINTS = f"{SIM_PREFIX}/link/{LIDAR_LINK}/sensor/lidar/points"
+    # Sensörler (Link isimlerine dikkat et, URDF/SDF dosyanla aynı olmalı)
+    # Eğer sensörler direkt model altındaysa 'link/base_link' kısmını silebilirsin.
+    LIDAR = f"{BASE_TOPIC}/link/lidar_link/sensor/lidar/scan"
+    CAMERA = f"{BASE_TOPIC}/link/camera_link/sensor/camera/image_raw"
+    IMU    = f"{BASE_TOPIC}/link/base_link/sensor/imu/imu"
+    
+    # ROS2 Bridge üzerinden haberleşiyorsan topicler kısalabilir, kontrol et:
+    CMD_VEL = f"/model/{ROBOT_NAME}/cmd_vel"
 
-    # 3. Kamera
-    CAM_IMAGE_RAW = f"{SIM_PREFIX}/link/{CAMERA_LINK}/sensor/camera/image"
-    CAM_INFO = f"{SIM_PREFIX}/link/{CAMERA_LINK}/sensor/camera/camera_info"
-    
-    # 4. Kontrol (ROS2 Bridge ile genelde basitleştirilir ama ham hali şöyledir)
-    CMD_VEL = f"/model/{ROBOT_NAME}/cmd_vel"  # Bazen sadece bu kadar olur
+class Params:
+    LINEAR_SPEED = 5.0
+    ANGULAR_SPEED = 1.0
+    TARGET_DISTANCE = 2.0  # Durma mesafesi vb.

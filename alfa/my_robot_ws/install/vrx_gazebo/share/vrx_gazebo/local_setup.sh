@@ -1,0 +1,1 @@
+/home/gauss/Desktop/my_robot_ws/build/vrx_gazebo/ament_cmake_environment_hooks/local_setup.sh

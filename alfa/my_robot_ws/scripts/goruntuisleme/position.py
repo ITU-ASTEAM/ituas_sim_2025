@@ -10,7 +10,11 @@ from gz.transport13 import Node
 from gz.msgs10.pose_v_pb2 import Pose_V
 
 # Senin sistemindeki doğru topic:
-TOPIC_NAME = "/world/ocean_world/model/boat/pose"
+#TOPIC_NAME = "/world/ocean_world/model/boat/pose"
+# Yeni:
+#TOPIC_NAME = "/model/boat/pose"
+# TOPIC_NAME = "/model/boat/pose" yerine bunu dene:
+TOPIC_NAME = "/world/ocean_world/pose/info"
 
 class PozisyonModulu:
     def __init__(self):
