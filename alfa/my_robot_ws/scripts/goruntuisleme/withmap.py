@@ -47,7 +47,7 @@ class MistikHaritaSistemi:
         print("      ✓ Hazır")
         
         print("[4/5] LIDAR...")
-        self.lidar = LidarModulu(topic_name="/scan")
+        self.lidar = LidarModulu(topic_name="/lidar")
         self.lidar_points = np.empty((0, 2))  # Global LIDAR noktaları
         self.lidar_clusters = []  # LIDAR kümeleri
         self.lidar_max_range = 20.0  # Maksimum LIDAR mesafesi

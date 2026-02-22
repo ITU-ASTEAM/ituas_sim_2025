@@ -1,0 +1,1 @@
+/home/gauss/Desktop/my_robot_ws/src/boat_navigation/launch/boat_nav2.launch.py

@@ -1,0 +1,25 @@
+[0.045s] Invoking command in '/home/gauss/Desktop/my_robot_ws/build/boat_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gauss/Desktop/my_robot_ws/install/my_robot_pkg:/opt/ros/humble /usr/bin/cmake --build /home/gauss/Desktop/my_robot_ws/build/boat_navigation -- -j16 -l16
+[0.102s] Invoked command in '/home/gauss/Desktop/my_robot_ws/build/boat_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gauss/Desktop/my_robot_ws/install/my_robot_pkg:/opt/ros/humble /usr/bin/cmake --build /home/gauss/Desktop/my_robot_ws/build/boat_navigation -- -j16 -l16
+[0.107s] Invoking command in '/home/gauss/Desktop/my_robot_ws/build/boat_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gauss/Desktop/my_robot_ws/install/my_robot_pkg:/opt/ros/humble /usr/bin/cmake --install /home/gauss/Desktop/my_robot_ws/build/boat_navigation
+[0.112s] -- Install configuration: ""
+[0.112s] -- Execute custom install script
+[0.112s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/launch/boat_nav2.launch.py
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/params/nav2_params.yaml
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/maps/costmap.png
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/maps/costmap.yaml
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/ament_index/resource_index/package_run_dependencies/boat_navigation
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/ament_index/resource_index/parent_prefix_path/boat_navigation
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/environment/ament_prefix_path.sh
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/environment/ament_prefix_path.dsv
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/environment/path.sh
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/environment/path.dsv
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/local_setup.bash
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/local_setup.sh
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/local_setup.zsh
+[0.113s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/local_setup.dsv
+[0.113s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/package.dsv
+[0.119s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/ament_index/resource_index/packages/boat_navigation
+[0.119s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/cmake/boat_navigationConfig.cmake
+[0.120s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/cmake/boat_navigationConfig-version.cmake
+[0.120s] -- Up-to-date symlink: /home/gauss/Desktop/my_robot_ws/install/boat_navigation/share/boat_navigation/package.xml
+[0.121s] Invoked command in '/home/gauss/Desktop/my_robot_ws/build/boat_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gauss/Desktop/my_robot_ws/install/my_robot_pkg:/opt/ros/humble /usr/bin/cmake --install /home/gauss/Desktop/my_robot_ws/build/boat_navigation

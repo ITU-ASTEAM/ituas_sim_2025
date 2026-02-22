@@ -1,0 +1,612 @@
+[0.007s] Invoking command in '/home/gauss/Desktop/my_robot_ws/build/vrx_gz': AMENT_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_description/share/wamv_description/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share/vrx_gazebo/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share PYTHONPATH=/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/gauss/Desktop/my_robot_ws/src/vrx/vrx_gz -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/gauss/Desktop/my_robot_ws/install/vrx_gz
+[0.042s] -- The C compiler identification is GNU 11.4.0
+[0.077s] -- The CXX compiler identification is GNU 11.4.0
+[0.082s] -- Detecting C compiler ABI info
+[0.138s] -- Detecting C compiler ABI info - done
+[0.143s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.143s] -- Detecting C compile features
+[0.144s] -- Detecting C compile features - done
+[0.146s] -- Detecting CXX compiler ABI info
+[0.204s] -- Detecting CXX compiler ABI info - done
+[0.209s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.209s] -- Detecting CXX compile features
+[0.209s] -- Detecting CXX compile features - done
+[0.210s] -- Performing Test COMPILER_SUPPORTS_CXX17
+[0.271s] -- Performing Test COMPILER_SUPPORTS_CXX17 - Success
+[0.272s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.381s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.425s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.446s] -- Looking for gz-sim8 -- found version 8.10.0
+[0.450s] -- Searching for dependencies of gz-sim8
+[0.451s] -- Looking for sdformat14 -- found version 14.9.0
+[0.452s] -- Searching for dependencies of sdformat14
+[0.456s] -- Checking for module 'tinyxml2'
+[0.465s] --   Found tinyxml2, version 9.0.0
+[0.490s] -- Looking for gz-math7 -- found version 7.5.1
+[0.490s] -- Searching for dependencies of gz-math7
+[0.491s] -- Looking for gz-utils2 -- found version 2.2.1
+[0.491s] -- Searching for dependencies of gz-utils2
+[0.492s] -- Looking for gz-utils2 -- found version 2.2.1
+[0.492s] -- Searching for dependencies of gz-utils2
+[0.492s] -- Searching for <gz-utils2> component [cli]
+[0.494s] -- Looking for gz-utils2-cli -- found version 2.2.1
+[0.494s] -- Searching for dependencies of gz-utils2-cli
+[0.496s] -- Looking for gz-plugin2 -- found version 2.0.4
+[0.496s] -- Searching for dependencies of gz-plugin2
+[0.496s] -- Looking for gz-utils2 -- found version 2.2.1
+[0.496s] -- Searching for <gz-plugin2> component [loader]
+[0.497s] -- Looking for gz-plugin2-loader -- found version 2.0.4
+[0.498s] -- Searching for dependencies of gz-plugin2-loader
+[0.498s] -- Searching for <gz-plugin2> component [register]
+[0.499s] -- Looking for gz-plugin2-register -- found version 2.0.4
+[0.499s] -- Searching for dependencies of gz-plugin2-register
+[0.501s] -- Looking for gz-transport13 -- found version 13.5.0
+[0.501s] -- Searching for dependencies of gz-transport13
+[0.650s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") 
+[0.657s] -- Config-file not installed for ZeroMQ -- checking for pkg-config
+[0.661s] -- Checking for module 'libzmq >= 4'
+[0.671s] --   Found libzmq , version 4.3.4
+[0.697s] -- Found ZeroMQ: TRUE (Required is at least version "4") 
+[0.702s] -- Checking for module 'uuid'
+[0.711s] --   Found uuid, version 2.37.2
+[0.736s] -- Found UUID: TRUE  
+[0.736s] -- Looking for gz-utils2 -- found version 2.2.1
+[0.737s] -- Looking for gz-msgs10 -- found version 10.3.2
+[0.737s] -- Searching for dependencies of gz-msgs10
+[0.750s] -- Looking for gz-utils2 -- found version 2.2.1
+[0.750s] -- Looking for gz-math7 -- found version 7.5.1
+[0.754s] -- Searching for <gz-transport13> component [log]
+[0.756s] -- Looking for gz-transport13-log -- found version 13.5.0
+[0.756s] -- Searching for dependencies of gz-transport13-log
+[0.756s] -- Searching for <gz-transport13> component [parameters]
+[0.757s] -- Looking for gz-transport13-parameters -- found version 13.5.0
+[0.757s] -- Searching for dependencies of gz-transport13-parameters
+[0.758s] -- Looking for gz-msgs10 -- found version 10.3.2
+[0.759s] -- Looking for gz-common5 -- found version 5.8.0
+[0.759s] -- Searching for dependencies of gz-common5
+[0.760s] -- Looking for gz-utils2 -- found version 2.2.1
+[0.760s] -- Looking for dlfcn.h - found
+[0.760s] -- Looking for libdl - found
+[0.761s] -- Found DL: TRUE  
+[0.765s] -- Searching for <gz-common5> component [av]
+[0.767s] -- Looking for gz-common5-av -- found version 5.8.0
+[0.767s] -- Searching for dependencies of gz-common5-av
+[0.770s] -- Checking for module 'libswscale'
+[0.780s] --   Found libswscale, version 5.9.100
+[0.803s] -- Found SWSCALE: TRUE  
+[0.807s] -- Checking for module 'libavdevice >= 56.4.100'
+[0.817s] --   Found libavdevice , version 58.13.100
+[0.846s] -- Found AVDEVICE: TRUE (Required is at least version "56.4.100") 
+[0.850s] -- Checking for module 'libavformat'
+[0.861s] --   Found libavformat, version 58.76.100
+[0.890s] -- Found AVFORMAT: TRUE  
+[0.895s] -- Checking for module 'libavcodec'
+[0.905s] --   Found libavcodec, version 58.134.100
+[0.931s] -- Found AVCODEC: TRUE  
+[0.936s] -- Checking for module 'libavutil'
+[0.945s] --   Found libavutil, version 56.70.100
+[0.970s] -- Found AVUTIL: TRUE  
+[0.971s] -- Searching for <gz-common5> component [events]
+[0.973s] -- Looking for gz-common5-events -- found version 5.8.0
+[0.974s] -- Searching for dependencies of gz-common5-events
+[0.974s] -- Looking for gz-math7 -- found version 7.5.1
+[0.974s] -- Searching for <gz-common5> component [graphics]
+[0.977s] -- Looking for gz-common5-graphics -- found version 5.8.0
+[0.977s] -- Searching for dependencies of gz-common5-graphics
+[0.977s] -- Looking for gz-math7 -- found version 7.5.1
+[0.981s] -- Found GzAssimp: TRUE (found version "5.2.0") 
+[0.981s] -- Searching for <gz-common5> component [io]
+[0.982s] -- Looking for gz-common5-io -- found version 5.8.0
+[0.982s] -- Searching for dependencies of gz-common5-io
+[0.983s] -- Searching for <gz-common5> component [profiler]
+[0.984s] -- Looking for gz-common5-profiler -- found version 5.8.0
+[0.984s] -- Searching for dependencies of gz-common5-profiler
+[0.986s] -- Looking for gz-fuel_tools9 -- found version 9.1.1
+[0.986s] -- Searching for dependencies of gz-fuel_tools9
+[1.042s] -- Found CURL: /usr/lib/x86_64-linux-gnu/libcurl.so (found version "7.81.0")  
+[1.047s] -- Checking for module 'jsoncpp'
+[1.056s] --   Found jsoncpp, version 1.9.5
+[1.080s] -- Found JSONCPP: TRUE  
+[1.085s] -- Checking for module 'libzip'
+[1.094s] --   Found libzip, version 1.7.3
+[1.118s] -- Found ZIP: TRUE  
+[1.119s] -- Looking for gz-utils2 -- found version 2.2.1
+[1.119s] -- Looking for gz-common5 -- found version 5.8.0
+[1.119s] -- Searching for dependencies of gz-common5
+[1.119s] -- Looking for gz-utils2 -- found version 2.2.1
+[1.119s] -- Looking for dlfcn.h - found
+[1.119s] -- Looking for libdl - found
+[1.125s] -- Searching for <gz-common5> component [testing]
+[1.127s] -- Looking for gz-common5-testing -- found version 5.8.0
+[1.127s] -- Searching for dependencies of gz-common5-testing
+[1.127s] -- Looking for gz-math7 -- found version 7.5.1
+[1.128s] -- Looking for gz-msgs10 -- found version 10.3.2
+[1.129s] -- Looking for gz-gui8 -- found version 8.4.0
+[1.129s] -- Searching for dependencies of gz-gui8
+[1.146s] -- Looking for gz-utils2 -- found version 2.2.1
+[1.146s] -- Looking for gz-math7 -- found version 7.5.1
+[1.146s] -- Looking for gz-common5 -- found version 5.8.0
+[1.146s] -- Looking for gz-plugin2 -- found version 2.0.4
+[1.147s] -- Looking for gz-transport13 -- found version 13.5.0
+[1.149s] -- Looking for gz-rendering8 -- found version 8.2.3
+[1.149s] -- Searching for dependencies of gz-rendering8
+[1.149s] -- Looking for gz-math7 -- found version 7.5.1
+[1.150s] -- Searching for dependencies of gz-math7
+[1.150s] -- Looking for gz-utils2 -- found version 2.2.1
+[1.150s] -- Searching for <gz-math7> component [eigen3]
+[1.152s] -- Looking for gz-math7-eigen3 -- found version 7.5.1
+[1.152s] -- Searching for dependencies of gz-math7-eigen3
+[1.157s] -- Looking for gz-common5 -- found version 5.8.0
+[1.157s] -- Searching for dependencies of gz-common5
+[1.157s] -- Looking for gz-utils2 -- found version 2.2.1
+[1.157s] -- Looking for dlfcn.h - found
+[1.157s] -- Looking for libdl - found
+[1.162s] -- Searching for <gz-common5> component [graphics]
+[1.162s] -- Searching for <gz-common5> component [events]
+[1.163s] -- Searching for <gz-common5> component [geospatial]
+[1.164s] -- Looking for gz-common5-geospatial -- found version 5.8.0
+[1.164s] -- Searching for dependencies of gz-common5-geospatial
+[1.164s] -- Looking for gz-math7 -- found version 7.5.1
+[1.165s] -- Looking for gz-common5 -- found version 5.8.0
+[1.165s] -- Looking for gz-plugin2 -- found version 2.0.4
+[1.165s] -- Searching for dependencies of gz-plugin2
+[1.166s] -- Looking for gz-utils2 -- found version 2.2.1
+[1.166s] -- Searching for <gz-plugin2> component [all]
+[1.167s] -- Looking for all libraries of gz-plugin2 -- found version 2.0.4
+[1.168s] -- Looking for gz-plugin2 -- found version 2.0.4
+[1.169s] -- Looking for gz-utils2 -- found version 2.2.1
+[1.172s] -- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so  found components: OpenGL 
+[1.173s] -- Looking for gz-msgs10 -- found version 10.3.2
+[1.185s] -- Looking for gz-physics7 -- found version 7.6.0
+[1.185s] -- Searching for dependencies of gz-physics7
+[1.186s] -- Looking for gz-common5 -- found version 5.8.0
+[1.186s] -- Looking for gz-math7 -- found version 7.5.1
+[1.186s] -- Looking for gz-plugin2 -- found version 2.0.4
+[1.186s] -- Looking for gz-utils2 -- found version 2.2.1
+[1.187s] -- Searching for <gz-physics7> component [heightmap]
+[1.188s] -- Looking for gz-physics7-heightmap -- found version 7.6.0
+[1.188s] -- Searching for dependencies of gz-physics7-heightmap
+[1.189s] -- Looking for gz-common5 -- found version 5.8.0
+[1.189s] -- Searching for <gz-physics7> component [mesh]
+[1.190s] -- Looking for gz-physics7-mesh -- found version 7.6.0
+[1.190s] -- Searching for dependencies of gz-physics7-mesh
+[1.191s] -- Looking for gz-common5 -- found version 5.8.0
+[1.191s] -- Searching for <gz-physics7> component [sdf]
+[1.192s] -- Looking for gz-physics7-sdf -- found version 7.6.0
+[1.192s] -- Searching for dependencies of gz-physics7-sdf
+[1.193s] -- Looking for sdformat14 -- found version 14.9.0
+[1.194s] -- Looking for gz-sensors8 -- found version 8.2.2
+[1.194s] -- Searching for dependencies of gz-sensors8
+[1.207s] -- Looking for gz-math7 -- found version 7.5.1
+[1.207s] -- Looking for gz-common5 -- found version 5.8.0
+[1.207s] -- Looking for gz-transport13 -- found version 13.5.0
+[1.208s] -- Looking for gz-rendering8 -- found version 8.2.3
+[1.208s] -- Looking for gz-msgs10 -- found version 10.3.2
+[1.208s] -- Looking for sdformat14 -- found version 14.9.0
+[1.209s] -- Searching for <gz-sensors8> component [air_pressure]
+[1.210s] -- Looking for gz-sensors8-air_pressure -- found version 8.2.2
+[1.210s] -- Searching for dependencies of gz-sensors8-air_pressure
+[1.210s] -- Searching for <gz-sensors8> component [air_speed]
+[1.212s] -- Looking for gz-sensors8-air_speed -- found version 8.2.2
+[1.212s] -- Searching for dependencies of gz-sensors8-air_speed
+[1.212s] -- Searching for <gz-sensors8> component [altimeter]
+[1.213s] -- Looking for gz-sensors8-altimeter -- found version 8.2.2
+[1.214s] -- Searching for dependencies of gz-sensors8-altimeter
+[1.214s] -- Searching for <gz-sensors8> component [imu]
+[1.215s] -- Looking for gz-sensors8-imu -- found version 8.2.2
+[1.215s] -- Searching for dependencies of gz-sensors8-imu
+[1.216s] -- Searching for <gz-sensors8> component [force_torque]
+[1.217s] -- Looking for gz-sensors8-force_torque -- found version 8.2.2
+[1.217s] -- Searching for dependencies of gz-sensors8-force_torque
+[1.217s] -- Searching for <gz-sensors8> component [logical_camera]
+[1.218s] -- Looking for gz-sensors8-logical_camera -- found version 8.2.2
+[1.219s] -- Searching for dependencies of gz-sensors8-logical_camera
+[1.219s] -- Searching for <gz-sensors8> component [magnetometer]
+[1.220s] -- Looking for gz-sensors8-magnetometer -- found version 8.2.2
+[1.220s] -- Searching for dependencies of gz-sensors8-magnetometer
+[1.221s] -- Searching for <gz-sensors8> component [navsat]
+[1.222s] -- Looking for gz-sensors8-navsat -- found version 8.2.2
+[1.222s] -- Searching for dependencies of gz-sensors8-navsat
+[1.222s] -- Searching for <gz-sensors8> component [dvl]
+[1.224s] -- Looking for gz-sensors8-dvl -- found version 8.2.2
+[1.224s] -- Searching for dependencies of gz-sensors8-dvl
+[1.224s] -- Looking for gz-sensors8 -- found version 8.2.2
+[1.224s] -- Searching for dependencies of gz-sensors8
+[1.237s] -- Looking for gz-math7 -- found version 7.5.1
+[1.237s] -- Looking for gz-common5 -- found version 5.8.0
+[1.237s] -- Looking for gz-transport13 -- found version 13.5.0
+[1.238s] -- Looking for gz-rendering8 -- found version 8.2.3
+[1.238s] -- Looking for gz-msgs10 -- found version 10.3.2
+[1.238s] -- Looking for sdformat14 -- found version 14.9.0
+[1.238s] -- Searching for <gz-sensors8> component [rendering]
+[1.240s] -- Looking for gz-sensors8-rendering -- found version 8.2.2
+[1.240s] -- Searching for dependencies of gz-sensors8-rendering
+[1.240s] -- Searching for <gz-sensors8> component [rendering]
+[1.241s] -- Searching for <gz-sensors8> component [lidar]
+[1.242s] -- Looking for gz-sensors8-lidar -- found version 8.2.2
+[1.242s] -- Searching for dependencies of gz-sensors8-lidar
+[1.242s] -- Looking for gz-sensors8 -- found version 8.2.2
+[1.243s] -- Searching for <gz-sensors8> component [gpu_lidar]
+[1.244s] -- Looking for gz-sensors8-gpu_lidar -- found version 8.2.2
+[1.244s] -- Searching for dependencies of gz-sensors8-gpu_lidar
+[1.244s] -- Looking for gz-sensors8 -- found version 8.2.2
+[1.245s] -- Searching for <gz-sensors8> component [camera]
+[1.246s] -- Looking for gz-sensors8-camera -- found version 8.2.2
+[1.246s] -- Searching for dependencies of gz-sensors8-camera
+[1.246s] -- Looking for gz-sensors8 -- found version 8.2.2
+[1.247s] -- Searching for <gz-sensors8> component [boundingbox_camera]
+[1.248s] -- Looking for gz-sensors8-boundingbox_camera -- found version 8.2.2
+[1.248s] -- Searching for dependencies of gz-sensors8-boundingbox_camera
+[1.248s] -- Searching for <gz-sensors8> component [segmentation_camera]
+[1.250s] -- Looking for gz-sensors8-segmentation_camera -- found version 8.2.2
+[1.250s] -- Searching for dependencies of gz-sensors8-segmentation_camera
+[1.250s] -- Searching for <gz-sensors8> component [depth_camera]
+[1.251s] -- Looking for gz-sensors8-depth_camera -- found version 8.2.2
+[1.252s] -- Searching for dependencies of gz-sensors8-depth_camera
+[1.252s] -- Looking for gz-sensors8 -- found version 8.2.2
+[1.252s] -- Searching for <gz-sensors8> component [rgbd_camera]
+[1.253s] -- Looking for gz-sensors8-rgbd_camera -- found version 8.2.2
+[1.254s] -- Searching for dependencies of gz-sensors8-rgbd_camera
+[1.254s] -- Looking for gz-sensors8 -- found version 8.2.2
+[1.254s] -- Searching for <gz-sensors8> component [thermal_camera]
+[1.255s] -- Looking for gz-sensors8-thermal_camera -- found version 8.2.2
+[1.256s] -- Searching for dependencies of gz-sensors8-thermal_camera
+[1.256s] -- Looking for gz-sensors8 -- found version 8.2.2
+[1.256s] -- Searching for <gz-sensors8> component [wide_angle_camera]
+[1.257s] -- Looking for gz-sensors8-wide_angle_camera -- found version 8.2.2
+[1.258s] -- Searching for dependencies of gz-sensors8-wide_angle_camera
+[1.258s] -- Looking for gz-rendering8 -- found version 8.2.3
+[1.259s] -- Looking for gz-math7 -- found version 7.5.1
+[1.259s] -- Looking for gz-utils2 -- found version 2.2.1
+[1.272s] -- Looking for gz-common5 -- found version 5.8.0
+[1.272s] -- Looking for gz-fuel_tools9 -- found version 9.1.1
+[1.272s] -- Looking for gz-math7 -- found version 7.5.1
+[1.272s] -- Looking for gz-msgs10 -- found version 10.3.2
+[1.273s] -- Looking for gz-transport13 -- found version 13.5.0
+[1.273s] -- Looking for gz-plugin2 -- found version 2.0.4
+[1.273s] -- Looking for gz-rendering8 -- found version 8.2.3
+[1.273s] -- Looking for gz-sensors8 -- found version 8.2.2
+[1.274s] -- Looking for gz-utils2 -- found version 2.2.1
+[1.274s] -- Looking for sdformat14 -- found version 14.9.0
+[1.275s] -- Found std_msgs: 4.9.0 (/opt/ros/humble/share/std_msgs/cmake)
+[1.292s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.295s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.300s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.316s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.318s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.437s] -- Configuring done
+[1.491s] -- Generating done
+[1.505s] -- Build files have been written to: /home/gauss/Desktop/my_robot_ws/build/vrx_gz
+[1.515s] Invoked command in '/home/gauss/Desktop/my_robot_ws/build/vrx_gz' returned '0': AMENT_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_description/share/wamv_description/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share/vrx_gazebo/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share PYTHONPATH=/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/gauss/Desktop/my_robot_ws/src/vrx/vrx_gz -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/gauss/Desktop/my_robot_ws/install/vrx_gz
+[1.516s] Invoking command in '/home/gauss/Desktop/my_robot_ws/build/vrx_gz': AMENT_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_description/share/wamv_description/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share/vrx_gazebo/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share PYTHONPATH=/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/gauss/Desktop/my_robot_ws/build/vrx_gz -- -j16 -l16
+[1.555s] [  2%] [32mBuilding CXX object CMakeFiles/Waves.dir/src/Wavefield.cc.o[0m
+[1.555s] [  4%] [32mBuilding CXX object CMakeFiles/ScoringPlugin.dir/src/ScoringPlugin.cc.o[0m
+[1.561s] [  4%] Built target ament_cmake_python_symlink_vrx_gz
+[1.748s] running egg_info
+[1.748s] creating vrx_gz.egg-info
+[1.748s] writing vrx_gz.egg-info/PKG-INFO
+[1.749s] writing dependency_links to vrx_gz.egg-info/dependency_links.txt
+[1.749s] writing top-level names to vrx_gz.egg-info/top_level.txt
+[1.749s] writing manifest file 'vrx_gz.egg-info/SOURCES.txt'
+[1.750s] reading manifest file 'vrx_gz.egg-info/SOURCES.txt'
+[1.750s] writing manifest file 'vrx_gz.egg-info/SOURCES.txt'
+[1.772s] [  4%] Built target ament_cmake_python_build_vrx_gz_egg
+[3.782s] [  6%] [32m[1mLinking CXX shared library libWaves.so[0m
+[3.945s] [  6%] Built target Waves
+[3.958s] [  8%] [32mBuilding CXX object CMakeFiles/PolyhedraBuoyancyDrag.dir/src/PolyhedraBuoyancyDrag.cc.o[0m
+[3.959s] [ 10%] [32mBuilding CXX object CMakeFiles/PolyhedraBuoyancyDrag.dir/src/ShapeVolume.cc.o[0m
+[3.960s] [ 12%] [32mBuilding CXX object CMakeFiles/PolyhedraBuoyancyDrag.dir/src/PolyhedronVolume.cc.o[0m
+[4.853s] [ 14%] [32m[1mLinking CXX shared library libScoringPlugin.so[0m
+[5.048s] [ 14%] Built target ScoringPlugin
+[5.067s] [ 16%] [32mBuilding CXX object CMakeFiles/AcousticPerceptionScoringPlugin.dir/src/AcousticPerceptionScoringPlugin.cc.o[0m
+[5.067s] [ 22%] [32mBuilding CXX object CMakeFiles/BallShooterPlugin.dir/src/BallShooterPlugin.cc.o[0m
+[5.067s] [ 22%] [32mBuilding CXX object CMakeFiles/AcousticPingerPlugin.dir/src/AcousticPingerPlugin.cc.o[0m
+[5.068s] [ 25%] [32mBuilding CXX object CMakeFiles/GymkhanaScoringPlugin.dir/src/GymkhanaScoringPlugin.cc.o[0m
+[5.068s] [ 27%] [32mBuilding CXX object CMakeFiles/PlacardPlugin.dir/src/PlacardPlugin.cc.o[0m
+[5.069s] [ 31%] [32mBuilding CXX object CMakeFiles/NavigationScoringPlugin.dir/src/NavigationScoringPlugin.cc.o[0m
+[5.069s] [ 33%] [32mBuilding CXX object CMakeFiles/PerceptionScoringPlugin.dir/src/PerceptionScoringPlugin.cc.o[0m
+[5.069s] [ 35%] [32mBuilding CXX object CMakeFiles/ScanDockScoringPlugin.dir/src/ScanDockScoringPlugin.cc.o[0m
+[5.069s] [ 37%] [32mBuilding CXX object CMakeFiles/AcousticTrackingScoringPlugin.dir/src/AcousticTrackingScoringPlugin.cc.o[0m
+[5.069s] [ 22%] [32mBuilding CXX object CMakeFiles/WayfindingScoringPlugin.dir/src/WayfindingScoringPlugin.cc.o[0m
+[5.069s] [ 29%] [32mBuilding CXX object CMakeFiles/StationkeepingScoringPlugin.dir/src/StationkeepingScoringPlugin.cc.o[0m
+[5.070s] [ 43%] [32mBuilding CXX object CMakeFiles/SimpleHydrodynamics.dir/src/SimpleHydrodynamics.cc.o[0m
+[5.070s] [ 43%] [32mBuilding CXX object CMakeFiles/LightBuoyPlugin.dir/src/LightBuoyPlugin.cc.o[0m
+[5.070s] [ 41%] [32mBuilding CXX object CMakeFiles/Surface.dir/src/Surface.cc.o[0m
+[5.070s] [ 45%] [32mBuilding CXX object CMakeFiles/PublisherPlugin.dir/src/PublisherPlugin.cc.o[0m
+[11.213s] [ 47%] [32m[1mLinking CXX shared library libPublisherPlugin.so[0m
+[11.221s] [ 50%] [32m[1mLinking CXX shared library libPolyhedraBuoyancyDrag.so[0m
+[11.528s] [ 52%] [32m[1mLinking CXX shared library libLightBuoyPlugin.so[0m
+[11.686s] [ 54%] [32m[1mLinking CXX shared library libSimpleHydrodynamics.so[0m
+[11.755s] [ 56%] [32m[1mLinking CXX shared library libSurface.so[0m
+[12.762s] [ 58%] [32m[1mLinking CXX shared library libGymkhanaScoringPlugin.so[0m
+[13.123s] [ 58%] Built target SimpleHydrodynamics
+[13.258s] [ 60%] [32mBuilding CXX object CMakeFiles/USVWind.dir/src/USVWind.cc.o[0m
+[13.418s] [ 60%] Built target LightBuoyPlugin
+[13.435s] [ 62%] [32mBuilding CXX object CMakeFiles/WaveVisual.dir/src/WaveVisual.cc.o[0m
+[13.489s] [ 62%] Built target PublisherPlugin
+[13.506s] [ 64%] [32mBuilding CXX object CMakeFiles/WildlifeScoringPlugin.dir/src/WildlifeScoringPlugin.cc.o[0m
+[13.547s] [ 64%] Built target Surface
+[13.556s] [ 66%] [32mBuilding CXX object CMakeFiles/AcousticTrackingScoringPlugin.dir/src/WaypointMarkers.cc.o[0m
+[13.561s] [ 66%] Built target GymkhanaScoringPlugin
+[13.570s] [ 68%] [32mBuilding CXX object CMakeFiles/AcousticPerceptionScoringPlugin.dir/src/WaypointMarkers.cc.o[0m
+[13.586s] [ 68%] Built target PolyhedraBuoyancyDrag
+[13.595s] [ 70%] [32mBuilding CXX object CMakeFiles/WayfindingScoringPlugin.dir/src/WaypointMarkers.cc.o[0m
+[13.750s] [ 72%] [32m[1mLinking CXX shared library libPlacardPlugin.so[0m
+[14.413s] [ 72%] Built target PlacardPlugin
+[14.422s] [ 75%] [32mBuilding CXX object CMakeFiles/StationkeepingScoringPlugin.dir/src/WaypointMarkers.cc.o[0m
+[15.758s] [ 77%] [32m[1mLinking CXX shared library libPerceptionScoringPlugin.so[0m
+[16.089s] [ 77%] Built target PerceptionScoringPlugin
+[16.363s] [ 79%] [32m[1mLinking CXX shared library libAcousticPingerPlugin.so[0m
+[16.488s] [ 81%] [32m[1mLinking CXX shared library libNavigationScoringPlugin.so[0m
+[16.774s] [ 83%] [32m[1mLinking CXX shared library libAcousticPerceptionScoringPlugin.so[0m
+[16.816s] [ 83%] Built target AcousticPingerPlugin
+[16.840s] [ 83%] Built target NavigationScoringPlugin
+[17.054s] [ 83%] Built target AcousticPerceptionScoringPlugin
+[17.081s] [ 85%] [32m[1mLinking CXX shared library libBallShooterPlugin.so[0m
+[17.087s] [ 87%] [32m[1mLinking CXX shared library libWayfindingScoringPlugin.so[0m
+[17.092s] [ 89%] [32m[1mLinking CXX shared library libScanDockScoringPlugin.so[0m
+[17.135s] [ 91%] [32m[1mLinking CXX shared library libStationkeepingScoringPlugin.so[0m
+[17.387s] [ 91%] Built target ScanDockScoringPlugin
+[17.392s] [ 91%] Built target WayfindingScoringPlugin
+[17.425s] [ 91%] Built target StationkeepingScoringPlugin
+[17.458s] [ 91%] Built target BallShooterPlugin
+[18.059s] [ 93%] [32m[1mLinking CXX shared library libAcousticTrackingScoringPlugin.so[0m
+[18.322s] [ 93%] Built target AcousticTrackingScoringPlugin
+[18.515s] [ 95%] [32m[1mLinking CXX shared library libWildlifeScoringPlugin.so[0m
+[18.727s] [ 95%] Built target WildlifeScoringPlugin
+[18.754s] [ 97%] [32m[1mLinking CXX shared library libUSVWind.so[0m
+[18.970s] [ 97%] Built target USVWind
+[19.106s] [100%] [32m[1mLinking CXX shared library libWaveVisual.so[0m
+[19.286s] [100%] Built target WaveVisual
+[19.294s] Invoked command in '/home/gauss/Desktop/my_robot_ws/build/vrx_gz' returned '0': AMENT_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_description/share/wamv_description/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share/vrx_gazebo/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share PYTHONPATH=/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/gauss/Desktop/my_robot_ws/build/vrx_gz -- -j16 -l16
+[19.295s] Invoking command in '/home/gauss/Desktop/my_robot_ws/build/vrx_gz': AMENT_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_description/share/wamv_description/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share/vrx_gazebo/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share PYTHONPATH=/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/gauss/Desktop/my_robot_ws/build/vrx_gz
+[19.299s] -- Install configuration: ""
+[19.299s] -- Execute custom install script
+[19.300s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/environment/resource_paths.dsv
+[19.304s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/environment/resource_paths.sh
+[19.309s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libWaves.so
+[19.315s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libPolyhedraBuoyancyDrag.so
+[19.322s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libScoringPlugin.so
+[19.326s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libStationkeepingScoringPlugin.so
+[19.331s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libWayfindingScoringPlugin.so
+[19.338s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libAcousticPerceptionScoringPlugin.so
+[19.343s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libAcousticTrackingScoringPlugin.so
+[19.348s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libAcousticPingerPlugin.so
+[19.354s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libBallShooterPlugin.so
+[19.359s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libLightBuoyPlugin.so
+[19.364s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libNavigationScoringPlugin.so
+[19.371s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libGymkhanaScoringPlugin.so
+[19.377s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libPerceptionScoringPlugin.so
+[19.384s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libPlacardPlugin.so
+[19.389s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libPublisherPlugin.so
+[19.394s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libScanDockScoringPlugin.so
+[19.401s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libSimpleHydrodynamics.so
+[19.405s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libSurface.so
+[19.410s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libUSVWind.so
+[19.415s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libWaveVisual.so
+[19.419s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/lib/libWildlifeScoringPlugin.so
+[19.426s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/environment/pythonpath.sh
+[19.433s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/environment/pythonpath.dsv
+[19.440s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz-0.0.0-py3.10.egg-info/PKG-INFO
+[19.446s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz-0.0.0-py3.10.egg-info/SOURCES.txt
+[19.451s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz-0.0.0-py3.10.egg-info/dependency_links.txt
+[19.457s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz-0.0.0-py3.10.egg-info/top_level.txt
+[19.464s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/__init__.py
+[19.470s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/bridge.py
+[19.475s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/bridges.py
+[19.481s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/launch.py
+[19.486s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/model.py
+[19.490s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/payload_bridges.py
+[19.496s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/config/roboboat.yaml
+[19.501s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/config/wamv.yaml
+[19.505s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/launch/competition.launch.py
+[19.512s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/launch/spawn.launch.py
+[19.517s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/launch/spawn_config.launch.py
+[19.522s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/launch/usv_joy_teleop.py
+[19.526s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/launch/vrx_environment.launch.py
+[19.532s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/articulated_platform/model.config
+[19.536s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/articulated_platform/model.sdf
+[19.541s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/coast_waves/materials/programs/GerstnerWaves_fs_330.glsl
+[19.546s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/coast_waves/materials/programs/GerstnerWaves_vs_330.glsl
+[19.554s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/coast_waves/materials/textures/skybox_lowres.dds
+[19.559s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/coast_waves/materials/textures/wave_normals.dds
+[19.565s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/coast_waves/meshes/waterlow.dae
+[19.570s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/coast_waves/model.config
+[19.576s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/coast_waves/model.sdf
+[19.583s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_2022/model.config
+[19.588s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_2022/model.sdf
+[19.592s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_2022_base/model.config
+[19.597s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_2022_base/model.sdf
+[19.602s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_block_4x4/mesh/DockCubes_Albedo.png
+[19.607s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_block_4x4/mesh/DockCubes_Metalness.png
+[19.612s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_block_4x4/mesh/DockCubes_Normal.png
+[19.618s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_block_4x4/mesh/DockCubes_Roughness.png
+[19.624s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_block_4x4/mesh/dock_block_4x4.dae
+[19.629s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_block_4x4/model.config
+[19.634s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/dock_block_4x4/model.sdf
+[19.641s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/entrance_exit/model.config
+[19.646s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/entrance_exit/model.sdf
+[19.653s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/obstacle_course/model.config
+[19.658s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/obstacle_course/model.sdf
+[19.664s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/placard_2022/materials/textures/Placard.png
+[19.668s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/placard_2022/meshes/placard_2022.dae
+[19.674s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/placard_2022/model.config
+[19.678s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/placard_2022/model.sdf
+[19.684s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/platform/model.config
+[19.690s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/platform/model.sdf
+[19.695s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/materials/scripts/model.material
+[19.699s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/materials/textures/Boat01_Albedo.png
+[19.704s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/materials/textures/Boat01_Metallic.png
+[19.709s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/materials/textures/Boat01_Normal.png
+[19.714s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/materials/textures/Boat01_Roughness.png
+[19.719s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/materials/textures/Thruster_Albedo.png
+[19.726s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/materials/textures/Thruster_Roughness.png
+[19.730s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/meshes/housing.dae
+[19.735s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/meshes/mount.dae
+[19.741s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/meshes/prop.dae
+[19.746s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/meshes/roboboat01.dae
+[19.750s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/model.config
+[19.755s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat01/model.sdf
+[19.759s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat02/materials/scripts/model.material
+[19.765s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat02/materials/textures/Boat02_Albedo.png
+[19.769s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat02/materials/textures/Boat02_Metallic.png
+[19.774s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat02/materials/textures/Boat02_Normal.png
+[19.779s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat02/materials/textures/Boat02_Roughness.png
+[19.784s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat02/meshes/roboboat02.dae
+[19.789s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat02/model.config
+[19.794s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat02/model.sdf
+[19.799s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat_cpubox/materials/textures/DryBox_Albedo.png
+[19.804s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat_cpubox/materials/textures/DryBox_Roughness.png
+[19.809s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat_cpubox/meshes/drybox.dae
+[19.814s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat_cpubox/model.config
+[19.819s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/roboboat_cpubox/model.sdf
+[19.824s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_bgr/model.config
+[19.829s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_bgr/model.sdf
+[19.834s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_bgy/model.config
+[19.840s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_bgy/model.sdf
+[19.846s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_gbr/model.config
+[19.850s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_gbr/model.sdf
+[19.856s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rbg/model.config
+[19.862s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rbg/model.sdf
+[19.867s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rgb/mesh/LightTower_Albedo.png
+[19.874s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rgb/mesh/LightTower_Metalness.png
+[19.879s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rgb/mesh/LightTower_Normal.png
+[19.884s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rgb/mesh/LightTower_Opacity.png
+[19.891s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rgb/mesh/LightTower_Roughness.png
+[19.897s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rgb/mesh/robotx_light_buoy.dae
+[19.901s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rgb/model.config
+[19.907s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rgb/model.sdf
+[19.912s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rgy/model.config
+[19.916s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_rgy/model.sdf
+[19.923s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_ybr/model.config
+[19.929s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_ybr/model.sdf
+[19.933s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_ygb/model.config
+[19.939s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_ygb/model.sdf
+[19.943s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_yrg/model.config
+[19.948s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/robotx_light_buoy_yrg/model.sdf
+[19.955s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_course_2023_phase3_1/model.config
+[19.962s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_course_2023_phase3_1/model.sdf
+[19.967s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_course_2023_phase3_2/model.config
+[19.973s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_course_2023_phase3_2/model.sdf
+[19.980s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_0/model.config
+[19.985s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_0/model.sdf
+[19.990s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_1/model.config
+[19.996s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_1/model.sdf
+[20.001s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_2/model.config
+[20.006s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_2/model.sdf
+[20.011s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_3/model.config
+[20.016s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_3/model.sdf
+[20.022s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_4/model.config
+[20.029s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_4/model.sdf
+[20.035s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_5/model.config
+[20.042s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/short_navigation_course_5/model.sdf
+[20.049s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/symbol_triangle/mesh/triangle.dae
+[20.055s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/symbol_triangle/model.config
+[20.061s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/models/symbol_triangle/model.sdf
+[20.067s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_perception0.sdf
+[20.072s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_perception1.sdf
+[20.078s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_perception2.sdf
+[20.084s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_perception3.sdf
+[20.090s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_perception4.sdf
+[20.096s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_perception5.sdf
+[20.104s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_tracking0.sdf
+[20.109s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_tracking1.sdf
+[20.116s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_tracking2.sdf
+[20.123s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_tracking3.sdf
+[20.130s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_tracking4.sdf
+[20.137s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_acoustic_tracking5.sdf
+[20.143s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_follow_path0.sdf
+[20.150s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_follow_path1.sdf
+[20.157s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_follow_path2.sdf
+[20.163s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_follow_path3.sdf
+[20.171s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_follow_path4.sdf
+[20.177s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_follow_path5.sdf
+[20.183s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_perception0.sdf
+[20.189s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_perception1.sdf
+[20.194s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_perception2.sdf
+[20.200s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_perception3.sdf
+[20.207s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_perception4.sdf
+[20.214s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_perception5.sdf
+[20.219s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_scan_dock_deliver0.sdf
+[20.225s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_scan_dock_deliver1.sdf
+[20.231s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_scan_dock_deliver2.sdf
+[20.238s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_scan_dock_deliver3.sdf
+[20.251s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_scan_dock_deliver4.sdf
+[20.257s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_scan_dock_deliver5.sdf
+[20.263s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_stationkeeping0.sdf
+[20.270s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_stationkeeping1.sdf
+[20.278s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_stationkeeping2.sdf
+[20.286s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_stationkeeping3.sdf
+[20.292s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_stationkeeping4.sdf
+[20.298s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_stationkeeping5.sdf
+[20.306s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wayfinding0.sdf
+[20.311s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wayfinding1.sdf
+[20.319s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wayfinding2.sdf
+[20.326s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wayfinding3.sdf
+[20.331s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wayfinding4.sdf
+[20.339s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wayfinding5.sdf
+[20.345s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wildlife0.sdf
+[20.351s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wildlife1.sdf
+[20.356s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wildlife2.sdf
+[20.364s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wildlife3.sdf
+[20.369s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wildlife4.sdf
+[20.378s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_phase2/phase2_2023_wildlife5.sdf
+[20.384s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_acoustic_perception0_task.sdf
+[20.390s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_acoustic_perception1_task.sdf
+[20.396s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_acoustic_perception2_task.sdf
+[20.403s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_acoustic_tracking0_task.sdf
+[20.409s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_acoustic_tracking1_task.sdf
+[20.415s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_acoustic_tracking2_task.sdf
+[20.422s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_follow_path0_task.sdf
+[20.427s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_follow_path1_task.sdf
+[20.432s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_follow_path2_task.sdf
+[20.439s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_perception0_task.sdf
+[20.447s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_perception1_task.sdf
+[20.453s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_perception2_task.sdf
+[20.461s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_scan_dock_deliver0_task.sdf
+[20.467s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_scan_dock_deliver1_task.sdf
+[20.472s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_scan_dock_deliver2_task.sdf
+[20.479s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_stationkeeping0_task.sdf
+[20.487s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_stationkeeping1_task.sdf
+[20.494s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_stationkeeping2_task.sdf
+[20.502s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_wayfinding0_task.sdf
+[20.507s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_wayfinding1_task.sdf
+[20.513s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_wayfinding2_task.sdf
+[20.521s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_wildlife0_task.sdf
+[20.527s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_wildlife1_task.sdf
+[20.532s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/2023_practice/practice_2023_wildlife2_task.sdf
+[20.539s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/acoustic_perception_task.sdf
+[20.544s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/acoustic_tracking_task.sdf
+[20.552s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/follow_path_task.sdf
+[20.559s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/gymkhana_task.sdf
+[20.564s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/navigation_task.sdf
+[20.569s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/nbpark.sdf
+[20.574s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/perception_task.sdf
+[20.580s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/scan_dock_deliver_task.sdf
+[20.585s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/stationkeeping_task.sdf
+[20.591s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/sydney_regatta.sdf
+[20.596s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/wayfinding_task.sdf
+[20.601s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/worlds/wildlife_task.sdf
+[20.607s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/ament_index/resource_index/package_run_dependencies/vrx_gz
+[20.612s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/ament_index/resource_index/parent_prefix_path/vrx_gz
+[20.617s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/environment/ament_prefix_path.sh
+[20.622s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/environment/ament_prefix_path.dsv
+[20.627s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/environment/path.sh
+[20.633s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/environment/path.dsv
+[20.640s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/local_setup.bash
+[20.646s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/local_setup.sh
+[20.652s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/local_setup.zsh
+[20.659s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/local_setup.dsv
+[20.665s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/package.dsv
+[20.671s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/ament_index/resource_index/packages/vrx_gz
+[20.678s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/cmake/vrx_gzConfig.cmake
+[20.683s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/cmake/vrx_gzConfig-version.cmake
+[20.688s] -- Symlinking: /home/gauss/Desktop/my_robot_ws/install/vrx_gz/share/vrx_gz/package.xml
+[21.038s] Listing '/home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz'...
+[21.038s] Compiling '/home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/__init__.py'...
+[21.038s] Compiling '/home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/bridge.py'...
+[21.038s] Compiling '/home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/bridges.py'...
+[21.038s] Compiling '/home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/launch.py'...
+[21.038s] Compiling '/home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/model.py'...
+[21.038s] Compiling '/home/gauss/Desktop/my_robot_ws/install/vrx_gz/local/lib/python3.10/dist-packages/vrx_gz/payload_bridges.py'...
+[21.043s] Invoked command in '/home/gauss/Desktop/my_robot_ws/build/vrx_gz' returned '0': AMENT_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_gazebo:/home/gauss/Desktop/my_robot_ws/install/wamv_description:/home/gauss/Desktop/my_robot_ws/install/vrx_ros:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo:/opt/ros/humble GZ_SIM_RESOURCE_PATH=/home/gauss/Desktop/my_robot_ws/install/wamv_description/share/wamv_description/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share/vrx_gazebo/models:/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/share PYTHONPATH=/home/gauss/Desktop/my_robot_ws/install/vrx_gazebo/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/gauss/Desktop/my_robot_ws/build/vrx_gz

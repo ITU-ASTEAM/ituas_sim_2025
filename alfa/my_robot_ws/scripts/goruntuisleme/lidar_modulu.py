@@ -11,7 +11,7 @@ from gz.msgs10.laserscan_pb2 import LaserScan
 
 
 class LidarModulu:
-    def __init__(self, topic_name="/scan"):
+    def __init__(self, topic_name="/lidar"):
         self.node = Node()
         self.topic_name = topic_name
         
@@ -156,7 +156,7 @@ if __name__ == "__main__":
     import time
     
     print("LIDAR Modülü Test")
-    lidar = LidarModulu("/scan")
+    lidar = LidarModulu("/lidar")
     
     # Pozisyon modülünden pose al (test için sabit)
     test_pose = (0.0, 0.0, 0.0)

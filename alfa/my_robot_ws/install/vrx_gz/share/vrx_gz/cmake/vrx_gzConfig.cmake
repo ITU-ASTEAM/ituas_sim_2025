@@ -1,0 +1,1 @@
+/home/gauss/Desktop/my_robot_ws/build/vrx_gz/ament_cmake_core/vrx_gzConfig.cmake
