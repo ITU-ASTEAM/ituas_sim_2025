@@ -83,11 +83,24 @@ def step_4_vision():
     run_command(cmd)
     
 def step_5_build():
-    print(f"\n{Colors.HEADER}--- 5. WORKSPACE DERLEME ---{Colors.ENDC}")
+    print(f"\n{Colors.HEADER}--- 5. WORKSPACE DERLEME (HAFİF VE GÜVENLİ) ---{Colors.ENDC}")
     ws_path, _, real_user = get_workspace_paths()
-    cmd = f"source /opt/ros/humble/setup.bash && cd {ws_path} && colcon build --symlink-install"
+    
+    # Rasyonel Kısıtlamalar:
+    # 1. GZ_VERSION=harmonic -> Köprünün doğru dilde derlenmesi için
+    # 2. MAKEFLAGS="-j2" -> C++ derleyicisinin sadece 2 CPU çekirdeği kullanması için
+    # 3. --parallel-workers 2 -> Colcon'un aynı anda sadece 2 paket derlemesi için
+    # 4. -DBUILD_TESTING=OFF -> Gereksiz test dosyalarını atlayıp zaman/RAM kazanmak için
+    
+    cmd = (
+        f"source /opt/ros/humble/setup.bash && "
+        f"cd {ws_path} && "
+        f"export GZ_VERSION=harmonic && "
+        f"export MAKEFLAGS=\"-j2\" && "
+        f"colcon build --symlink-install --parallel-workers 2 --cmake-args -DBUILD_TESTING=OFF"
+    )
+    
     run_command(cmd, shell=True, as_user=real_user)
-
 def step_6_rename():
     print(f"\n{Colors.HEADER}--- 6. İSİM VE YOL DÜZENLEME ---{Colors.ENDC}")
     _, src_path, real_user = get_workspace_paths()

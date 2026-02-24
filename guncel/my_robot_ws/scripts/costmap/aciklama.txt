@@ -1,0 +1,21 @@
+selamlar, 
+yarışmamızda costmapimizi kendimiz yapıcak olsak bile costmap üretme adımlarını başarıyla yapana kadar static bir costmap üzerinden ilerlemek en sağlıklısı olacaktır.
+
+https://docs.nav2.org/configuration/packages/costmap-plugins/range.html
+
+.py için gerekli indirmeler
+
+sudo apt-get update && sudo apt-get install -y libspatialindex-dev python3-pip
+pip install trimesh pycollada shapely rtree pillow scipy lxml mapbox_earcut
+
+pip install -r .....
+..... kısmına aşağıdakiler gelmeli.
+trimesh
+pycollada
+shapely
+rtree
+pillow
+scipy
+lxml
+mapbox_earcut
+numpy<2.0
