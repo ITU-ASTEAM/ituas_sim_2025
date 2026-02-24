@@ -1,9 +1,0 @@
-/home/gauss/Desktop/my_robot_ws/build/boat_navigation/CMakeFiles/uninstall.dir
-/home/gauss/Desktop/my_robot_ws/build/boat_navigation/CMakeFiles/boat_navigation_uninstall.dir
-/home/gauss/Desktop/my_robot_ws/build/boat_navigation/CMakeFiles/test.dir
-/home/gauss/Desktop/my_robot_ws/build/boat_navigation/CMakeFiles/edit_cache.dir
-/home/gauss/Desktop/my_robot_ws/build/boat_navigation/CMakeFiles/rebuild_cache.dir
-/home/gauss/Desktop/my_robot_ws/build/boat_navigation/CMakeFiles/list_install_components.dir
-/home/gauss/Desktop/my_robot_ws/build/boat_navigation/CMakeFiles/install.dir
-/home/gauss/Desktop/my_robot_ws/build/boat_navigation/CMakeFiles/install/local.dir
-/home/gauss/Desktop/my_robot_ws/build/boat_navigation/CMakeFiles/install/strip.dir

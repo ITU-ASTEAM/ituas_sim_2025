@@ -1,1 +1,0 @@
-/home/gauss/Desktop/my_robot_ws/build/wamv_description/ament_cmake_core/wamv_descriptionConfig.cmake
