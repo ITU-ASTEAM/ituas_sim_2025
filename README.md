@@ -65,15 +65,6 @@ Script çalıştığında karşınıza aşağıdaki interaktif menü gelecektir:
 > **Adım 6 Notu:** Bu adımda eski isim kısmına varsayılan olarak `gauss` yazmalısınız. 17 Şubat 2026 itibarıyla sistem, yapıdaki **6 farklı dosyada** otomatik değişiklik yapmaktadır.
 
 ---
-
-## 🎮 Simülasyonu Başlatma
-
-Kurulum tamamlandıktan sonra simülasyonu başlatmak için script içindeki 8. adımı kullanabilirsiniz. Ancak, logları daha temiz takip etmek için **yeni bir terminalden** şu komutu kullanmanız önerilir:
-
-```bash
-gz sim -v 4 -r ~/Desktop/my_robot_ws/src/my_robot_description/worlds/final_boat_hydro.sdf
-```
-
 ---
 
 ### 📝 Notlar
