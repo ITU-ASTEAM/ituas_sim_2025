@@ -82,3 +82,74 @@ Logları ve hataları temiz takip etmek için şu komut önerilir:
 gz sim -v 4 -r ~/Desktop/my_robot_ws/src/my_robot_description/worlds/final_boat_hydro.sdf
 ```
 
+
+---
+
+## 🗺️ Navigasyon ve RViz Çalıştırma (TF Köprüleri)
+
+Simülasyon ayağa kalktıktan sonra otonom sürüş (**Nav2**) özelliklerini kullanmak ve sensör verilerini **RViz** üzerinden mantıksal düzlemde görselleştirmek için aşağıdaki adımları sırasıyla çalıştırmalısınız.
+
+---
+
+### 🚀 1. Navigasyon Stack'ini Başlatma
+
+Teknenin otonom sürüş altyapısını başlatan ana komuttur.  
+Sistem konfigürasyonunuza göre RViz arayüzünü de bu komut tetikler.
+
+```bash
+ros2 launch boat_navigation boat_nav2.launch.py
+```
+
+---
+
+### 🔗 2. Statik Transform (TF) Köprülerinin Kurulması
+
+Gazebo simülasyonundaki fiziksel modelleme ile ROS2'nin mantıksal koordinat sistemi arasında doğrudan bir bağ yoktur.  
+
+RViz'in robotu ve lazer sensör (Lidar) verilerini uzaysal olarak doğru yere konumlandırabilmesi için bir **TF Tree (Transform Ağacı)** oluşturulması şarttır.
+
+> `use_sim_time:=true` parametresi, bu köprülerin simülasyon saati ile senkronize kalmasını sağlar.
+
+---
+
+#### 🔹 A. Gazebo Modeli ile ROS2 `base_link` Köprüsü
+
+Simülasyondaki ana gövde olan `boat` frame'ini, ROS2 navigasyon standartlarında robotun merkezi kabul edilen `base_link` frame’ine sıfır rotasyon ve sıfır öteleme ile bağlar.
+
+```bash
+ros2 run tf2_ros static_transform_publisher \
+--x 0 --y 0 --z 0 \
+--qx 0 --qy 0 --qz 0 --qw 1 \
+--frame-id boat \
+--child-frame-id base_link \
+--ros-args -p use_sim_time:=true
+```
+
+---
+
+#### 🔹 B. Lidar Sensörünün Uzaysal Konumlandırması
+
+Lidar verilerinin robotun merkezine (`base_link`) göre nerede bulunduğunu sisteme tanıtır.  
+
+Bu köprü kurulmazsa RViz, lazer noktalarını harita üzerine yerleştirecek referans noktasını bulamaz ve veriler doğru şekilde görselleştirilemez.
+
+```bash
+ros2 run tf2_ros static_transform_publisher \
+--x 0 --y 0 --z 0 \
+--qx 0 --qy 0 --qz 0 --qw 1 \
+--frame-id base_link \
+--child-frame-id boat/base_link/gpu_lidar \
+--ros-args -p use_sim_time:=true
+```
+
+---
+
+### ✅ Doğrulama
+
+Bu işlemleri tamamladıktan sonra:
+
+* RViz üzerinde **TF ağacının oluştuğunu**
+* `/scan` verisinin aktığını
+* Robot modelinin doğru konumda yer aldığını gözlemlemelisiniz.
+
+---
