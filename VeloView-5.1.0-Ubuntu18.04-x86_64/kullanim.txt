@@ -1,0 +1,1 @@
+bin/veloview çalıştırlırak lidarverisi gözükür
