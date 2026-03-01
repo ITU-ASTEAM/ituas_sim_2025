@@ -1,0 +1,49 @@
+sudo apt install ros-$ROS_DISTRO-velodyne
+
+sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup -y
+
+
+
+
+
+sudo apt install ros-humble-velodyne
+
+ros2 launch velodyne_pointcloud velodyne_transform_node-VLP16-launch.py
+
+
+
+gauss@gauss:~$ rviz2
+[INFO] [1772287825.477705046] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1772287825.477765410] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[INFO] [1772287825.494176436] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [1772287826.672843597] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287825,635 for reason 'discarding message because the queue is full'
+[INFO] [1772287829.296788222] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287828,257 for reason 'discarding message because the queue is full'
+[INFO] [1772287831.919928219] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287830,879 for reason 'discarding message because the queue is full'
+[INFO] [1772287834.512847882] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287833,502 for reason 'discarding message because the queue is full'
+[INFO] [1772287837.040531931] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287836,023 for reason 'discarding message because the queue is full'
+[INFO] [1772287839.567982216] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287838,545 for reason 'discarding message because the queue is full'
+[INFO] [1772287842.096578792] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287841,066 for reason 'discarding message because the queue is full'
+[INFO] [1772287844.624011567] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287843,588 for reason 'discarding message because the queue is full'
+[INFO] [1772287847.248561536] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287846,210 for reason 'discarding message because the queue is full'
+[INFO] [1772287849.776700643] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287848,731 for reason 'discarding message because the queue is full'
+[INFO] [1772287852.368626669] [rviz]: Message Filter dropping message: frame 'velodyne' at time 1772287851,354 for reason 'discarding message because the queue is full'
+
+
+
+http://192.168.1.201/
+ile kontol edebilirsin.
+
+
+Şİmdi rvizde veri filtrasyonu ve mapping+kameranın nodelanması ve ros2 ile kamikaze test
+
+
+
+gauss@gauss:~/Desktop$ ros2 run tf2_ros static_transform_publisher --x 0 --y 0 --z 0 --qx 0 --qy 0 --qz 0 --qw 1 --frame-id map --child-frame-id velodyne
+[INFO] [1772295789.201266464] [static_transform_publisher_8eV3WXHOxxXBiZdi]: Spinning until stopped - publishing transform
+translation: ('0.000000', '0.000000', '0.000000')
+rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+from 'map' to 'velodyne'
+
+
+
+ros2 launch velodyne velodyne-all-nodes-VLP16-launch.py device_ip:=192.168.1.201
