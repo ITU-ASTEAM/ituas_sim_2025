@@ -113,16 +113,6 @@ ls node_modules | grep vite      # vite çıkmalı
 
 ---
 
-### Adım 5 — Python Bağımlılıklarını Kur (Opsiyonel)
-
-Eğer Python tabanlı `server.py` backend'i kullanmak istiyorsanız:
-
-```bash
-pip3 install fastapi uvicorn pyyaml
-```
-
-> **Not:** Varsayılan backend `server.cjs` (Node.js) kullanır. Python backend'i kullanmak istemiyorsanız bu adımı atlayın.
-
 Kurulumu doğrulayın:
 ```bash
 python3 -c "import fastapi, uvicorn, yaml; print('OK')"
@@ -254,5 +244,3 @@ tf-tree/
 ├── ornek.png            # README görseli
 └── README.md
 ```
-
----
