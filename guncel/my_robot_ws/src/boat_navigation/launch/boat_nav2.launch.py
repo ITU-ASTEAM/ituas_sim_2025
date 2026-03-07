@@ -4,8 +4,7 @@ from launch.actions import DeclareLaunchArgument, TimerAction
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
-
-
+from launch.actions import DeclareLaunchArgument, TimerAction, ExecuteProcess
 def generate_launch_description():
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
@@ -17,12 +16,6 @@ def generate_launch_description():
     model_sdf = '/home/gauss/Desktop/my_robot_ws/src/my_robot_description/models/boat/model.sdf'
 
     # ------------------------------------------------------------------
-    # 1) GZ→ROS Bridge — YAML config ile lazy:false  (subscriber zorla açılır)
-    # ------------------------------------------------------------------
-    # ------------------------------------------------------------------
-    # 1) GZ <-> ROS Bridge (Doğrudan Argüman Yöntemi)
-    # ------------------------------------------------------------------
-# ------------------------------------------------------------------
     # 1) GZ <-> ROS Bridge (Doğrudan Argüman ve Deadlock Kırıcı)
     # ------------------------------------------------------------------
     gz_bridge = Node(
@@ -42,6 +35,7 @@ def generate_launch_description():
         # DİKKAT: Ölümcül kilitlenmeyi kırmak için köprüde sim_time KESİNLİKLE False olmalı!
         parameters=[{'use_sim_time': False}] 
     )
+
     cmd_vel_to_thrust = Node(
         package='boat_navigation',
         executable='cmd_vel_to_thrust.py',
@@ -72,6 +66,7 @@ def generate_launch_description():
             'publish_frequency': 30.0,
         }],
     )
+
     joint_state_publisher = Node(
         package='joint_state_publisher',
         executable='joint_state_publisher',
@@ -162,13 +157,65 @@ def generate_launch_description():
         parameters=[{'use_sim_time': use_sim_time}],
     )
 
+    # ------------------------------------------------------------------
+    # 5) OAK-D Camera TF & Object Detection
+    # ------------------------------------------------------------------
+    # Kameranın ana gövdeye fiziksel mesafesini tanımlayan düğüm (X: 0.5m, Y: 0.0m, Z: 0.3m)
+    camera_static_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='camera_static_tf',
+        arguments=['0.5', '0.0', '0.3', '0', '0', '0', 'base_link', 'oak_rgb_camera_optical_frame']
+    )
+
+
+
+
+# 1. Arkadaşının OAK-D Kamerası için izole TF dalı (Gazebo kameranı bozmaz)
+    oak_camera_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='oak_camera_static_tf',
+        # X: 0.5, Y: 0.0, Z: 0.3 değerlerini OAK-D'nin fiziksel konumuna göre revize edebilirsin
+        arguments=['0.5', '0.0', '0.3', '0', '0', '0', 'base_link', 'oak_rgb_camera_optical_frame'],
+        parameters=[{'use_sim_time': use_sim_time}] # Zaman senkronizasyonu için kritik
+    )
+
+    # 2. Gazebo'dan gelen bozuk LiDAR ismini düzelten köprü (RViz hatası için)
+    gazebo_lidar_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='gazebo_lidar_tf',
+        arguments=['0', '0', '0', '0', '0', '0', 'gpu_lidar', 'boat/base_link/gpu_lidar'],
+        parameters=[{'use_sim_time': use_sim_time}] # Zaman senkronizasyonu için kritik
+    )
+
+    # 3. Arkadaşının YOLO / PointCloud kodu
+    object_detect_node = ExecuteProcess(
+        cmd=['python3', 'pcl.py'],
+        cwd='/home/gauss/Desktop/my_robot_ws/src/objectdetect/objectdetect',
+        output='screen'
+    )
+    # Görüntü işleme ve pointcloud verisini yorumlayan düğüm
+
+    object_detect_node = ExecuteProcess(
+        cmd=['python3', 'pcl.py'],
+        cwd='/home/gauss/Desktop/my_robot_ws/src/objectdetect/objectdetect',
+        output='screen'
+    )
+
     return LaunchDescription([
         DeclareLaunchArgument('use_sim_time', default_value='true'),
 
         gz_bridge,
-        cmd_vel_to_thrust,  # YENİ EKLEDİĞİMİZ SATIR
+        cmd_vel_to_thrust,
         robot_state_publisher,
         joint_state_publisher,
+        
+        # YENİ EKLENEN SENSÖR VE İŞLEME DÜĞÜMLERİ
+        oak_camera_tf,
+        gazebo_lidar_tf,
+        object_detect_node,
 
         TimerAction(period=3.0, actions=[
             map_server,

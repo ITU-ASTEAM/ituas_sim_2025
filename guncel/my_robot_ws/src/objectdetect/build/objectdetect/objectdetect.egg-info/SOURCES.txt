@@ -1,0 +1,12 @@
+package.xml
+setup.py
+build/objectdetect/objectdetect.egg-info/PKG-INFO
+build/objectdetect/objectdetect.egg-info/SOURCES.txt
+build/objectdetect/objectdetect.egg-info/dependency_links.txt
+build/objectdetect/objectdetect.egg-info/entry_points.txt
+build/objectdetect/objectdetect.egg-info/requires.txt
+build/objectdetect/objectdetect.egg-info/top_level.txt
+build/objectdetect/objectdetect.egg-info/zip-safe
+objectdetect/__init__.py
+objectdetect/pcl.py
+resource/objectdetect

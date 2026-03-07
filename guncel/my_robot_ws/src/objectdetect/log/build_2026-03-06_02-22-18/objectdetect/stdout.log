@@ -1,0 +1,35 @@
+running egg_info
+creating build/objectdetect/objectdetect.egg-info
+writing build/objectdetect/objectdetect.egg-info/PKG-INFO
+writing dependency_links to build/objectdetect/objectdetect.egg-info/dependency_links.txt
+writing entry points to build/objectdetect/objectdetect.egg-info/entry_points.txt
+writing requirements to build/objectdetect/objectdetect.egg-info/requires.txt
+writing top-level names to build/objectdetect/objectdetect.egg-info/top_level.txt
+writing manifest file 'build/objectdetect/objectdetect.egg-info/SOURCES.txt'
+reading manifest file 'build/objectdetect/objectdetect.egg-info/SOURCES.txt'
+writing manifest file 'build/objectdetect/objectdetect.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build
+creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib
+creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib/objectdetect
+copying objectdetect/pcl.py -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib/objectdetect
+copying objectdetect/__init__.py -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib/objectdetect
+running install
+running install_lib
+creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect
+copying /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib/objectdetect/pcl.py -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect
+copying /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib/objectdetect/__init__.py -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect
+byte-compiling /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect/pcl.py to pcl.cpython-310.pyc
+byte-compiling /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/share/ament_index
+creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/share/ament_index/resource_index
+creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/share/ament_index/resource_index/packages
+copying resource/objectdetect -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/share/ament_index/resource_index/packages
+copying package.xml -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/share/objectdetect
+running install_egg_info
+Copying build/objectdetect/objectdetect.egg-info to /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect-0.0.0-py3.10.egg-info
+running install_scripts
+Installing objectdetect script to /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/bin
+writing list of installed files to '/home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/install.log'
