@@ -1,0 +1,96 @@
+# Foxglove Bridge Kurulumu ve Çalıştırılması (ROS2 Humble)
+
+Bu doküman, ROS2 sisteminde yayınlanan topic’lerin Foxglove Studio üzerinden izlenebilmesi için Foxglove Bridge kurulumu ve çalıştırılmasını anlatır.
+
+---
+
+## 1. Foxglove Bridge Kurulumu
+
+Terminalde aşağıdaki komut çalıştırılır:
+
+sudo apt install ros-$ROS_DISTRO-foxglove-bridge
+
+Bu komut aşağıdaki paketleri kurar:
+
+- foxglove_bridge
+- rosx_introspection
+- rapidjson
+
+---
+
+## 2. Foxglove Bridge Çalıştırma
+
+Workspace dizinine gidilir:
+
+cd ~/Desktop/my_robot_ws
+
+Foxglove Bridge başlatılır:
+
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+
+Bridge çalıştığında terminalde aşağıya benzer bir çıktı görülür:
+
+[INFO] [foxglove_bridge]: Starting foxglove_bridge  
+[INFO] [foxglove_bridge]: Server listening on port 8765  
+
+Bu mesaj WebSocket sunucusunun 8765 portunda çalıştığını gösterir.
+
+Bridge çalışırken ROS2 sistemindeki topic’ler otomatik olarak yayınlanır. Örneğin:
+
+/tf  
+/map  
+/odom  
+/scan  
+/cmd_vel  
+/oak/rgb/image_raw  
+/global_costmap/costmap  
+/local_costmap/costmap  
+
+---
+
+## 3. Foxglove Studio ile Bağlantı
+
+Foxglove Studio açılır.
+
+Bağlantı oluşturulur:
+
+Connection type: Foxglove WebSocket  
+Address: ws://localhost:8765  
+
+Bağlantı kurulduktan sonra ROS2 topic’leri Foxglove arayüzünde görüntülenebilir.
+
+---
+
+## 4. Görüntülenebilecek Veri Türleri
+
+Foxglove Studio ile aşağıdaki veri türleri görselleştirilebilir:
+
+- Lidar verisi (/scan)
+- Harita (/map)
+- Robot konumu (/odom)
+- TF dönüşümleri (/tf)
+- Kamera görüntüleri (/oak/rgb/image_raw)
+- Navigation planları (/plan, /local_plan)
+- Costmap verileri (/global_costmap, /local_costmap)
+
+Bu sayede robotun navigasyon, algılama ve sensör verileri gerçek zamanlı olarak izlenebilir.
+
+---
+
+## 5. Bağlantının Doğrulanması
+
+Foxglove Studio bağlandığında terminalde aşağıdaki mesajlar görülür:
+
+Client ID ... created ROS subscription
+
+Bu mesajlar Foxglove’un ROS topic’lerine abone olduğunu gösterir.
+
+---
+
+## Not
+
+Eğer bağlantı kurulamazsa aşağıdaki komut ile port kontrol edilebilir:
+
+ss -lntp | grep 8765
+
+Port açıksa bridge düzgün çalışıyor demektir.
