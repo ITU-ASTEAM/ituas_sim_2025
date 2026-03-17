@@ -1,4 +1,4 @@
-	#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Mistik SLAM v6 - Optimized Version
 Daha az tekrar, daha stabil mapping
@@ -8,7 +8,15 @@ import cv2
 import numpy as np
 import math
 import time
+import os
 from collections import defaultdict
+import rclpy
+from rclpy.parameter import Parameter
+from std_msgs.msg import Header
+from geometry_msgs.msg import Point
+from sensor_msgs.msg import PointCloud2
+import sensor_msgs_py.point_cloud2 as pc2
+from visualization_msgs.msg import Marker, MarkerArray
 from ultralytics import YOLO
 from kamera_modulu import KameraModulu
 from position import PozisyonModulu
@@ -30,7 +38,13 @@ class MistikHaritaSistemi:
         
         # Modeller
         print("[1/4] YOLO yükleniyor...")
-        self.model = YOLO("best29jan.pt")
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        weights_path = os.path.join(script_dir, "best29jan.pt")
+
+        if not os.path.exists(weights_path):
+            raise FileNotFoundError(f"YOLO ağırlık dosyası bulunamadı: {weights_path}")
+
+        self.model = YOLO(weights_path)
         print("      ✓ Hazır")
         
         print("[2/4] Kameralar...")
@@ -90,6 +104,234 @@ class MistikHaritaSistemi:
         
         # LIDAR görselleştirme açık/kapalı
         self.show_lidar = True
+
+        # RViz yayıncıları
+        self.rviz_frame_id = "map"
+        self.rviz_enabled = self._init_rviz_publishers()
+        if self.rviz_enabled:
+            print("[RViz] Görselleştirme aktif: /mistik_slam/markers, /mistik_slam/lidar_points")
+            print("[RViz] OpenCV pencere açılmayacak; veriler RViz'e yayınlanıyor.\n")
+
+    def _init_rviz_publishers(self):
+        try:
+            if not rclpy.ok():
+                rclpy.init(args=None)
+
+            self.rviz_node = rclpy.create_node('mistik_slam_rviz_publisher')
+            self.rviz_node.set_parameters([
+                Parameter('use_sim_time', Parameter.Type.BOOL, True)
+            ])
+
+            self.marker_pub = self.rviz_node.create_publisher(MarkerArray, '/mistik_slam/markers', 10)
+            self.lidar_cloud_pub = self.rviz_node.create_publisher(PointCloud2, '/mistik_slam/lidar_points', 10)
+            return True
+        except Exception as exc:
+            print(f"[RViz] Başlatılamadı: {exc}")
+            self.rviz_node = None
+            return False
+
+    def _yaw_to_quaternion(self, yaw):
+        return (0.0, 0.0, math.sin(yaw / 2.0), math.cos(yaw / 2.0))
+
+    def _bgr_to_rgba(self, bgr, alpha=1.0):
+        return (
+            float(bgr[2]) / 255.0,
+            float(bgr[1]) / 255.0,
+            float(bgr[0]) / 255.0,
+            alpha,
+        )
+
+    def publish_rviz(self, robot_pose):
+        if not self.rviz_enabled or self.rviz_node is None or not rclpy.ok():
+            return
+
+        stamp = self.rviz_node.get_clock().now().to_msg()
+        rx, ry, r_yaw = robot_pose
+
+        # 1) LIDAR PointCloud2
+        header = Header()
+        header.stamp = stamp
+        header.frame_id = self.rviz_frame_id
+        lidar_xyz = [[float(p[0]), float(p[1]), 0.0] for p in self.lidar_points] if len(self.lidar_points) > 0 else []
+        lidar_msg = pc2.create_cloud_xyz32(header, lidar_xyz)
+        try:
+            self.lidar_cloud_pub.publish(lidar_msg)
+        except Exception:
+            return
+
+        # 2) MarkerArray
+        markers = MarkerArray()
+
+        clear_marker = Marker()
+        clear_marker.header.frame_id = self.rviz_frame_id
+        clear_marker.header.stamp = stamp
+        clear_marker.action = Marker.DELETEALL
+        markers.markers.append(clear_marker)
+
+        marker_id = 0
+
+        # Robot gövdesi
+        robot_marker = Marker()
+        robot_marker.header.frame_id = self.rviz_frame_id
+        robot_marker.header.stamp = stamp
+        robot_marker.ns = 'robot'
+        robot_marker.id = marker_id
+        marker_id += 1
+        robot_marker.type = Marker.CUBE
+        robot_marker.action = Marker.ADD
+        robot_marker.pose.position.x = float(rx)
+        robot_marker.pose.position.y = float(ry)
+        robot_marker.pose.position.z = 0.20
+        qx, qy, qz, qw = self._yaw_to_quaternion(r_yaw)
+        robot_marker.pose.orientation.x = qx
+        robot_marker.pose.orientation.y = qy
+        robot_marker.pose.orientation.z = qz
+        robot_marker.pose.orientation.w = qw
+        robot_marker.scale.x = 2.0
+        robot_marker.scale.y = 1.0
+        robot_marker.scale.z = 0.25
+        robot_marker.color.r = 1.0
+        robot_marker.color.g = 0.8
+        robot_marker.color.b = 0.8
+        robot_marker.color.a = 0.95
+        markers.markers.append(robot_marker)
+
+        # Robot yön oku
+        heading_marker = Marker()
+        heading_marker.header.frame_id = self.rviz_frame_id
+        heading_marker.header.stamp = stamp
+        heading_marker.ns = 'robot_heading'
+        heading_marker.id = marker_id
+        marker_id += 1
+        heading_marker.type = Marker.ARROW
+        heading_marker.action = Marker.ADD
+        heading_marker.scale.x = 0.15
+        heading_marker.scale.y = 0.30
+        heading_marker.scale.z = 0.30
+        heading_marker.color.r = 1.0
+        heading_marker.color.g = 0.1
+        heading_marker.color.b = 0.1
+        heading_marker.color.a = 1.0
+        p0 = Point()
+        p0.x, p0.y, p0.z = float(rx), float(ry), 0.35
+        p1 = Point()
+        p1.x = float(rx + 3.5 * math.cos(r_yaw))
+        p1.y = float(ry + 3.5 * math.sin(r_yaw))
+        p1.z = 0.35
+        heading_marker.points = [p0, p1]
+        markers.markers.append(heading_marker)
+
+        # LIDAR kümeleri
+        if self.show_lidar:
+            for cluster in self.lidar_clusters:
+                center = cluster['center']
+                cluster_marker = Marker()
+                cluster_marker.header.frame_id = self.rviz_frame_id
+                cluster_marker.header.stamp = stamp
+                cluster_marker.ns = 'lidar_clusters'
+                cluster_marker.id = marker_id
+                marker_id += 1
+                cluster_marker.type = Marker.SPHERE
+                cluster_marker.action = Marker.ADD
+                cluster_marker.pose.position.x = float(center[0])
+                cluster_marker.pose.position.y = float(center[1])
+                cluster_marker.pose.position.z = 0.10
+                cluster_marker.pose.orientation.w = 1.0
+                size = min(cluster['size'] * 0.04 + 0.12, 0.55)
+                cluster_marker.scale.x = size
+                cluster_marker.scale.y = size
+                cluster_marker.scale.z = 0.12
+                cluster_marker.color.r = 0.60
+                cluster_marker.color.g = 0.90
+                cluster_marker.color.b = 1.00
+                cluster_marker.color.a = 0.80
+                markers.markers.append(cluster_marker)
+
+        # Vision nesneleri
+        sorted_objects = sorted(self.detected_objects, key=lambda x: x['confidence'])
+        for obj in sorted_objects:
+            conf_ratio = min(float(obj['confidence']) / 50.0, 1.0)
+            rr, gg, bb, aa = self._bgr_to_rgba(obj['color'], alpha=0.90)
+
+            obj_marker = Marker()
+            obj_marker.header.frame_id = self.rviz_frame_id
+            obj_marker.header.stamp = stamp
+            obj_marker.ns = 'vision_objects'
+            obj_marker.id = marker_id
+            marker_id += 1
+            obj_marker.type = Marker.SPHERE
+            obj_marker.action = Marker.ADD
+            obj_marker.pose.position.x = float(obj['x'])
+            obj_marker.pose.position.y = float(obj['y'])
+            obj_marker.pose.position.z = 0.30
+            obj_marker.pose.orientation.w = 1.0
+            diameter = 0.30 + 0.35 * conf_ratio
+            obj_marker.scale.x = diameter
+            obj_marker.scale.y = diameter
+            obj_marker.scale.z = 0.30
+            obj_marker.color.r = rr
+            obj_marker.color.g = gg
+            obj_marker.color.b = bb
+            obj_marker.color.a = aa
+            markers.markers.append(obj_marker)
+
+            if obj['confidence'] > 20:
+                text_marker = Marker()
+                text_marker.header.frame_id = self.rviz_frame_id
+                text_marker.header.stamp = stamp
+                text_marker.ns = 'vision_conf_text'
+                text_marker.id = marker_id
+                marker_id += 1
+                text_marker.type = Marker.TEXT_VIEW_FACING
+                text_marker.action = Marker.ADD
+                text_marker.pose.position.x = float(obj['x'])
+                text_marker.pose.position.y = float(obj['y'])
+                text_marker.pose.position.z = 0.85
+                text_marker.pose.orientation.w = 1.0
+                text_marker.scale.z = 0.28
+                text_marker.color.r = rr
+                text_marker.color.g = gg
+                text_marker.color.b = bb
+                text_marker.color.a = 1.0
+                text_marker.text = f"{obj['type']} ({obj['confidence']:.1f})"
+                markers.markers.append(text_marker)
+
+        # İstatistik metni
+        high_conf = sum(1 for o in self.detected_objects if o['confidence'] > 20)
+        med_conf = sum(1 for o in self.detected_objects if 10 <= o['confidence'] <= 20)
+        low_conf = sum(1 for o in self.detected_objects if o['confidence'] < 10)
+        lidar_status = f"LIDAR: {len(self.lidar_points)} pkt, {len(self.lidar_clusters)} kume" if self.show_lidar else "LIDAR: KAPALI"
+
+        info_marker = Marker()
+        info_marker.header.frame_id = self.rviz_frame_id
+        info_marker.header.stamp = stamp
+        info_marker.ns = 'system_info'
+        info_marker.id = marker_id
+        marker_id += 1
+        info_marker.type = Marker.TEXT_VIEW_FACING
+        info_marker.action = Marker.ADD
+        info_marker.pose.position.x = float(rx + 6.0)
+        info_marker.pose.position.y = float(ry + 6.0)
+        info_marker.pose.position.z = 2.0
+        info_marker.pose.orientation.w = 1.0
+        info_marker.scale.z = 0.35
+        info_marker.color.r = 0.95
+        info_marker.color.g = 0.95
+        info_marker.color.b = 0.95
+        info_marker.color.a = 1.0
+        info_marker.text = (
+            f"Pozisyon: ({rx:.1f}, {ry:.1f})\n"
+            f"Yaw: {math.degrees(r_yaw):.1f}\n"
+            f"Toplam: {len(self.detected_objects)} nesne\n"
+            f"Yuksek: {high_conf}  Orta: {med_conf}  Dusuk: {low_conf}\n"
+            f"{lidar_status}"
+        )
+        markers.markers.append(info_marker)
+
+        try:
+            self.marker_pub.publish(markers)
+        except Exception:
+            return
     
     def get_buoy_color(self, label):
         """Label'dan renk al - esnek eşleştirme"""
@@ -462,36 +704,22 @@ class MistikHaritaSistemi:
                     cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
                     cv2.putText(frame, f"{label.split('_')[0]} {depth:.1f}m",
                                (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-                
-                # Harita
-                map_img = self.harita_ciz(robot_pose)
-                
-                cv2.imshow("Kamera", frame)
-                cv2.imshow("Mistik SLAM v6", map_img)
-                
-                key = cv2.waitKey(1) & 0xFF
-                if key == ord('q'):
-                    break
-                elif key == ord('r'):
-                    self.detected_objects.clear()
-                    self.detection_buffer.clear()
-                    print("[Reset] Harita temizlendi")
-                elif key == ord('c'):
-                    # Manuel temizlik - confidence < 10 olanları sil
-                    before = len(self.detected_objects)
-                    self.detected_objects = [o for o in self.detected_objects if o['confidence'] >= 10]
-                    after = len(self.detected_objects)
-                    print(f"[Temizlik] {before - after} düşük güvenli nesne silindi")
-                elif key == ord('l'):
-                    # LIDAR görselleştirme toggle
-                    self.show_lidar = not self.show_lidar
-                    print(f"[LIDAR] Görselleştirme: {'AÇIK' if self.show_lidar else 'KAPALI'}")
+
+                # RViz yayınları
+                self.publish_rviz(robot_pose)
+
+                # CPU'yu yormamak için kısa bekleme
+                time.sleep(0.01)
         
         except KeyboardInterrupt:
             print("\n[Sistem] Durduruluyor...")
         
         finally:
-            cv2.destroyAllWindows()
+            if self.rviz_node is not None:
+                self.rviz_node.destroy_node()
+
+            if rclpy.ok():
+                rclpy.shutdown()
             
             # Final rapor
             if self.detected_objects:
