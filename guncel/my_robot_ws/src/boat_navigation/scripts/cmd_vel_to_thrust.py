@@ -24,7 +24,7 @@ class CmdVelToThrust(RosNode):
         self.right_pub = self.gz_node.advertise("/model/boat/joint/rightmotor_link_joint/cmd_thrust", Double)
         
         self.wheel_sep = 0.66
-        self.thrust_mult = 50.0
+        self.thrust_mult = 15.0
 
     def cmd_vel_callback(self, msg):
         left_vel = msg.linear.x - (msg.angular.z * self.wheel_sep / 2.0)
