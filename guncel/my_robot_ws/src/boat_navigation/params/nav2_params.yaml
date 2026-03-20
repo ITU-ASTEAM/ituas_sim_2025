@@ -20,9 +20,9 @@ bt_navigator:
 controller_server:
   ros__parameters:
     use_sim_time: true
-    controller_frequency: 10.0
+    controller_frequency: 20.0
     min_x_velocity_threshold: 0.001
-    min_y_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
     failure_tolerance: 0.3
     progress_checker_plugins: ["progress_checker"]
@@ -31,39 +31,49 @@ controller_server:
 
     progress_checker:
       plugin: "nav2_controller::SimpleProgressChecker"
-      required_movement_radius: 0.5
-      movement_time_allowance: 60.0  # tekne yavaş, daha fazla süre ver
+      required_movement_radius: 0.1
+      movement_time_allowance: 120.0
 
     goal_checker:
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 1.0   # su ortamı için geniş tolerans
-      yaw_goal_tolerance: 0.5  # yaw toleransı da geniş, tur atmasın
+      xy_goal_tolerance: 0.5   # su ortamı: 1m makul
+      yaw_goal_tolerance: 0.15  # yaw ignore
       stateful: true
 
     FollowPath:
       plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
-      desired_linear_vel: 1.0
-      lookahead_dist: 3.0        # tekne için uzun lookahead
-      min_lookahead_dist: 2.0
-      max_lookahead_dist: 6.0
-      lookahead_time: 1.5
-      rotate_to_heading_angular_vel: 0.5
-      transform_tolerance: 1.0
+
+      # --- HIZLAR ---
+      desired_linear_vel: 0.8
+      min_approach_linear_velocity: 0.05
+      approach_velocity_scaling_dist: 8.0
+
+      # --- LOOKAHEAD (KRİTİK: path'e sadık kalmak için küçült) ---
+      lookahead_dist: 2.0        # <<< 4.0→1.5: path'i daha yakından takip et
+      min_lookahead_dist: 1.5    # <<< 3.0→1.0: minimum lookahead küçük olsun
+      max_lookahead_dist: 3.0    # <<< 8.0→3.0: çok uzağa bakmasın, viraj kesilmesin
+      lookahead_time: 1.5        # <<< 2.0→1.5
       use_velocity_scaled_lookahead_dist: true
-      min_approach_linear_velocity: 0.3
-      approach_velocity_scaling_dist: 3.0
+
+      # --- DÖNÜŞ ---
+      use_rotate_to_heading: true
+      rotate_to_heading_angular_vel: 0.4
+      rotate_to_heading_min_angle: 0.8  # <<< 1.0→0.8: daha erken dönmeye başlasın
+      max_angular_accel: 0.3
+
+      # --- ÇARPIŞMA / ÖLÇEKLEME ---
       use_collision_detection: true
-      max_allowed_time_to_collision_up_to_carrot: 1.0
+      max_allowed_time_to_collision_up_to_carrot: 1.5  # lookahead ile uyumlu
       use_regulated_linear_velocity_scaling: true
       use_fixed_curvature_lookahead: false
-      curvature_feedback_gain: 3.5
-      inflation_cost_scaling_factor: 3.0
-      regulated_linear_scaling_min_radius: 0.9
-      regulated_linear_scaling_min_speed: 0.25
-      use_rotate_to_heading: false 
+      curvature_feedback_gain: 3.5   # <<< 2.5→3.5: virajlarda daha agresif yavaşlasın
+      inflation_cost_scaling_factor: 0.5
+      regulated_linear_scaling_min_radius: 1.0  # <<< 1.5→1.0: dar virajlarda daha çok yavaşlasın
+      regulated_linear_scaling_min_speed: 0.05
+
+      # --- DİĞER ---
+      transform_tolerance: 1.0
       allow_reversing: false
-      rotate_to_heading_min_angle: 0.785
-      max_angular_accel: 0.5
       max_robot_pose_search_dist: 10.0
 
 local_costmap:
@@ -85,8 +95,8 @@ local_costmap:
         map_subscribe_transient_local: True
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 2.0
-        inflation_radius: 2.0
+        cost_scaling_factor: 1.0
+        inflation_radius: 1.0
       always_send_full_costmap: true
 
 global_costmap:
@@ -106,8 +116,8 @@ global_costmap:
         map_subscribe_transient_local: true
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 2.0
-        inflation_radius: 2.0
+        cost_scaling_factor: 1.0
+        inflation_radius: 1.0
       always_send_full_costmap: true
 
 planner_server:
@@ -117,8 +127,8 @@ planner_server:
     planner_plugins: ["GridBased"]
     GridBased:
       plugin: "nav2_navfn_planner/NavfnPlanner"
-      tolerance: 1.0
-      use_astar: false
+      tolerance: 0.5
+      use_astar: true
       allow_unknown: true
 
 behavior_server:
@@ -141,9 +151,9 @@ behavior_server:
     robot_base_frame: base_link
     transform_tolerance: 1.0
     simulate_ahead_time: 2.0
-    max_rotational_vel: 0.5
+    max_rotational_vel: 0.4
     min_rotational_vel: 0.1
-    rotational_acc_lim: 1.2
+    rotational_acc_lim: 0.8
 
 map_server:
   ros__parameters:

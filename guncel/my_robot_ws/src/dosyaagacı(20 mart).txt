@@ -1,25 +1,37 @@
 gauss@gauss:~/Desktop/my_robot_ws/src$ tree
 .
+├── algo
+│   ├── algo
+│   │   ├── __init__.py
+│   │   ├── map_parser.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.pyc
+│   │   │   └── map_parser.cpython-310.pyc
+│   │   └── waypoint_generator.py
+│   ├── package.xml
+│   ├── resource
+│   │   └── algo
+│   ├── setup.cfg
+│   └── setup.py
 ├── boat_navigation
 │   ├── CMakeLists.txt
 │   ├── config
 │   │   └── bridge.yaml
-│   ├── include
-│   │   └── boat_navigation
 │   ├── launch
 │   │   └── boat_nav2.launch.py
 │   ├── maps
+│   │   ├── costmap_colored.png
 │   │   ├── costmap.png
 │   │   └── costmap.yaml
 │   ├── package.xml
 │   ├── params
 │   │   └── nav2_params.yaml
-│   ├── scripts
-│   │   └── cmd_vel_to_thrust.py
-│   ├── src
-│   └── urdf
-│       ├── robot.sdf
-│       └── robot.urdf
+│   └── scripts
+│       ├── cmd_vel_to_thrust.py
+│       ├── map_tracker_test.py
+│       ├── mission_control.py
+│       └── not.txt
+├── dosyaagacı(20 mart).txt
 ├── hydrodynamic_drag_plugin
 │   ├── build
 │   │   ├── CMakeCache.txt
@@ -32,16 +44,13 @@ gauss@gauss:~/Desktop/my_robot_ws/src$ tree
 │   │   │   │   ├── CMakeSystem.cmake
 │   │   │   │   ├── CompilerIdC
 │   │   │   │   │   ├── a.out
-│   │   │   │   │   ├── CMakeCCompilerId.c
-│   │   │   │   │   └── tmp
+│   │   │   │   │   └── CMakeCCompilerId.c
 │   │   │   │   └── CompilerIdCXX
 │   │   │   │       ├── a.out
-│   │   │   │       ├── CMakeCXXCompilerId.cpp
-│   │   │   │       └── tmp
+│   │   │   │       └── CMakeCXXCompilerId.cpp
 │   │   │   ├── cmake.check_cache
 │   │   │   ├── CMakeConfigureLog.yaml
 │   │   │   ├── CMakeDirectoryInformation.cmake
-│   │   │   ├── CMakeScratch
 │   │   │   ├── HydrodynamicDrag.dir
 │   │   │   │   ├── build.make
 │   │   │   │   ├── cmake_clean.cmake
@@ -56,7 +65,6 @@ gauss@gauss:~/Desktop/my_robot_ws/src$ tree
 │   │   │   │   └── progress.make
 │   │   │   ├── Makefile2
 │   │   │   ├── Makefile.cmake
-│   │   │   ├── pkgRedirects
 │   │   │   ├── progress.marks
 │   │   │   └── TargetDirectories.txt
 │   │   ├── cmake_install.cmake
@@ -93,8 +101,6 @@ gauss@gauss:~/Desktop/my_robot_ws/src$ tree
 │   │   │   │       ├── lavender_flower.jpg
 │   │   │   │       ├── lavender_trunk.jpg
 │   │   │   │       └── overlay.png
-│   │   │   ├── meshes
-│   │   │   │   └── golet.dae
 │   │   │   ├── model.config
 │   │   │   └── model.sdf
 │   │   └── parkur
@@ -130,90 +136,6 @@ gauss@gauss:~/Desktop/my_robot_ws/src$ tree
 │       ├── test_flake8.py
 │       └── test_pep257.py
 ├── objectdetect
-│   ├── build
-│   │   ├── COLCON_IGNORE
-│   │   └── objectdetect
-│   │       ├── build
-│   │       │   └── lib
-│   │       │       └── objectdetect
-│   │       │           ├── __init__.py
-│   │       │           └── pcl.py
-│   │       ├── colcon_build.rc
-│   │       ├── colcon_command_prefix_setup_py.sh
-│   │       ├── colcon_command_prefix_setup_py.sh.env
-│   │       ├── install.log
-│   │       ├── objectdetect.egg-info
-│   │       │   ├── dependency_links.txt
-│   │       │   ├── entry_points.txt
-│   │       │   ├── PKG-INFO
-│   │       │   ├── requires.txt
-│   │       │   ├── SOURCES.txt
-│   │       │   ├── top_level.txt
-│   │       │   └── zip-safe
-│   │       └── prefix_override
-│   │           ├── __pycache__
-│   │           │   └── sitecustomize.cpython-310.pyc
-│   │           └── sitecustomize.py
-│   ├── install
-│   │   ├── COLCON_IGNORE
-│   │   ├── local_setup.bash
-│   │   ├── local_setup.ps1
-│   │   ├── local_setup.sh
-│   │   ├── _local_setup_util_ps1.py
-│   │   ├── _local_setup_util_sh.py
-│   │   ├── local_setup.zsh
-│   │   ├── objectdetect
-│   │   │   ├── bin
-│   │   │   │   └── objectdetect
-│   │   │   ├── lib
-│   │   │   │   └── python3.10
-│   │   │   │       └── site-packages
-│   │   │   │           ├── objectdetect
-│   │   │   │           │   ├── __init__.py
-│   │   │   │           │   ├── pcl.py
-│   │   │   │           │   └── __pycache__
-│   │   │   │           │       ├── __init__.cpython-310.pyc
-│   │   │   │           │       └── pcl.cpython-310.pyc
-│   │   │   │           └── objectdetect-0.0.0-py3.10.egg-info
-│   │   │   │               ├── dependency_links.txt
-│   │   │   │               ├── entry_points.txt
-│   │   │   │               ├── PKG-INFO
-│   │   │   │               ├── requires.txt
-│   │   │   │               ├── SOURCES.txt
-│   │   │   │               ├── top_level.txt
-│   │   │   │               └── zip-safe
-│   │   │   └── share
-│   │   │       ├── ament_index
-│   │   │       │   └── resource_index
-│   │   │       │       └── packages
-│   │   │       │           └── objectdetect
-│   │   │       ├── colcon-core
-│   │   │       │   └── packages
-│   │   │       │       └── objectdetect
-│   │   │       └── objectdetect
-│   │   │           ├── hook
-│   │   │           │   ├── ament_prefix_path.dsv
-│   │   │           │   ├── ament_prefix_path.ps1
-│   │   │           │   ├── ament_prefix_path.sh
-│   │   │           │   ├── path.dsv
-│   │   │           │   ├── path.ps1
-│   │   │           │   ├── path.sh
-│   │   │           │   ├── pythonpath.dsv
-│   │   │           │   ├── pythonpath.ps1
-│   │   │           │   ├── pythonpath.sh
-│   │   │           │   ├── pythonscriptspath.dsv
-│   │   │           │   ├── pythonscriptspath.ps1
-│   │   │           │   └── pythonscriptspath.sh
-│   │   │           ├── package.bash
-│   │   │           ├── package.dsv
-│   │   │           ├── package.ps1
-│   │   │           ├── package.sh
-│   │   │           ├── package.xml
-│   │   │           └── package.zsh
-│   │   ├── setup.bash
-│   │   ├── setup.ps1
-│   │   ├── setup.sh
-│   │   └── setup.zsh
 │   ├── log
 │   │   ├── build_2026-03-06_02-22-18
 │   │   │   ├── events.log
@@ -224,9 +146,7 @@ gauss@gauss:~/Desktop/my_robot_ws/src$ tree
 │   │   │       ├── stdout.log
 │   │   │       ├── stdout_stderr.log
 │   │   │       └── streams.log
-│   │   ├── COLCON_IGNORE
-│   │   ├── latest -> latest_build
-│   │   └── latest_build -> build_2026-03-06_02-22-18
+│   │   └── COLCON_IGNORE
 │   ├── objectdetect
 │   │   ├── best.pt
 │   │   ├── cost.py
@@ -1077,6 +997,5 @@ gauss@gauss:~/Desktop/my_robot_ws/src$ tree
                 ├── wamv_gazebo.urdf.xacro
                 └── wamv_gazebo.xacro
 
-254 directories, 822 files
-gauss@gauss:~/Desktop/my_robot_ws/src$ 
+222 directories, 774 files
 

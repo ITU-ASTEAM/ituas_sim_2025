@@ -5,13 +5,14 @@ Algoritma:
 1. Başlangıç konumu /odom'dan otomatik alınır
 2. Kullanıcı sadece bitiş (B) girer
 3. A→B doğrultusuna göre önündeki sarı (engel) duba bulunur
-4. O dubanın sağ/sol yeşil (kenar) dubaları bulunur
+4. O dubanın sağ/sol yeşil (kenar) dubaları bulunur (mesafe filtreli)
 5. Geniş tarafa ara hedef koyulur, engelin ötesine
 6. Nav2'ye gönderilir, ulaşılınca tekrar 3'e dönülür
 7. B'ye ulaşana kadar devam eder
 """
 
 import math
+import threading
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
@@ -27,11 +28,12 @@ MAP_IMAGE         = '/home/gauss/Desktop/my_robot_ws/src/boat_navigation/maps/co
 RESOLUTION        = 0.05
 ORIGIN            = [-64.2, -25.5, 0.0]
 
-LOOK_AHEAD_M      = 10.0  # bakış penceresi (metre)
-WAYPOINT_OFFSET_M =  1.5  # engelin ötesine konacak ara hedef mesafesi
+LOOK_AHEAD_M      = 20.0  # bakış penceresi (metre) — artırıldı
+WAYPOINT_OFFSET_M =  2.0  # engelin ötesine konacak ara hedef mesafesi
 GOAL_TOLERANCE_M  =  1.5  # hedefe bu kadar yaklaşınca "ulaştı" say
-GOAL_TIMEOUT_S    = 30.0  # bu kadar saniye geçerse hedefi skip et
+GOAL_TIMEOUT_S    = 60.0  # bu kadar saniye geçerse hedefi skip et
 MIN_SAFE_DIST_M   =  2.5  # ara hedef dubaya bu kadardan yakın olamaz
+SIDE_GREEN_MAX_M  =  8.0  # sarı dubadan bu kadar uzaktaki yeşilleri "yan kenar" say
 # ─────────────────────────────────────────────────────────────────────────────
 
 
@@ -61,44 +63,57 @@ class WaypointGenerator(Node):
 
         # Konum
         self.pose = None  # (x, y, yaw)
+        self._pose_lock = threading.Lock()
         self.create_subscription(Odometry, '/odom', self._odom_cb, 10)
 
         # Nav2 action client
         self._nav_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
 
-        # Odom gelene kadar bekle, sonra kullanıcıdan B al
+        # Hedef — thread'den set edilecek
+        self.goal = None
+
+        # input() ayrı thread'de çalışsın, spin bloklanmasın
         self.get_logger().info('Konum bekleniyor (/odom)...')
-        self._init_timer = self.create_timer(0.5, self._wait_for_odom)
+        self._mission_thread = threading.Thread(target=self._mission_thread_fn, daemon=True)
+        self._mission_thread.start()
 
     # ── Callbacks ─────────────────────────────────────────────────────────────
 
     def _odom_cb(self, msg):
         q = msg.pose.pose.orientation
         yaw = euler_from_quaternion(q.x, q.y, q.z, q.w)
-        self.pose = (
-            msg.pose.pose.position.x,
-            msg.pose.pose.position.y,
-            yaw
-        )
+        with self._pose_lock:
+            self.pose = (
+                msg.pose.pose.position.x,
+                msg.pose.pose.position.y,
+                yaw
+            )
 
-    def _wait_for_odom(self):
-        if self.pose is None:
-            return
-        self._init_timer.cancel()
+    # ── Mission thread ────────────────────────────────────────────────────────
 
-        ax, ay, ayaw = self.pose
-        self.get_logger().info(f'Başlangıç konumu alındı: x={ax:.2f} y={ay:.2f} yaw={ayaw:.2f}')
+    def _mission_thread_fn(self):
+        # Odom gelene kadar bekle
+        import time
+        while rclpy.ok():
+            with self._pose_lock:
+                pose = self.pose
+            if pose is not None:
+                break
+            time.sleep(0.1)
 
-        # Kullanıcıdan bitiş al
+        ax, ay, ayaw = pose
+        self.get_logger().info(f'Başlangıç: x={ax:.2f} y={ay:.2f} yaw={math.degrees(ayaw):.1f}°')
+
+        # Kullanıcıdan hedef al — burada input() güvenli, spin ayrı thread'de
         self.goal = self._get_goal_input()
         self.get_logger().info(f'Hedef: {self.goal}')
 
-        # A→B yönünü kaydet (tüm görev boyunca bu yön referans)
+        # A→B görev yönü — tüm görev boyunca sabit referans
         self.mission_yaw = math.atan2(
             self.goal[1] - ay,
             self.goal[0] - ax
         )
-        self.get_logger().info(f'Görev yönü (A→B yaw): {math.degrees(self.mission_yaw):.1f}°')
+        self.get_logger().info(f'Görev yönü: {math.degrees(self.mission_yaw):.1f}°')
 
         self._run_mission()
 
@@ -106,7 +121,7 @@ class WaypointGenerator(Node):
 
     def _get_goal_input(self):
         print('\n=== WAYPOINT GENERATOR ===')
-        print('Koordinat formatı: x y  (yaw otomatik hesaplanır)')
+        print('Koordinat formatı: x y')
         print('Örnek: 80.0 20.0\n')
         while True:
             try:
@@ -118,24 +133,25 @@ class WaypointGenerator(Node):
     # ── Ana görev döngüsü ──────────────────────────────────────────────────────
 
     def _run_mission(self):
+        import time
         while rclpy.ok():
-            rclpy.spin_once(self, timeout_sec=0.1)
-
-            if self.pose is None:
+            with self._pose_lock:
+                pose = self.pose
+            if pose is None:
+                time.sleep(0.1)
                 continue
 
             # B'ye ulaştık mı?
-            if dist(self.pose[:2], self.goal) < GOAL_TOLERANCE_M:
-                self.get_logger().info('HEDEFE ULAŞILDI!')
-                break
+            if dist(pose[:2], self.goal) < GOAL_TOLERANCE_M:
+                self.get_logger().info('✓ HEDEFE ULAŞILDI!')
+                return
 
-            waypoint = self._compute_waypoint()
+            waypoint = self._compute_waypoint(pose)
 
             if waypoint is None:
-                # Önde engel kalmadı, direkt B'ye git
-                self.get_logger().info('Önde engel yok, direkt hedefe gidiliyor.')
+                # Önde engel yok, direkt B'ye git
+                self.get_logger().info('Önde engel yok → direkt hedefe.')
                 self._send_goal_and_wait(self.goal[0], self.goal[1], self.mission_yaw)
-                break
             else:
                 wx, wy, wyaw = waypoint
                 self.get_logger().info(
@@ -145,11 +161,11 @@ class WaypointGenerator(Node):
 
     # ── Waypoint hesaplama ────────────────────────────────────────────────────
 
-    def _compute_waypoint(self):
-        rx, ry, _ = self.pose
-        ref_yaw = self.mission_yaw  # A→B yönü sabit referans
+    def _compute_waypoint(self, pose):
+        rx, ry, _ = pose
+        ref_yaw = self.mission_yaw
 
-        # A→B yönünde önündeki sarı dubalar (LOOK_AHEAD_M içinde)
+        # Önündeki sarı dubalar (LOOK_AHEAD_M içinde, A→B yönünde)
         nearby_yellow = [
             b for b in self.yellow_buoys
             if self._in_front_of(b, rx, ry, ref_yaw)
@@ -162,9 +178,11 @@ class WaypointGenerator(Node):
         # En yakın sarı duba
         nearest_yellow = min(nearby_yellow, key=lambda b: dist((rx, ry), b))
         yx, yy = nearest_yellow
-        self.get_logger().info(f'Engel duba: ({yx:.1f}, {yy:.1f}), mesafe: {dist((rx,ry), nearest_yellow):.1f}m')
+        self.get_logger().info(
+            f'Engel duba: ({yx:.1f}, {yy:.1f}), mesafe: {dist((rx,ry), nearest_yellow):.1f}m'
+        )
 
-        # Sağ ve sol yeşil kenarları bul
+        # Sağ ve sol yeşil kenarları bul (mesafe filtreli)
         left_green, right_green = self._find_side_greens(nearest_yellow, ref_yaw)
 
         if left_green is None and right_green is None:
@@ -173,55 +191,55 @@ class WaypointGenerator(Node):
             wy = yy + math.sin(ref_yaw) * WAYPOINT_OFFSET_M
             return (wx, wy, ref_yaw)
 
+        # Hangi tarafa kayacağız?
         if left_green is None:
-            # Sadece sağ var, sola git
-            mid_x = (yx + right_green[0]) / 2.0
-            mid_y = (yy + right_green[1]) / 2.0
+            chosen = right_green
+            side = 'SAĞ'
         elif right_green is None:
-            # Sadece sol var, sağa git
-            mid_x = (yx + left_green[0]) / 2.0
-            mid_y = (yy + left_green[1]) / 2.0
+            chosen = left_green
+            side = 'SOL'
         else:
             d_left  = dist(nearest_yellow, left_green)
             d_right = dist(nearest_yellow, right_green)
             self.get_logger().info(
-                f'Sol kenar mesafe: {d_left:.1f}m | Sağ kenar mesafe: {d_right:.1f}m'
+                f'Sol kenar: {d_left:.1f}m | Sağ kenar: {d_right:.1f}m'
             )
             if d_left >= d_right:
-                # Sol daha geniş → sola kay
-                mid_x = (yx + left_green[0]) / 2.0
-                mid_y = (yy + left_green[1]) / 2.0
+                chosen = left_green
+                side = 'SOL (geniş)'
             else:
-                # Sağ daha geniş → sağa kay
-                mid_x = (yx + right_green[0]) / 2.0
-                mid_y = (yy + right_green[1]) / 2.0
+                chosen = right_green
+                side = 'SAĞ (geniş)'
 
-        # Engel dubasının yan tarafına (mid) git, oradan ileri yöne WAYPOINT_OFFSET_M kadar
+        self.get_logger().info(f'Geçiş yönü: {side}')
+
+        # Sarı duba ile seçilen yeşil kenarın ortası
+        mid_x = (yx + chosen[0]) / 2.0
+        mid_y = (yy + chosen[1]) / 2.0
+
+        # Orta noktanın ötesine WAYPOINT_OFFSET_M kadar git
         wx = mid_x + math.cos(ref_yaw) * WAYPOINT_OFFSET_M
         wy = mid_y + math.sin(ref_yaw) * WAYPOINT_OFFSET_M
 
-        # Eğer ara hedef mevcut konumdan geriye düşüyorsa düzelt
+        # Geri düşüyorsa düzelt
         if not self._in_front_of((wx, wy), rx, ry, ref_yaw):
             wx = rx + math.cos(ref_yaw) * WAYPOINT_OFFSET_M
             wy = ry + math.sin(ref_yaw) * WAYPOINT_OFFSET_M
 
-        # Ara hedef herhangi bir dubaya çok yakınsa güvenli mesafeye çek
+        # Dubaya çok yakınsa güvenli mesafeye çek
         all_buoys = self.green_buoys + self.yellow_buoys
         for bx, by in all_buoys:
             if dist((wx, wy), (bx, by)) < MIN_SAFE_DIST_M:
                 self.get_logger().warn(
                     f'Ara hedef dubaya çok yakın ({dist((wx,wy),(bx,by)):.1f}m), düzeltiliyor.'
                 )
-                # Dubadan uzaklaştır: duba→hedef vektörünü uzat
                 vx = wx - bx
                 vy = wy - by
                 vlen = math.hypot(vx, vy) or 0.001
                 wx = bx + (vx / vlen) * MIN_SAFE_DIST_M
                 wy = by + (vy / vlen) * MIN_SAFE_DIST_M
 
-        # Ara hedefe bakış açısı: B'ye doğru
         wyaw = math.atan2(self.goal[1] - wy, self.goal[0] - wx)
-
         return (wx, wy, wyaw)
 
     def _in_front_of(self, buoy, rx, ry, ref_yaw):
@@ -232,11 +250,10 @@ class WaypointGenerator(Node):
 
     def _find_side_greens(self, yellow_buoy, ref_yaw):
         """
-        Sarı dubanın sağındaki ve solundaki en yakın yeşil dubaları bul.
+        Sarı dubanın yakınındaki (SIDE_GREEN_MAX_M) sağ/sol yeşil dubaları bul.
         Sağ/sol A→B yönüne göre belirlenir.
         """
         yx, yy = yellow_buoy
-        # A→B yönüne dik sağ vektör
         right_x =  math.sin(ref_yaw)
         right_y = -math.cos(ref_yaw)
 
@@ -244,6 +261,10 @@ class WaypointGenerator(Node):
         right_greens = []
 
         for gx, gy in self.green_buoys:
+            # DÜZELTME: sadece sarı dubaya yakın yeşilleri al
+            if dist((gx, gy), yellow_buoy) > SIDE_GREEN_MAX_M:
+                continue
+
             dx = gx - yx
             dy = gy - yy
             dot = dx * right_x + dy * right_y
@@ -260,6 +281,7 @@ class WaypointGenerator(Node):
     # ── Nav2 ──────────────────────────────────────────────────────────────────
 
     def _send_goal_and_wait(self, x, y, yaw):
+        import time
         if not self._nav_client.wait_for_server(timeout_sec=5.0):
             self.get_logger().error('Nav2 action server bulunamadı!')
             return
@@ -268,46 +290,44 @@ class WaypointGenerator(Node):
         goal_msg.pose = self._make_pose_stamped(x, y, yaw)
 
         send_future = self._nav_client.send_goal_async(goal_msg)
-        rclpy.spin_until_future_complete(self, send_future)
-        goal_handle = send_future.result()
 
+        # Future tamamlanana kadar bekle (spin ayrı thread'de)
+        while rclpy.ok() and not send_future.done():
+            time.sleep(0.05)
+
+        goal_handle = send_future.result()
         if not goal_handle.accepted:
             self.get_logger().error('Hedef reddedildi!')
             return
 
-        # Nav2'nin kendi result'unu BEKLEME
-        # Sadece mesafeyi izle, toleransa girince veya timeout dolunca cancel et
         last_log = 0.0
-        start_time = self.get_clock().now().nanoseconds / 1e9
+        start_time = time.time()
+
         while rclpy.ok():
-            rclpy.spin_once(self, timeout_sec=0.1)
-            if self.pose is None:
+            time.sleep(0.1)
+            with self._pose_lock:
+                pose = self.pose
+            if pose is None:
                 continue
 
-            d = dist(self.pose[:2], (x, y))
-            now = self.get_clock().now().nanoseconds / 1e9
+            d = dist(pose[:2], (x, y))
+            now = time.time()
             elapsed = now - start_time
 
             if now - last_log > 2.0:
-                self.get_logger().info(f'Hedefe mesafe: {d:.1f}m | Geçen süre: {elapsed:.0f}s')
+                self.get_logger().info(f'Hedefe mesafe: {d:.1f}m | Geçen: {elapsed:.0f}s')
                 last_log = now
 
             if d < GOAL_TOLERANCE_M:
-                self.get_logger().info(
-                    f'Tolerans içinde ({d:.1f}m), hedef iptal ediliyor → sonraki adım.'
-                )
+                self.get_logger().info(f'✓ Tolerans içinde ({d:.1f}m), sonraki adıma geçiliyor.')
                 goal_handle.cancel_goal_async()
-                for _ in range(10):
-                    rclpy.spin_once(self, timeout_sec=0.1)
+                time.sleep(0.5)
                 break
 
             if elapsed > GOAL_TIMEOUT_S:
-                self.get_logger().warn(
-                    f'TIMEOUT ({GOAL_TIMEOUT_S}s)! Hedef skip ediliyor. Kalan mesafe: {d:.1f}m'
-                )
+                self.get_logger().warn(f'⚠ TIMEOUT! Kalan: {d:.1f}m, skip ediliyor.')
                 goal_handle.cancel_goal_async()
-                for _ in range(10):
-                    rclpy.spin_once(self, timeout_sec=0.1)
+                time.sleep(0.5)
                 break
 
     def _make_pose_stamped(self, x, y, yaw):
