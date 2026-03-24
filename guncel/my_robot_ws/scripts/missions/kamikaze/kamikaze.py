@@ -21,7 +21,7 @@ from kamera_modulu import KameraModulu
 # ============================================================
 #  AYARLAR
 # ============================================================
-YOLO_WEIGHTS  = "best29jan.pt"
+YOLO_WEIGHTS  = "/home/gauss/Desktop/my_robot_ws/scripts/missions/kamikaze/best29jan.pt"
 CONF_THRESH   = 0.3
 YOLO_IMG_SIZE = 416
 FOCAL_LENGTH  = 554.25

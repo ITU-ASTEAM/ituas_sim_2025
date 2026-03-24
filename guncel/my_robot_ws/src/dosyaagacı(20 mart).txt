@@ -6,8 +6,24 @@ gauss@gauss:~/Desktop/my_robot_ws/src$ tree
 │   │   ├── map_parser.py
 │   │   ├── __pycache__
 │   │   │   ├── __init__.cpython-310.pyc
+<<<<<<< HEAD
 │   │   │   └── map_parser.cpython-310.pyc
 │   │   └── waypoint_generator.py
+=======
+│   │   │   ├── map_parser.cpython-310.pyc
+│   │   │   └── waypoint_generator.cpython-310.pyc
+│   │   └── waypoint_generator.py
+│   ├── mapping
+│   │   ├── best29jan.pt
+│   │   ├── kamera_modulu.py
+│   │   ├── lidar_modulu.py
+│   │   ├── position.py
+│   │   ├── __pycache__
+│   │   │   ├── kamera_modulu.cpython-310.pyc
+│   │   │   ├── lidar_modulu.cpython-310.pyc
+│   │   │   └── position.cpython-310.pyc
+│   │   └── withmap.py
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
 │   ├── package.xml
 │   ├── resource
 │   │   └── algo
@@ -997,5 +1013,9 @@ gauss@gauss:~/Desktop/my_robot_ws/src$ tree
                 ├── wamv_gazebo.urdf.xacro
                 └── wamv_gazebo.xacro
 
+<<<<<<< HEAD
 222 directories, 774 files
+=======
+224 directories, 783 files
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
 

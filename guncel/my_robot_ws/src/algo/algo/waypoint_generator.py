@@ -9,10 +9,17 @@ Algoritma:
 5. Geniş tarafa ara hedef koyulur, engelin ötesine
 6. Nav2'ye gönderilir, ulaşılınca tekrar 3'e dönülür
 7. B'ye ulaşana kadar devam eder
+
+Duba kaynağı: withmap.py → /buoys/yellow + /buoys/green (dinamik, canlı)
+map_parser.py artık kullanılmıyor.
 """
 
 import math
 import threading
+<<<<<<< HEAD
+=======
+import os
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
@@ -20,10 +27,11 @@ from rclpy.action import ActionClient
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseStamped
 from nav2_msgs.action import NavigateToPose
-
-from algo.map_parser import MapParser
+from sensor_msgs.msg import PointCloud2
+import sensor_msgs_py.point_cloud2 as pc2
 
 # ── Ayarlar ──────────────────────────────────────────────────────────────────
+<<<<<<< HEAD
 MAP_IMAGE         = '/home/gauss/Desktop/my_robot_ws/src/boat_navigation/maps/costmap_colored.png'
 RESOLUTION        = 0.05
 ORIGIN            = [-64.2, -25.5, 0.0]
@@ -34,6 +42,14 @@ GOAL_TOLERANCE_M  =  1.5  # hedefe bu kadar yaklaşınca "ulaştı" say
 GOAL_TIMEOUT_S    = 60.0  # bu kadar saniye geçerse hedefi skip et
 MIN_SAFE_DIST_M   =  2.5  # ara hedef dubaya bu kadardan yakın olamaz
 SIDE_GREEN_MAX_M  =  8.0  # sarı dubadan bu kadar uzaktaki yeşilleri "yan kenar" say
+=======
+LOOK_AHEAD_M      = 20.0
+WAYPOINT_OFFSET_M =  2.0
+GOAL_TOLERANCE_M  =  1.5
+GOAL_TIMEOUT_S    = 60.0
+MIN_SAFE_DIST_M   =  2.5
+SIDE_GREEN_MAX_M  =  8.0
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
 # ─────────────────────────────────────────────────────────────────────────────
 
 
@@ -47,37 +63,70 @@ def euler_from_quaternion(x, y, z, w):
     return math.atan2(siny_cosp, cosy_cosp)
 
 
+def pointcloud2_to_list(msg):
+    """PointCloud2 mesajini (x, y) listesine donustur"""
+    pts = []
+    for p in pc2.read_points(msg, field_names=('x', 'y'), skip_nans=True):
+        pts.append((float(p[0]), float(p[1])))
+    return pts
+
+
 class WaypointGenerator(Node):
 
     def __init__(self):
         super().__init__('waypoint_generator')
 
-        # Harita parse
-        self.get_logger().info('Harita okunuyor...')
-        parser = MapParser(MAP_IMAGE, RESOLUTION, ORIGIN)
-        self.green_buoys  = parser.get_green_buoys()
-        self.yellow_buoys = parser.get_yellow_buoys()
-        self.get_logger().info(
-            f'Yeşil duba: {len(self.green_buoys)}, Sarı duba: {len(self.yellow_buoys)}'
-        )
+        # Duba listeleri — withmap.py'den canli gelecek
+        self.green_buoys  = []
+        self.yellow_buoys = []
+        self._buoy_lock   = threading.Lock()
+        self._buoys_ready = threading.Event()
+
+        # Canli duba topic'leri
+        self.create_subscription(PointCloud2, '/buoys/yellow', self._yellow_cb, 10)
+        self.create_subscription(PointCloud2, '/buoys/green',  self._green_cb,  10)
+        self.get_logger().info('Duba verileri bekleniyor: /buoys/yellow + /buoys/green')
 
         # Konum
+<<<<<<< HEAD
         self.pose = None  # (x, y, yaw)
+=======
+        self.pose = None
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
         self._pose_lock = threading.Lock()
         self.create_subscription(Odometry, '/odom', self._odom_cb, 10)
 
         # Nav2 action client
         self._nav_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
 
+<<<<<<< HEAD
         # Hedef — thread'den set edilecek
         self.goal = None
 
         # input() ayrı thread'de çalışsın, spin bloklanmasın
+=======
+        self.goal = None
+
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
         self.get_logger().info('Konum bekleniyor (/odom)...')
         self._mission_thread = threading.Thread(target=self._mission_thread_fn, daemon=True)
         self._mission_thread.start()
 
     # ── Callbacks ─────────────────────────────────────────────────────────────
+
+    def _yellow_cb(self, msg):
+        pts = pointcloud2_to_list(msg)
+        with self._buoy_lock:
+            self.yellow_buoys = pts
+        if pts:
+            self._buoys_ready.set()
+
+    def _green_cb(self, msg):
+        pts = pointcloud2_to_list(msg)
+        with self._buoy_lock:
+            self.green_buoys = pts
+        if pts:
+            self._buoys_ready.set()
 
     def _odom_cb(self, msg):
         q = msg.pose.pose.orientation
@@ -88,6 +137,7 @@ class WaypointGenerator(Node):
                 msg.pose.pose.position.y,
                 yaw
             )
+<<<<<<< HEAD
 
     # ── Mission thread ────────────────────────────────────────────────────────
 
@@ -109,11 +159,49 @@ class WaypointGenerator(Node):
         self.get_logger().info(f'Hedef: {self.goal}')
 
         # A→B görev yönü — tüm görev boyunca sabit referans
+=======
+
+    # ── Mission thread ────────────────────────────────────────────────────────
+
+    def _mission_thread_fn(self):
+        import time
+
+        while rclpy.ok():
+            with self._pose_lock:
+                pose = self.pose
+            if pose is not None:
+                break
+            time.sleep(0.1)
+
+        ax, ay, ayaw = pose
+        self.get_logger().info(
+            f'Baslangic: x={ax:.2f} y={ay:.2f} yaw={math.degrees(ayaw):.1f} deg'
+        )
+
+        # withmap'ten ilk duba verisi gelene kadar bekle (max 30s)
+        self.get_logger().info('withmap duba verisi bekleniyor...')
+        self._buoys_ready.wait(timeout=30.0)
+
+        with self._buoy_lock:
+            ny = len(self.yellow_buoys)
+            ng = len(self.green_buoys)
+        self.get_logger().info(f'Duba verisi alindi — Sari: {ny}, Yesil: {ng}')
+
+        self.goal = self._get_goal_input()
+        self.get_logger().info(f'Hedef: {self.goal}')
+
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
         self.mission_yaw = math.atan2(
             self.goal[1] - ay,
             self.goal[0] - ax
         )
+<<<<<<< HEAD
         self.get_logger().info(f'Görev yönü: {math.degrees(self.mission_yaw):.1f}°')
+=======
+        self.get_logger().info(
+            f'Gorev yonu: {math.degrees(self.mission_yaw):.1f} deg'
+        )
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
 
         self._run_mission()
 
@@ -121,14 +209,19 @@ class WaypointGenerator(Node):
 
     def _get_goal_input(self):
         print('\n=== WAYPOINT GENERATOR ===')
+<<<<<<< HEAD
         print('Koordinat formatı: x y')
         print('Örnek: 80.0 20.0\n')
+=======
+        print('Koordinat formati: x y')
+        print('Ornek: 80.0 20.0\n')
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
         while True:
             try:
-                raw = input('Bitiş (B) [x y]: ').strip().split()
+                raw = input('Bitis (B) [x y]: ').strip().split()
                 return (float(raw[0]), float(raw[1]))
             except Exception:
-                print('Hatalı giriş, tekrar dene.')
+                print('Hatali giris, tekrar dene.')
 
     # ── Ana görev döngüsü ──────────────────────────────────────────────────────
 
@@ -141,6 +234,7 @@ class WaypointGenerator(Node):
                 time.sleep(0.1)
                 continue
 
+<<<<<<< HEAD
             # B'ye ulaştık mı?
             if dist(pose[:2], self.goal) < GOAL_TOLERANCE_M:
                 self.get_logger().info('✓ HEDEFE ULAŞILDI!')
@@ -151,11 +245,30 @@ class WaypointGenerator(Node):
             if waypoint is None:
                 # Önde engel yok, direkt B'ye git
                 self.get_logger().info('Önde engel yok → direkt hedefe.')
+=======
+            if dist(pose[:2], self.goal) < GOAL_TOLERANCE_M:
+                self.get_logger().info('HEDEFE ULASILDI!')
+                os._exit(0)
+
+            remaining = dist(pose[:2], self.goal)
+            if remaining < 8.2:
+                self.get_logger().info(
+                    f'Hedefe {remaining:.1f}m kaldi, direkt gidiliyor.'
+                )
+                self._send_goal_and_wait(self.goal[0], self.goal[1], self.mission_yaw)
+                self.get_logger().info('HEDEFE ULASILDI!')
+                os._exit(0)
+
+            waypoint = self._compute_waypoint(pose)
+
+            if waypoint is None:
+                self.get_logger().info('Onde engel yok, direkt hedefe.')
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
                 self._send_goal_and_wait(self.goal[0], self.goal[1], self.mission_yaw)
             else:
                 wx, wy, wyaw = waypoint
                 self.get_logger().info(
-                    f'Ara hedef → x:{wx:.2f} y:{wy:.2f} yaw:{math.degrees(wyaw):.1f}°'
+                    f'Ara hedef x:{wx:.2f} y:{wy:.2f} yaw:{math.degrees(wyaw):.1f}'
                 )
                 self._send_goal_and_wait(wx, wy, wyaw)
 
@@ -164,10 +277,18 @@ class WaypointGenerator(Node):
     def _compute_waypoint(self, pose):
         rx, ry, _ = pose
         ref_yaw = self.mission_yaw
+<<<<<<< HEAD
 
         # Önündeki sarı dubalar (LOOK_AHEAD_M içinde, A→B yönünde)
+=======
+
+        with self._buoy_lock:
+            yellow_buoys = list(self.yellow_buoys)
+            green_buoys  = list(self.green_buoys)
+
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
         nearby_yellow = [
-            b for b in self.yellow_buoys
+            b for b in yellow_buoys
             if self._in_front_of(b, rx, ry, ref_yaw)
             and dist((rx, ry), b) < LOOK_AHEAD_M
         ]
@@ -175,33 +296,49 @@ class WaypointGenerator(Node):
         if not nearby_yellow:
             return None
 
-        # En yakın sarı duba
         nearest_yellow = min(nearby_yellow, key=lambda b: dist((rx, ry), b))
         yx, yy = nearest_yellow
         self.get_logger().info(
+<<<<<<< HEAD
             f'Engel duba: ({yx:.1f}, {yy:.1f}), mesafe: {dist((rx,ry), nearest_yellow):.1f}m'
         )
 
         # Sağ ve sol yeşil kenarları bul (mesafe filtreli)
         left_green, right_green = self._find_side_greens(nearest_yellow, ref_yaw)
+=======
+            f'Engel duba: ({yx:.1f}, {yy:.1f}), '
+            f'mesafe: {dist((rx,ry), nearest_yellow):.1f}m'
+        )
+
+        left_green, right_green = self._find_side_greens(
+            nearest_yellow, ref_yaw, green_buoys
+        )
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
 
         if left_green is None and right_green is None:
-            self.get_logger().warn('Kenar duba bulunamadı, engeli düz geçiyorum.')
+            self.get_logger().warn('Kenar duba bulunamadi, engeli duz geciyorum.')
             wx = yx + math.cos(ref_yaw) * WAYPOINT_OFFSET_M
             wy = yy + math.sin(ref_yaw) * WAYPOINT_OFFSET_M
             return (wx, wy, ref_yaw)
 
         # Hangi tarafa kayacağız?
         if left_green is None:
+<<<<<<< HEAD
             chosen = right_green
             side = 'SAĞ'
         elif right_green is None:
             chosen = left_green
             side = 'SOL'
+=======
+            chosen, side = right_green, 'SAG'
+        elif right_green is None:
+            chosen, side = left_green, 'SOL'
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
         else:
             d_left  = dist(nearest_yellow, left_green)
             d_right = dist(nearest_yellow, right_green)
             self.get_logger().info(
+<<<<<<< HEAD
                 f'Sol kenar: {d_left:.1f}m | Sağ kenar: {d_right:.1f}m'
             )
             if d_left >= d_right:
@@ -222,16 +359,38 @@ class WaypointGenerator(Node):
         wy = mid_y + math.sin(ref_yaw) * WAYPOINT_OFFSET_M
 
         # Geri düşüyorsa düzelt
+=======
+                f'Sol kenar: {d_left:.1f}m | Sag kenar: {d_right:.1f}m'
+            )
+            if d_left >= d_right:
+                chosen, side = left_green, 'SOL (genis)'
+            else:
+                chosen, side = right_green, 'SAG (genis)'
+
+        self.get_logger().info(f'Gecis yonu: {side}')
+
+        mid_x = (yx + chosen[0]) / 2.0
+        mid_y = (yy + chosen[1]) / 2.0
+
+        wx = mid_x + math.cos(ref_yaw) * WAYPOINT_OFFSET_M
+        wy = mid_y + math.sin(ref_yaw) * WAYPOINT_OFFSET_M
+
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
         if not self._in_front_of((wx, wy), rx, ry, ref_yaw):
             wx = rx + math.cos(ref_yaw) * WAYPOINT_OFFSET_M
             wy = ry + math.sin(ref_yaw) * WAYPOINT_OFFSET_M
 
+<<<<<<< HEAD
         # Dubaya çok yakınsa güvenli mesafeye çek
         all_buoys = self.green_buoys + self.yellow_buoys
+=======
+        all_buoys = green_buoys + yellow_buoys
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
         for bx, by in all_buoys:
             if dist((wx, wy), (bx, by)) < MIN_SAFE_DIST_M:
                 self.get_logger().warn(
-                    f'Ara hedef dubaya çok yakın ({dist((wx,wy),(bx,by)):.1f}m), düzeltiliyor.'
+                    f'Ara hedef dubaya cok yakin '
+                    f'({dist((wx,wy),(bx,by)):.1f}m), duzeltiliyor.'
                 )
                 vx = wx - bx
                 vy = wy - by
@@ -243,16 +402,19 @@ class WaypointGenerator(Node):
         return (wx, wy, wyaw)
 
     def _in_front_of(self, buoy, rx, ry, ref_yaw):
-        """Duba, ref_yaw yönünde önde mi?"""
         dx = buoy[0] - rx
         dy = buoy[1] - ry
         return (dx * math.cos(ref_yaw) + dy * math.sin(ref_yaw)) > 0
 
+<<<<<<< HEAD
     def _find_side_greens(self, yellow_buoy, ref_yaw):
         """
         Sarı dubanın yakınındaki (SIDE_GREEN_MAX_M) sağ/sol yeşil dubaları bul.
         Sağ/sol A→B yönüne göre belirlenir.
         """
+=======
+    def _find_side_greens(self, yellow_buoy, ref_yaw, green_buoys):
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
         yx, yy = yellow_buoy
         right_x =  math.sin(ref_yaw)
         right_y = -math.cos(ref_yaw)
@@ -260,11 +422,17 @@ class WaypointGenerator(Node):
         left_greens  = []
         right_greens = []
 
+<<<<<<< HEAD
         for gx, gy in self.green_buoys:
             # DÜZELTME: sadece sarı dubaya yakın yeşilleri al
             if dist((gx, gy), yellow_buoy) > SIDE_GREEN_MAX_M:
                 continue
 
+=======
+        for gx, gy in green_buoys:
+            if dist((gx, gy), yellow_buoy) > SIDE_GREEN_MAX_M:
+                continue
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
             dx = gx - yx
             dy = gy - yy
             dot = dx * right_x + dy * right_y
@@ -273,9 +441,14 @@ class WaypointGenerator(Node):
             else:
                 left_greens.append((gx, gy))
 
-        left_green  = min(left_greens,  key=lambda b: dist(yellow_buoy, b)) if left_greens  else None
-        right_green = min(right_greens, key=lambda b: dist(yellow_buoy, b)) if right_greens else None
-
+        left_green  = (
+            min(left_greens,  key=lambda b: dist(yellow_buoy, b))
+            if left_greens else None
+        )
+        right_green = (
+            min(right_greens, key=lambda b: dist(yellow_buoy, b))
+            if right_greens else None
+        )
         return left_green, right_green
 
     # ── Nav2 ──────────────────────────────────────────────────────────────────
@@ -283,7 +456,7 @@ class WaypointGenerator(Node):
     def _send_goal_and_wait(self, x, y, yaw):
         import time
         if not self._nav_client.wait_for_server(timeout_sec=5.0):
-            self.get_logger().error('Nav2 action server bulunamadı!')
+            self.get_logger().error('Nav2 action server bulunamadi!')
             return
 
         goal_msg = NavigateToPose.Goal()
@@ -291,7 +464,10 @@ class WaypointGenerator(Node):
 
         send_future = self._nav_client.send_goal_async(goal_msg)
 
+<<<<<<< HEAD
         # Future tamamlanana kadar bekle (spin ayrı thread'de)
+=======
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
         while rclpy.ok() and not send_future.done():
             time.sleep(0.05)
 
@@ -302,6 +478,10 @@ class WaypointGenerator(Node):
 
         last_log = 0.0
         start_time = time.time()
+<<<<<<< HEAD
+=======
+        result_future = goal_handle.get_result_async()
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
 
         while rclpy.ok():
             time.sleep(0.1)
@@ -315,17 +495,47 @@ class WaypointGenerator(Node):
             elapsed = now - start_time
 
             if now - last_log > 2.0:
+<<<<<<< HEAD
                 self.get_logger().info(f'Hedefe mesafe: {d:.1f}m | Geçen: {elapsed:.0f}s')
                 last_log = now
 
             if d < GOAL_TOLERANCE_M:
                 self.get_logger().info(f'✓ Tolerans içinde ({d:.1f}m), sonraki adıma geçiliyor.')
+=======
+                self.get_logger().info(
+                    f'Hedefe mesafe: {d:.1f}m | Gecen: {elapsed:.0f}s'
+                )
+                last_log = now
+
+            if d < GOAL_TOLERANCE_M:
+                self.get_logger().info(
+                    f'Tolerans icinde ({d:.1f}m), sonraki adima geciliyor.'
+                )
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
                 goal_handle.cancel_goal_async()
                 time.sleep(0.5)
                 break
 
+            # Nav2 abort ettiyse (progress checker vs) yeniden gönder
+            if result_future.done():
+                status = result_future.result().status
+                if status == 4:  # ABORTED
+                    self.get_logger().warn(
+                        f'Nav2 gorevi abort etti ({d:.1f}m kaldi), yeniden gonderiliyor...'
+                    )
+                    time.sleep(1.0)
+                    self._send_goal_and_wait(x, y, yaw)  # recursive retry
+                    return
+                break  # SUCCEEDED veya baska durum
+
             if elapsed > GOAL_TIMEOUT_S:
+<<<<<<< HEAD
                 self.get_logger().warn(f'⚠ TIMEOUT! Kalan: {d:.1f}m, skip ediliyor.')
+=======
+                self.get_logger().warn(
+                    f'TIMEOUT! Kalan: {d:.1f}m, skip ediliyor.'
+                )
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
                 goal_handle.cancel_goal_async()
                 time.sleep(0.5)
                 break

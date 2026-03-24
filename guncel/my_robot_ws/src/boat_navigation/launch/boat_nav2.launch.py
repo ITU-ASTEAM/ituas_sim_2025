@@ -26,7 +26,7 @@ def generate_launch_description():
             '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry'
         ],
         remappings=[('/lidar', '/scan')],
-        parameters=[{'use_sim_time': False}] 
+        parameters=[{'use_sim_time': False}]
     )
 
     cmd_vel_to_thrust = Node(
@@ -36,7 +36,7 @@ def generate_launch_description():
         output='screen',
     )
 
-    # 2) Statik Map -> Odom TF (AMCL yerine bunu kullanıyoruz)
+    # 2) Statik Map -> Odom TF
     map_to_odom_tf = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
@@ -66,13 +66,13 @@ def generate_launch_description():
         parameters=[{'use_sim_time': use_sim_time}],
     )
 
-    # 4) Nav2 stack (AMCL Çıkarıldı)
+    # 4) Nav2 stack
     map_server = Node(package='nav2_map_server', executable='map_server', name='map_server', output='screen', parameters=[{'use_sim_time': use_sim_time, 'yaml_filename': map_file}])
     controller_server = Node(package='nav2_controller', executable='controller_server', name='controller_server', output='screen', parameters=[nav2_params_file, {'use_sim_time': use_sim_time}], remappings=[('cmd_vel', 'cmd_vel')])
     planner_server = Node(package='nav2_planner', executable='planner_server', name='planner_server', output='screen', parameters=[nav2_params_file, {'use_sim_time': use_sim_time}])
     behavior_server = Node(package='nav2_behaviors', executable='behavior_server', name='behavior_server', output='screen', parameters=[nav2_params_file, {'use_sim_time': use_sim_time}])
     bt_navigator = Node(package='nav2_bt_navigator', executable='bt_navigator', name='bt_navigator', output='screen', parameters=[nav2_params_file, {'use_sim_time': use_sim_time}])
-    
+
     lifecycle_manager = Node(
         package='nav2_lifecycle_manager',
         executable='lifecycle_manager',
@@ -85,18 +85,38 @@ def generate_launch_description():
         }],
     )
 
-    rviz = Node(package='rviz2', executable='rviz2', name='rviz2', output='screen', parameters=[{'use_sim_time': use_sim_time}])
+    rviz = Node(package='rviz2', executable='rviz2', name='rviz2', output='screen',
+                parameters=[{'use_sim_time': use_sim_time}])
 
     # 5) TF ve Ekstra Düğümler
-    oak_camera_tf = Node(package='tf2_ros', executable='static_transform_publisher', name='oak_camera_static_tf', arguments=['0.5', '0.0', '0.3', '0', '0', '0', 'base_link', 'oak_rgb_camera_optical_frame'], parameters=[{'use_sim_time': use_sim_time}])
-    gazebo_lidar_tf = Node(package='tf2_ros', executable='static_transform_publisher', name='gazebo_lidar_tf', arguments=['0', '0', '0', '0', '0', '0', 'gpu_lidar', 'boat/base_link/gpu_lidar'], parameters=[{'use_sim_time': use_sim_time}])
-    
-    object_detect_node = ExecuteProcess(cmd=['python3', 'pcl.py'], cwd='/home/gauss/Desktop/my_robot_ws/src/objectdetect/objectdetect', output='screen')
+    oak_camera_tf = Node(package='tf2_ros', executable='static_transform_publisher', name='oak_camera_static_tf',
+                         arguments=['0.5', '0.0', '0.3', '0', '0', '0', 'base_link', 'oak_rgb_camera_optical_frame'],
+                         parameters=[{'use_sim_time': use_sim_time}])
+    gazebo_lidar_tf = Node(package='tf2_ros', executable='static_transform_publisher', name='gazebo_lidar_tf',
+                           arguments=['0', '0', '0', '0', '0', '0', 'gpu_lidar', 'boat/base_link/gpu_lidar'],
+                           parameters=[{'use_sim_time': use_sim_time}])
+
+    object_detect_node = ExecuteProcess(
+        cmd=['python3', 'pcl.py'],
+        cwd='/home/gauss/Desktop/my_robot_ws/src/objectdetect/objectdetect',
+        output='screen'
+    )
+
+    # 6) SLAM + Obstacle Publisher (withmap.py)
+    withmap_node = ExecuteProcess(
+        cmd=['python3', 'withmap.py'],
+        cwd='/home/gauss/Desktop/my_robot_ws/src/algo/mapping',
+        output='screen'
+    )
 
     return LaunchDescription([
         DeclareLaunchArgument('use_sim_time', default_value='true'),
-        gz_bridge, cmd_vel_to_thrust, map_to_odom_tf, robot_state_publisher, joint_state_publisher,
+        gz_bridge, cmd_vel_to_thrust, map_to_odom_tf,
+        robot_state_publisher, joint_state_publisher,
         oak_camera_tf, gazebo_lidar_tf, object_detect_node,
-        TimerAction(period=3.0, actions=[map_server, controller_server, planner_server, behavior_server, bt_navigator, lifecycle_manager]),
+        # withmap 5 saniye sonra başlasın — Nav2 ayağa kalksın önce
+        TimerAction(period=3.0, actions=[map_server, controller_server, planner_server,
+                                         behavior_server, bt_navigator, lifecycle_manager]),
         TimerAction(period=5.0, actions=[rviz]),
+        TimerAction(period=8.0, actions=[withmap_node]),
     ])

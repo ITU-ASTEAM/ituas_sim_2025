@@ -17,6 +17,8 @@ from geometry_msgs.msg import Point
 from sensor_msgs.msg import PointCloud2
 import sensor_msgs_py.point_cloud2 as pc2
 from visualization_msgs.msg import Marker, MarkerArray
+from nav2_msgs.msg import Costmap
+from std_msgs.msg import Float32MultiArray
 from ultralytics import YOLO
 from kamera_modulu import KameraModulu
 from position import PozisyonModulu
@@ -124,11 +126,83 @@ class MistikHaritaSistemi:
 
             self.marker_pub = self.rviz_node.create_publisher(MarkerArray, '/mistik_slam/markers', 10)
             self.lidar_cloud_pub = self.rviz_node.create_publisher(PointCloud2, '/mistik_slam/lidar_points', 10)
+
+            # Nav2 obstacle layer için tespit edilen dubalar
+            # QoS: transient_local → Nav2 başlarken geçmiş mesajları da alır
+            from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSReliabilityPolicy
+            obs_qos = QoSProfile(
+                depth=10,
+                reliability=QoSReliabilityPolicy.RELIABLE,
+                durability=QoSDurabilityPolicy.TRANSIENT_LOCAL
+            )
+            self.obstacle_pub = self.rviz_node.create_publisher(
+                PointCloud2,
+                '/detected_buoys',   # Nav2 obstacle_layer bu topic'i dinleyecek
+                obs_qos
+            )
+            self.last_obstacle_pub = 0.0  # throttle için
             return True
         except Exception as exc:
             print(f"[RViz] Başlatılamadı: {exc}")
             self.rviz_node = None
             return False
+
+    def publish_obstacles(self):
+        """
+        Güvenilir dubaları Nav2 obstacle_layer'a PointCloud2 olarak yayınla.
+        Sadece confidence > MIN_CONF olanlar gönderilir.
+        Her 0.5 saniyede bir yayınlanır (throttle).
+        """
+        if not self.rviz_enabled or self.rviz_node is None or not rclpy.ok():
+            return
+
+        now = time.time()
+        if now - self.last_obstacle_pub < 0.5:  # 2 Hz yeterli
+            return
+        self.last_obstacle_pub = now
+
+        MIN_CONF = 15  # Bu değerin altındakiler Nav2'ye gönderilmez
+
+        # Güvenilir dubaları filtrele
+        reliable = [
+            obj for obj in self.detected_objects
+            if obj['confidence'] >= MIN_CONF
+        ]
+
+        if not reliable:
+            # Boş cloud gönder — Nav2 temizlesin
+            header = Header()
+            header.stamp = self.rviz_node.get_clock().now().to_msg()
+            header.frame_id = 'map'
+            empty_cloud = pc2.create_cloud_xyz32(header, [])
+            try:
+                self.obstacle_pub.publish(empty_cloud)
+            except Exception:
+                pass
+            return
+
+        # XYZ noktaları — Z=0.5 (Nav2 3D costmap için biraz yükseklik ver)
+        points = [
+            [float(obj['x']), float(obj['y']), 0.5]
+            for obj in reliable
+        ]
+
+        header = Header()
+        header.stamp = self.rviz_node.get_clock().now().to_msg()
+        header.frame_id = 'map'
+
+        cloud_msg = pc2.create_cloud_xyz32(header, points)
+        try:
+            self.obstacle_pub.publish(cloud_msg)
+        except Exception as e:
+            print(f'[obstacle_pub] Hata: {e}')
+            return
+
+        # Log — sadece değişince
+        if not hasattr(self, '_last_obs_count') or self._last_obs_count != len(reliable):
+            self._last_obs_count = len(reliable)
+            print(f'[Nav2] {len(reliable)} duba obstacle olarak yayınlandı '
+                  f'(conf>={MIN_CONF})')
 
     def _yaw_to_quaternion(self, yaw):
         return (0.0, 0.0, math.sin(yaw / 2.0), math.cos(yaw / 2.0))
@@ -707,6 +781,9 @@ class MistikHaritaSistemi:
 
                 # RViz yayınları
                 self.publish_rviz(robot_pose)
+
+                # Nav2 obstacle layer yayını
+                self.publish_obstacles()
 
                 # CPU'yu yormamak için kısa bekleme
                 time.sleep(0.01)

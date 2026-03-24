@@ -15,7 +15,7 @@ from gz.msgs10.pose_v_pb2 import Pose_V
 # Topicler
 LEFT_TOPIC  = "/model/boat/joint/leftmotor_link_joint/cmd_thrust"
 RIGHT_TOPIC = "/model/boat/joint/rightmotor_link_joint/cmd_thrust"
-POSE_TOPIC  = "/world/ocean_world/model/boat/pose"
+POSE_TOPIC = "/world/ocean_world/pose/info"  # ← DOĞRU
 MODEL_NAME  = "boat"
 
 # Motor Güçleri (Negatif = İleri, Pozitif = Geri)
@@ -29,23 +29,10 @@ WAIT_TIME = 0.2    # Bekleme süresi
 # ROTA
 WAYPOINTS = [
     (-55.7, 4.2),   # <--- BAŞLANGIÇ NOKTASI (START)
-    (-55.0404, -9.7256),  # box
-    (-44.7946, 4.8350),   # box_0
-    (-37.8388, 11.1742),  # box_1
-    (-32.5524, 15.7666),  # box_2
-    (-24.0575, 11.7861),  # box_3
-    (-12.9219, 14.4102),  # box_4
-    (-2.0056, 16.8078),   # box_5
-    (10.7889, 15.6508),   # box_6
-    (23.2447, 13.9372),   # box_7
-    (33.6612, 14.8137),   # box_8
-    (47.5942, 13.6152),   # box_9
-    (53.8629, 15.6669),   # box_10
-    (60.7975, 13.0923),   # box_11
-    (66.0949, 17.7089),   # box_12
-    (74.8474, 15.1684),   # box_13
-    (83.9408, 15.4265)    # box_14
-]
+    (-32.165, 16.53),  # box
+    (-21.49, 10.284),   # box_0
+    (-16.749, 16.50)
+    ]
 
 # ============= POZİSYON MODÜLÜ (GZ TRANSPORT) =============
 
