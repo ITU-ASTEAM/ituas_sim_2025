@@ -1,0 +1,12 @@
+# Derleme ve çıktı klasörleri
+build/
+install/
+log/
+
+# IDE ayarları
+.vscode/
+
+# Python ve sistem dosyaları
+__pycache__/
+*.pyc
+.DS_Store

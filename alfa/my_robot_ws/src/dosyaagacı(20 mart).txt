@@ -1,0 +1,1021 @@
+gauss@gauss:~/Desktop/my_robot_ws/src$ tree
+.
+├── algo
+│   ├── algo
+│   │   ├── __init__.py
+│   │   ├── map_parser.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.pyc
+<<<<<<< HEAD
+│   │   │   └── map_parser.cpython-310.pyc
+│   │   └── waypoint_generator.py
+=======
+│   │   │   ├── map_parser.cpython-310.pyc
+│   │   │   └── waypoint_generator.cpython-310.pyc
+│   │   └── waypoint_generator.py
+│   ├── mapping
+│   │   ├── best29jan.pt
+│   │   ├── kamera_modulu.py
+│   │   ├── lidar_modulu.py
+│   │   ├── position.py
+│   │   ├── __pycache__
+│   │   │   ├── kamera_modulu.cpython-310.pyc
+│   │   │   ├── lidar_modulu.cpython-310.pyc
+│   │   │   └── position.cpython-310.pyc
+│   │   └── withmap.py
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
+│   ├── package.xml
+│   ├── resource
+│   │   └── algo
+│   ├── setup.cfg
+│   └── setup.py
+├── boat_navigation
+│   ├── CMakeLists.txt
+│   ├── config
+│   │   └── bridge.yaml
+│   ├── launch
+│   │   └── boat_nav2.launch.py
+│   ├── maps
+│   │   ├── costmap_colored.png
+│   │   ├── costmap.png
+│   │   └── costmap.yaml
+│   ├── package.xml
+│   ├── params
+│   │   └── nav2_params.yaml
+│   └── scripts
+│       ├── cmd_vel_to_thrust.py
+│       ├── map_tracker_test.py
+│       ├── mission_control.py
+│       └── not.txt
+├── dosyaagacı(20 mart).txt
+├── hydrodynamic_drag_plugin
+│   ├── build
+│   │   ├── CMakeCache.txt
+│   │   ├── CMakeFiles
+│   │   │   ├── 3.28.3
+│   │   │   │   ├── CMakeCCompiler.cmake
+│   │   │   │   ├── CMakeCXXCompiler.cmake
+│   │   │   │   ├── CMakeDetermineCompilerABI_C.bin
+│   │   │   │   ├── CMakeDetermineCompilerABI_CXX.bin
+│   │   │   │   ├── CMakeSystem.cmake
+│   │   │   │   ├── CompilerIdC
+│   │   │   │   │   ├── a.out
+│   │   │   │   │   └── CMakeCCompilerId.c
+│   │   │   │   └── CompilerIdCXX
+│   │   │   │       ├── a.out
+│   │   │   │       └── CMakeCXXCompilerId.cpp
+│   │   │   ├── cmake.check_cache
+│   │   │   ├── CMakeConfigureLog.yaml
+│   │   │   ├── CMakeDirectoryInformation.cmake
+│   │   │   ├── HydrodynamicDrag.dir
+│   │   │   │   ├── build.make
+│   │   │   │   ├── cmake_clean.cmake
+│   │   │   │   ├── compiler_depend.make
+│   │   │   │   ├── compiler_depend.ts
+│   │   │   │   ├── DependInfo.cmake
+│   │   │   │   ├── depend.make
+│   │   │   │   ├── flags.make
+│   │   │   │   ├── HydrodynamicDrag.cc.o
+│   │   │   │   ├── HydrodynamicDrag.cc.o.d
+│   │   │   │   ├── link.txt
+│   │   │   │   └── progress.make
+│   │   │   ├── Makefile2
+│   │   │   ├── Makefile.cmake
+│   │   │   ├── progress.marks
+│   │   │   └── TargetDirectories.txt
+│   │   ├── cmake_install.cmake
+│   │   ├── libHydrodynamicDrag.so
+│   │   └── Makefile
+│   ├── CMakeLists.txt
+│   └── HydrodynamicDrag.cc
+├── my_robot_description
+│   ├── CMakeLists.txt
+│   ├── launch
+│   │   ├── spawn_boat.launch.py
+│   │   └── spawn_robot.launch.py
+│   ├── meshes
+│   │   ├── robot.log
+│   │   └── robot.stl
+│   ├── models
+│   │   ├── boat
+│   │   │   ├── boat_world.sdf
+│   │   │   ├── meshes
+│   │   │   │   └── stl
+│   │   │   │       ├── denemeas.001.stl
+│   │   │   │       ├── denemeas.002.stl
+│   │   │   │       └── denemeas.003.stl
+│   │   │   ├── model.config
+│   │   │   └── model.sdf
+│   │   ├── golet
+│   │   │   ├── materials
+│   │   │   │   └── textures
+│   │   │   │       ├── 21208336.jpg
+│   │   │   │       ├── 2_bump.jpg
+│   │   │   │       ├── 2diffuse.jpg
+│   │   │   │       ├── COLOR.JPG
+│   │   │   │       ├── Kashtan.jpg
+│   │   │   │       ├── lavender_flower.jpg
+│   │   │   │       ├── lavender_trunk.jpg
+│   │   │   │       └── overlay.png
+│   │   │   ├── model.config
+│   │   │   └── model.sdf
+│   │   └── parkur
+│   │       ├── meshes
+│   │       │   ├── parkur12.dae
+│   │       │   └── parkur.dae
+│   │       ├── model.config
+│   │       └── model.sdf
+│   ├── package.xml
+│   ├── scripts
+│   │   └── boat_navigator.py
+│   ├── urdf
+│   │   ├── robot.sdf
+│   │   └── robot.urdf
+│   └── worlds
+│       ├── boat_world.sdf
+│       └── final_boat_hydro.sdf
+├── my_robot_pkg
+│   ├── launch
+│   │   ├── spawn_boat.launch.py
+│   │   └── spawn_my_robot.launch.py
+│   ├── my_robot_pkg
+│   │   ├── __init__.py
+│   │   └── launch
+│   │       └── spawn_my_robot.launch.py
+│   ├── package.xml
+│   ├── resource
+│   │   └── my_robot_pkg
+│   ├── setup.cfg
+│   ├── setup.py
+│   └── test
+│       ├── test_copyright.py
+│       ├── test_flake8.py
+│       └── test_pep257.py
+├── objectdetect
+│   ├── log
+│   │   ├── build_2026-03-06_02-22-18
+│   │   │   ├── events.log
+│   │   │   ├── logger_all.log
+│   │   │   └── objectdetect
+│   │   │       ├── command.log
+│   │   │       ├── stderr.log
+│   │   │       ├── stdout.log
+│   │   │       ├── stdout_stderr.log
+│   │   │       └── streams.log
+│   │   └── COLCON_IGNORE
+│   ├── objectdetect
+│   │   ├── best.pt
+│   │   ├── cost.py
+│   │   ├── eskimodelaugmantation.pt
+│   │   ├── __init__.py
+│   │   └── pcl.py
+│   ├── package.xml
+│   ├── resource
+│   │   └── objectdetect
+│   └── setup.py
+├── ros_gz
+│   ├── CONTRIBUTING.md
+│   ├── LICENSE
+│   ├── README.md
+│   ├── README_RENAME.md
+│   ├── RELEASING.md
+│   ├── ros_gz
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── package.xml
+│   │   └── README.md
+│   ├── ros_gz_bridge
+│   │   ├── bin
+│   │   │   ├── ros_gz_bridge_generate_factories
+│   │   │   ├── ros_gz_bridge_generate_tests
+│   │   │   └── ros_gz_bridge_markdown_table
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── images
+│   │   │   └── bridge_image_exchange.png
+│   │   ├── include
+│   │   │   └── ros_gz_bridge
+│   │   │       ├── bridge_config.hpp
+│   │   │       ├── convert
+│   │   │       │   ├── actuator_msgs.hpp
+│   │   │       │   ├── builtin_interfaces.hpp
+│   │   │       │   ├── geometry_msgs.hpp
+│   │   │       │   ├── gps_msgs.hpp
+│   │   │       │   ├── nav_msgs.hpp
+│   │   │       │   ├── rcl_interfaces.hpp
+│   │   │       │   ├── rosgraph_msgs.hpp
+│   │   │       │   ├── ros_gz_interfaces.hpp
+│   │   │       │   ├── sensor_msgs.hpp
+│   │   │       │   ├── std_msgs.hpp
+│   │   │       │   ├── tf2_msgs.hpp
+│   │   │       │   ├── trajectory_msgs.hpp
+│   │   │       │   └── vision_msgs.hpp
+│   │   │       ├── convert_decl.hpp
+│   │   │       ├── convert.hpp
+│   │   │       └── ros_gz_bridge.hpp
+│   │   ├── package.xml
+│   │   ├── README.md
+│   │   ├── resource
+│   │   │   ├── get_factory.cpp.em
+│   │   │   ├── get_mappings.cpp.em
+│   │   │   ├── pkg_factories.cpp.em
+│   │   │   └── pkg_factories.hpp.em
+│   │   ├── ros_gz_bridge
+│   │   │   ├── __init__.py
+│   │   │   ├── mappings.py
+│   │   │   └── __pycache__
+│   │   │       ├── __init__.cpython-310.pyc
+│   │   │       └── mappings.cpython-310.pyc
+│   │   ├── src
+│   │   │   ├── bridge_config.cpp
+│   │   │   ├── bridge_handle.cpp
+│   │   │   ├── bridge_handle_gz_to_ros.cpp
+│   │   │   ├── bridge_handle_gz_to_ros.hpp
+│   │   │   ├── bridge_handle_gz_to_ros_parameters.hpp
+│   │   │   ├── bridge_handle.hpp
+│   │   │   ├── bridge_handle_ros_to_gz.cpp
+│   │   │   ├── bridge_handle_ros_to_gz.hpp
+│   │   │   ├── bridge_types.cpp
+│   │   │   ├── convert
+│   │   │   │   ├── actuator_msgs.cpp
+│   │   │   │   ├── builtin_interfaces.cpp
+│   │   │   │   ├── geometry_msgs.cpp
+│   │   │   │   ├── gps_msgs.cpp
+│   │   │   │   ├── nav_msgs.cpp
+│   │   │   │   ├── rcl_interfaces.cpp
+│   │   │   │   ├── rcl_interfaces_TEST.cpp
+│   │   │   │   ├── rosgraph_msgs.cpp
+│   │   │   │   ├── ros_gz_interfaces.cpp
+│   │   │   │   ├── ros_gz_interfaces_TEST.cpp
+│   │   │   │   ├── sensor_msgs.cpp
+│   │   │   │   ├── std_msgs.cpp
+│   │   │   │   ├── tf2_msgs.cpp
+│   │   │   │   ├── trajectory_msgs.cpp
+│   │   │   │   ├── utils.cpp
+│   │   │   │   ├── utils.hpp
+│   │   │   │   └── vision_msgs.cpp
+│   │   │   ├── factory.hpp
+│   │   │   ├── factory_interface.cpp
+│   │   │   ├── factory_interface.hpp
+│   │   │   ├── get_factory.hpp
+│   │   │   ├── get_mappings.hpp
+│   │   │   ├── parameter_bridge.cpp
+│   │   │   ├── ros_gz_bridge.cpp
+│   │   │   ├── service_factories
+│   │   │   │   ├── ros_gz_interfaces.cpp
+│   │   │   │   └── ros_gz_interfaces.hpp
+│   │   │   ├── service_factory.hpp
+│   │   │   ├── service_factory_interface.cpp
+│   │   │   ├── service_factory_interface.hpp
+│   │   │   └── static_bridge.cpp
+│   │   └── test
+│   │       ├── bridge_config.cpp
+│   │       ├── config
+│   │       │   ├── full_ign.yaml
+│   │       │   ├── full.yaml
+│   │       │   ├── minimum_ign.yaml
+│   │       │   └── minimum.yaml
+│   │       ├── launch
+│   │       │   ├── test_gz_server.launch.py
+│   │       │   ├── test_gz_subscriber.launch.py
+│   │       │   └── test_ros_subscriber.launch.py
+│   │       ├── resource
+│   │       │   ├── gz_publisher.cpp.em
+│   │       │   ├── gz_subscriber.cpp.em
+│   │       │   ├── ros_pkg_subscriber.cpp.em
+│   │       │   └── ros_publisher.cpp.em
+│   │       ├── serverclient
+│   │       │   ├── gz_server.cpp
+│   │       │   └── ros_client.cpp
+│   │       ├── subscribers
+│   │       │   ├── ros_subscriber
+│   │       │   │   └── ros_gz_interfaces_subscriber.cpp
+│   │       │   ├── ros_subscriber.cpp
+│   │       │   └── ros_subscriber.hpp
+│   │       ├── test_gid_filtering.cpp
+│   │       └── utils
+│   │           ├── gz_test_msg.cpp
+│   │           ├── gz_test_msg.hpp
+│   │           ├── ros_test_msg.cpp
+│   │           ├── ros_test_msg.hpp
+│   │           └── test_utils.hpp
+│   ├── ros_gz_image
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── package.xml
+│   │   ├── README.md
+│   │   ├── src
+│   │   │   └── image_bridge.cpp
+│   │   └── test
+│   │       ├── AMENT_IGNORE
+│   │       ├── launch
+│   │       │   └── test_ros_subscriber.launch
+│   │       ├── publishers
+│   │       │   └── gz_publisher.cpp
+│   │       ├── ros_subscriber.test
+│   │       ├── subscribers
+│   │       │   └── ros_subscriber.cpp
+│   │       └── test_utils.h
+│   ├── ros_gz_interfaces
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── msg
+│   │   │   ├── Altimeter.msg
+│   │   │   ├── Contact.msg
+│   │   │   ├── Contacts.msg
+│   │   │   ├── Dataframe.msg
+│   │   │   ├── EntityFactory.msg
+│   │   │   ├── Entity.msg
+│   │   │   ├── EntityWrench.msg
+│   │   │   ├── Float32Array.msg
+│   │   │   ├── GuiCamera.msg
+│   │   │   ├── JointWrench.msg
+│   │   │   ├── Light.msg
+│   │   │   ├── LogPlaybackStatistics.msg
+│   │   │   ├── MaterialColor.msg
+│   │   │   ├── ParamVec.msg
+│   │   │   ├── SensorNoise.msg
+│   │   │   ├── StringVec.msg
+│   │   │   ├── TrackVisual.msg
+│   │   │   ├── VideoRecord.msg
+│   │   │   ├── WorldControl.msg
+│   │   │   ├── WorldReset.msg
+│   │   │   └── WorldStatistics.msg
+│   │   ├── package.xml
+│   │   ├── README.md
+│   │   └── srv
+│   │       ├── ControlWorld.srv
+│   │       ├── DeleteEntity.srv
+│   │       ├── SetEntityPose.srv
+│   │       └── SpawnEntity.srv
+│   ├── ros_gz_point_cloud
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── COLCON_IGNORE
+│   │   ├── examples
+│   │   │   ├── depth_camera.sdf
+│   │   │   ├── gpu_lidar.sdf
+│   │   │   └── rgbd_camera.sdf
+│   │   ├── package.xml
+│   │   └── src
+│   │       ├── point_cloud.cc
+│   │       └── point_cloud.hh
+│   ├── ros_gz_sim
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── include
+│   │   │   └── ros_gz_sim
+│   │   │       └── Stopwatch.hpp
+│   │   ├── launch
+│   │   │   └── gz_sim.launch.py.in
+│   │   ├── package.xml
+│   │   ├── README.md
+│   │   ├── src
+│   │   │   ├── create.cpp
+│   │   │   └── Stopwatch.cpp
+│   │   └── test
+│   │       └── test_stopwatch.cpp
+│   ├── ros_gz_sim_demos
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── hooks
+│   │   │   └── ros_gz_sim_demos.dsv.in
+│   │   ├── images
+│   │   │   ├── air_pressure_demo.png
+│   │   │   ├── battery_demo.png
+│   │   │   ├── camera_demo.png
+│   │   │   ├── depth_camera_demo.png
+│   │   │   ├── diff_drive_demo.png
+│   │   │   ├── gpu_lidar_demo.png
+│   │   │   ├── imu_demo.png
+│   │   │   ├── joint_states.png
+│   │   │   ├── magnetometer_demo.png
+│   │   │   ├── navsat_demo.png
+│   │   │   ├── rgbd_camera_demo.png
+│   │   │   ├── robot_state_publisher_demo.png
+│   │   │   ├── shapes_demo.png
+│   │   │   └── tf_bridge.gif
+│   │   ├── launch
+│   │   │   ├── air_pressure.launch.py
+│   │   │   ├── battery.launch.py
+│   │   │   ├── camera.launch.py
+│   │   │   ├── depth_camera.launch.py
+│   │   │   ├── diff_drive.launch.py
+│   │   │   ├── gpu_lidar_bridge.launch.py
+│   │   │   ├── gpu_lidar.launch.py
+│   │   │   ├── image_bridge.launch.py
+│   │   │   ├── imu.launch.py
+│   │   │   ├── joint_states.launch.py
+│   │   │   ├── magnetometer.launch.py
+│   │   │   ├── navsat_gpsfix.launch.py
+│   │   │   ├── navsat.launch.py
+│   │   │   ├── rgbd_camera_bridge.launch.py
+│   │   │   ├── rgbd_camera.launch.py
+│   │   │   ├── robot_description_publisher.launch.py
+│   │   │   ├── sdf_parser.launch.py
+│   │   │   ├── tf_bridge.launch.py
+│   │   │   └── triggered_camera.launch.py
+│   │   ├── models
+│   │   │   ├── double_pendulum_model.sdf
+│   │   │   ├── rrbot.xacro
+│   │   │   └── vehicle
+│   │   │       ├── model.config
+│   │   │       └── model.sdf
+│   │   ├── package.xml
+│   │   ├── README.md
+│   │   ├── rviz
+│   │   │   ├── camera.rviz
+│   │   │   ├── depth_camera.rviz
+│   │   │   ├── diff_drive.rviz
+│   │   │   ├── gpu_lidar_bridge.rviz
+│   │   │   ├── gpu_lidar.rviz
+│   │   │   ├── imu.rviz
+│   │   │   ├── joint_states.rviz
+│   │   │   ├── rgbd_camera_bridge.rviz
+│   │   │   ├── rgbd_camera.rviz
+│   │   │   ├── robot_description_publisher.rviz
+│   │   │   ├── tf_bridge.rviz
+│   │   │   └── vehicle.rviz
+│   │   └── worlds
+│   │       └── vehicle.sdf
+│   ├── ros_ign
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── package.xml
+│   │   └── README.md
+│   ├── ros_ign_bridge
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── package.xml
+│   │   ├── README.md
+│   │   └── src
+│   │       ├── parameter_bridge_shim.cpp
+│   │       └── static_bridge_shim.cpp
+│   ├── ros_ign_gazebo
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── launch
+│   │   │   └── ign_gazebo.launch.py
+│   │   ├── package.xml
+│   │   ├── README.md
+│   │   └── src
+│   │       └── create_shim.cpp
+│   ├── ros_ign_gazebo_demos
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── launch
+│   │   │   ├── air_pressure.launch.py
+│   │   │   ├── battery.launch.py
+│   │   │   ├── camera.launch.py
+│   │   │   ├── depth_camera.launch.py
+│   │   │   ├── diff_drive.launch.py
+│   │   │   ├── gpu_lidar_bridge.launch.py
+│   │   │   ├── gpu_lidar.launch.py
+│   │   │   ├── image_bridge.launch.py
+│   │   │   ├── imu.launch.py
+│   │   │   ├── joint_states.launch.py
+│   │   │   ├── magnetometer.launch.py
+│   │   │   ├── rgbd_camera_bridge.launch.py
+│   │   │   ├── rgbd_camera.launch.py
+│   │   │   ├── robot_description_publisher.launch.py
+│   │   │   ├── tf_bridge.launch.py
+│   │   │   └── triggered_camera.launch.py
+│   │   ├── package.xml
+│   │   └── README.md
+│   ├── ros_ign_image
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── package.xml
+│   │   ├── README.md
+│   │   └── src
+│   │       └── image_bridge_shim.cpp
+│   ├── ros_ign_interfaces
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── msg
+│   │   │   ├── Contact.msg
+│   │   │   ├── Contacts.msg
+│   │   │   ├── EntityFactory.msg
+│   │   │   ├── Entity.msg
+│   │   │   ├── GuiCamera.msg
+│   │   │   ├── JointWrench.msg
+│   │   │   ├── Light.msg
+│   │   │   ├── StringVec.msg
+│   │   │   ├── TrackVisual.msg
+│   │   │   ├── VideoRecord.msg
+│   │   │   ├── WorldControl.msg
+│   │   │   └── WorldReset.msg
+│   │   ├── package.xml
+│   │   ├── README.md
+│   │   └── srv
+│   │       ├── ControlWorld.srv
+│   │       ├── DeleteEntity.srv
+│   │       ├── SetEntityPose.srv
+│   │       └── SpawnEntity.srv
+│   ├── test_ros_gz_bridge
+│   │   ├── CHANGELOG.rst
+│   │   ├── CMakeLists.txt
+│   │   ├── package.xml
+│   │   └── src
+│   │       └── test_ros_gz_bridge.cpp
+│   └── tools
+│       └── pyproject.toml
+└── vrx
+    ├── Changelog.md
+    ├── docker
+    │   ├── docker-compose.yml
+    │   ├── Dockerfile.base
+    │   ├── Dockerfile.builder
+    │   ├── Dockerfile.devel
+    │   ├── entrypoint-ros.sh
+    │   ├── gz.repos
+    │   └── README.md
+    ├── images
+    │   └── sydney_regatta_gzsim.png
+    ├── LICENSE
+    ├── README.md
+    ├── vrx_gz
+    │   ├── CMakeLists.txt
+    │   ├── config
+    │   │   ├── roboboat.yaml
+    │   │   └── wamv.yaml
+    │   ├── hooks
+    │   │   ├── resource_paths.dsv.in
+    │   │   └── resource_paths.sh
+    │   ├── launch
+    │   │   ├── competition.launch.py
+    │   │   ├── spawn_config.launch.py
+    │   │   ├── spawn.launch.py
+    │   │   ├── usv_joy_teleop.py
+    │   │   └── vrx_environment.launch.py
+    │   ├── models
+    │   │   ├── articulated_platform
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── coast_waves
+    │   │   │   ├── materials
+    │   │   │   │   ├── programs
+    │   │   │   │   │   ├── GerstnerWaves_fs_330.glsl
+    │   │   │   │   │   └── GerstnerWaves_vs_330.glsl
+    │   │   │   │   └── textures
+    │   │   │   │       ├── skybox_lowres.dds
+    │   │   │   │       └── wave_normals.dds
+    │   │   │   ├── meshes
+    │   │   │   │   └── waterlow.dae
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── dock_2022
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── dock_2022_base
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── dock_block_4x4
+    │   │   │   ├── mesh
+    │   │   │   │   ├── dock_block_4x4.dae
+    │   │   │   │   ├── DockCubes_Albedo.png
+    │   │   │   │   ├── DockCubes_Metalness.png
+    │   │   │   │   ├── DockCubes_Normal.png
+    │   │   │   │   └── DockCubes_Roughness.png
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── entrance_exit
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── obstacle_course
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── placard_2022
+    │   │   │   ├── materials
+    │   │   │   │   └── textures
+    │   │   │   │       └── Placard.png
+    │   │   │   ├── meshes
+    │   │   │   │   └── placard_2022.dae
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── platform
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── roboboat01
+    │   │   │   ├── materials
+    │   │   │   │   ├── scripts
+    │   │   │   │   │   └── model.material
+    │   │   │   │   └── textures
+    │   │   │   │       ├── Boat01_Albedo.png
+    │   │   │   │       ├── Boat01_Metallic.png
+    │   │   │   │       ├── Boat01_Normal.png
+    │   │   │   │       ├── Boat01_Roughness.png
+    │   │   │   │       ├── Thruster_Albedo.png
+    │   │   │   │       └── Thruster_Roughness.png
+    │   │   │   ├── meshes
+    │   │   │   │   ├── housing.dae
+    │   │   │   │   ├── mount.dae
+    │   │   │   │   ├── prop.dae
+    │   │   │   │   └── roboboat01.dae
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── roboboat02
+    │   │   │   ├── materials
+    │   │   │   │   ├── scripts
+    │   │   │   │   │   └── model.material
+    │   │   │   │   └── textures
+    │   │   │   │       ├── Boat02_Albedo.png
+    │   │   │   │       ├── Boat02_Metallic.png
+    │   │   │   │       ├── Boat02_Normal.png
+    │   │   │   │       └── Boat02_Roughness.png
+    │   │   │   ├── meshes
+    │   │   │   │   └── roboboat02.dae
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── roboboat_cpubox
+    │   │   │   ├── materials
+    │   │   │   │   └── textures
+    │   │   │   │       ├── DryBox_Albedo.png
+    │   │   │   │       └── DryBox_Roughness.png
+    │   │   │   ├── meshes
+    │   │   │   │   └── drybox.dae
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── robotx_light_buoy_bgr
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── robotx_light_buoy_bgy
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── robotx_light_buoy_gbr
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── robotx_light_buoy_rbg
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── robotx_light_buoy_rgb
+    │   │   │   ├── mesh
+    │   │   │   │   ├── LightTower_Albedo.png
+    │   │   │   │   ├── LightTower_Metalness.png
+    │   │   │   │   ├── LightTower_Normal.png
+    │   │   │   │   ├── LightTower_Opacity.png
+    │   │   │   │   ├── LightTower_Roughness.png
+    │   │   │   │   └── robotx_light_buoy.dae
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── robotx_light_buoy_rgy
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── robotx_light_buoy_ybr
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── robotx_light_buoy_ygb
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── robotx_light_buoy_yrg
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── short_course_2023_phase3_1
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── short_course_2023_phase3_2
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── short_navigation_course_0
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── short_navigation_course_1
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── short_navigation_course_2
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── short_navigation_course_3
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── short_navigation_course_4
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   ├── short_navigation_course_5
+    │   │   │   ├── model.config
+    │   │   │   └── model.sdf
+    │   │   └── symbol_triangle
+    │   │       ├── mesh
+    │   │       │   └── triangle.dae
+    │   │       ├── model.config
+    │   │       └── model.sdf
+    │   ├── package.xml
+    │   ├── scripts
+    │   │   └── update_sea_state_params.sh
+    │   ├── src
+    │   │   ├── AcousticPerceptionScoringPlugin.cc
+    │   │   ├── AcousticPerceptionScoringPlugin.hh
+    │   │   ├── AcousticPingerPlugin.cc
+    │   │   ├── AcousticPingerPlugin.hh
+    │   │   ├── AcousticTrackingScoringPlugin.cc
+    │   │   ├── AcousticTrackingScoringPlugin.hh
+    │   │   ├── BallShooterPlugin.cc
+    │   │   ├── BallShooterPlugin.hh
+    │   │   ├── GymkhanaScoringPlugin.cc
+    │   │   ├── GymkhanaScoringPlugin.hh
+    │   │   ├── LightBuoyPlugin.cc
+    │   │   ├── LightBuoyPlugin.hh
+    │   │   ├── NavigationScoringPlugin.cc
+    │   │   ├── NavigationScoringPlugin.hh
+    │   │   ├── PerceptionScoringPlugin.cc
+    │   │   ├── PerceptionScoringPlugin.hh
+    │   │   ├── PlacardPlugin.cc
+    │   │   ├── PlacardPlugin.hh
+    │   │   ├── PolyhedraBuoyancyDrag.cc
+    │   │   ├── PolyhedraBuoyancyDrag.hh
+    │   │   ├── PolyhedronVolume.cc
+    │   │   ├── PolyhedronVolume.hh
+    │   │   ├── PublisherPlugin.cc
+    │   │   ├── PublisherPlugin.hh
+    │   │   ├── ScanDockScoringPlugin.cc
+    │   │   ├── ScanDockScoringPlugin.hh
+    │   │   ├── ScoringPlugin.cc
+    │   │   ├── ScoringPlugin.hh
+    │   │   ├── ShapeVolume.cc
+    │   │   ├── ShapeVolume.hh
+    │   │   ├── SimpleHydrodynamics.cc
+    │   │   ├── SimpleHydrodynamics.hh
+    │   │   ├── StationkeepingScoringPlugin.cc
+    │   │   ├── StationkeepingScoringPlugin.hh
+    │   │   ├── Surface.cc
+    │   │   ├── Surface.hh
+    │   │   ├── USVWind.cc
+    │   │   ├── USVWind.hh
+    │   │   ├── vrx_gz
+    │   │   │   ├── bridge.py
+    │   │   │   ├── bridges.py
+    │   │   │   ├── __init__.py
+    │   │   │   ├── launch.py
+    │   │   │   ├── model.py
+    │   │   │   └── payload_bridges.py
+    │   │   ├── Wavefield.cc
+    │   │   ├── Wavefield.hh
+    │   │   ├── WaveVisual.cc
+    │   │   ├── WaveVisual.hh
+    │   │   ├── WayfindingScoringPlugin.cc
+    │   │   ├── WayfindingScoringPlugin.hh
+    │   │   ├── WaypointMarkers.cc
+    │   │   ├── WaypointMarkers.hh
+    │   │   ├── WildlifeScoringPlugin.cc
+    │   │   └── WildlifeScoringPlugin.hh
+    │   └── worlds
+    │       ├── 2023_phase2
+    │       │   ├── phase2_2023_acoustic_perception0.sdf
+    │       │   ├── phase2_2023_acoustic_perception1.sdf
+    │       │   ├── phase2_2023_acoustic_perception2.sdf
+    │       │   ├── phase2_2023_acoustic_perception3.sdf
+    │       │   ├── phase2_2023_acoustic_perception4.sdf
+    │       │   ├── phase2_2023_acoustic_perception5.sdf
+    │       │   ├── phase2_2023_acoustic_tracking0.sdf
+    │       │   ├── phase2_2023_acoustic_tracking1.sdf
+    │       │   ├── phase2_2023_acoustic_tracking2.sdf
+    │       │   ├── phase2_2023_acoustic_tracking3.sdf
+    │       │   ├── phase2_2023_acoustic_tracking4.sdf
+    │       │   ├── phase2_2023_acoustic_tracking5.sdf
+    │       │   ├── phase2_2023_follow_path0.sdf
+    │       │   ├── phase2_2023_follow_path1.sdf
+    │       │   ├── phase2_2023_follow_path2.sdf
+    │       │   ├── phase2_2023_follow_path3.sdf
+    │       │   ├── phase2_2023_follow_path4.sdf
+    │       │   ├── phase2_2023_follow_path5.sdf
+    │       │   ├── phase2_2023_perception0.sdf
+    │       │   ├── phase2_2023_perception1.sdf
+    │       │   ├── phase2_2023_perception2.sdf
+    │       │   ├── phase2_2023_perception3.sdf
+    │       │   ├── phase2_2023_perception4.sdf
+    │       │   ├── phase2_2023_perception5.sdf
+    │       │   ├── phase2_2023_scan_dock_deliver0.sdf
+    │       │   ├── phase2_2023_scan_dock_deliver1.sdf
+    │       │   ├── phase2_2023_scan_dock_deliver2.sdf
+    │       │   ├── phase2_2023_scan_dock_deliver3.sdf
+    │       │   ├── phase2_2023_scan_dock_deliver4.sdf
+    │       │   ├── phase2_2023_scan_dock_deliver5.sdf
+    │       │   ├── phase2_2023_stationkeeping0.sdf
+    │       │   ├── phase2_2023_stationkeeping1.sdf
+    │       │   ├── phase2_2023_stationkeeping2.sdf
+    │       │   ├── phase2_2023_stationkeeping3.sdf
+    │       │   ├── phase2_2023_stationkeeping4.sdf
+    │       │   ├── phase2_2023_stationkeeping5.sdf
+    │       │   ├── phase2_2023_wayfinding0.sdf
+    │       │   ├── phase2_2023_wayfinding1.sdf
+    │       │   ├── phase2_2023_wayfinding2.sdf
+    │       │   ├── phase2_2023_wayfinding3.sdf
+    │       │   ├── phase2_2023_wayfinding4.sdf
+    │       │   ├── phase2_2023_wayfinding5.sdf
+    │       │   ├── phase2_2023_wildlife0.sdf
+    │       │   ├── phase2_2023_wildlife1.sdf
+    │       │   ├── phase2_2023_wildlife2.sdf
+    │       │   ├── phase2_2023_wildlife3.sdf
+    │       │   ├── phase2_2023_wildlife4.sdf
+    │       │   └── phase2_2023_wildlife5.sdf
+    │       ├── 2023_practice
+    │       │   ├── practice_2023_acoustic_perception0_task.sdf
+    │       │   ├── practice_2023_acoustic_perception1_task.sdf
+    │       │   ├── practice_2023_acoustic_perception2_task.sdf
+    │       │   ├── practice_2023_acoustic_tracking0_task.sdf
+    │       │   ├── practice_2023_acoustic_tracking1_task.sdf
+    │       │   ├── practice_2023_acoustic_tracking2_task.sdf
+    │       │   ├── practice_2023_follow_path0_task.sdf
+    │       │   ├── practice_2023_follow_path1_task.sdf
+    │       │   ├── practice_2023_follow_path2_task.sdf
+    │       │   ├── practice_2023_perception0_task.sdf
+    │       │   ├── practice_2023_perception1_task.sdf
+    │       │   ├── practice_2023_perception2_task.sdf
+    │       │   ├── practice_2023_scan_dock_deliver0_task.sdf
+    │       │   ├── practice_2023_scan_dock_deliver1_task.sdf
+    │       │   ├── practice_2023_scan_dock_deliver2_task.sdf
+    │       │   ├── practice_2023_stationkeeping0_task.sdf
+    │       │   ├── practice_2023_stationkeeping1_task.sdf
+    │       │   ├── practice_2023_stationkeeping2_task.sdf
+    │       │   ├── practice_2023_wayfinding0_task.sdf
+    │       │   ├── practice_2023_wayfinding1_task.sdf
+    │       │   ├── practice_2023_wayfinding2_task.sdf
+    │       │   ├── practice_2023_wildlife0_task.sdf
+    │       │   ├── practice_2023_wildlife1_task.sdf
+    │       │   └── practice_2023_wildlife2_task.sdf
+    │       ├── acoustic_perception_task.sdf
+    │       ├── acoustic_tracking_task.sdf
+    │       ├── follow_path_task.sdf
+    │       ├── gymkhana_task.sdf
+    │       ├── navigation_task.sdf
+    │       ├── nbpark.sdf
+    │       ├── perception_task.sdf
+    │       ├── scan_dock_deliver_task.sdf
+    │       ├── stationkeeping_task.sdf
+    │       ├── sydney_regatta.sdf
+    │       ├── wayfinding_task.sdf
+    │       └── wildlife_task.sdf
+    ├── vrx_ros
+    │   ├── CMakeLists.txt
+    │   ├── launch
+    │   │   └── monitor_sim.py
+    │   ├── package.xml
+    │   └── src
+    │       ├── optical_frame_publisher.cc
+    │       └── pose_tf_broadcaster.cc
+    └── vrx_urdf
+        ├── vrx_gazebo
+        │   ├── CMakeLists.txt
+        │   ├── config
+        │   │   ├── rviz_vrx_final.rviz
+        │   │   ├── rviz_vrx_rsp.rviz
+        │   │   └── wamv_config
+        │   │       ├── component_compliance
+        │   │       │   ├── bounding_boxes.yaml
+        │   │       │   └── numeric.yaml
+        │   │       ├── example_component_config.yaml
+        │   │       ├── example_thruster_config.yaml
+        │   │       └── thruster_compliance
+        │   │           ├── bounding_boxes.yaml
+        │   │           └── numeric.yaml
+        │   ├── hooks
+        │   │   ├── resource_paths.dsv.in
+        │   │   └── resource_paths.sh
+        │   ├── launch
+        │   │   ├── generate_wamv.launch.py
+        │   │   └── rviz.launch.py
+        │   ├── models
+        │   │   ├── 3d_lidar
+        │   │   │   ├── mesh
+        │   │   │   │   ├── 3d_Lidar_Albedo.png
+        │   │   │   │   ├── 3d_lidar.dae
+        │   │   │   │   ├── 3d_Lidar_Metalness.png
+        │   │   │   │   ├── 3d_Lidar_Normal.png
+        │   │   │   │   ├── 3d_lidar.png
+        │   │   │   │   └── 3d_Lidar_Roughness.png
+        │   │   │   ├── model.config
+        │   │   │   └── model.sdf
+        │   │   ├── ball_shooter
+        │   │   │   ├── materials
+        │   │   │   │   └── Textures
+        │   │   │   │       ├── Launcher_Albedo.png
+        │   │   │   │       ├── Launcher_Metalness.png
+        │   │   │   │       ├── Launcher_Normal.png
+        │   │   │   │       └── Launcher_Roughness.png
+        │   │   │   ├── meshes
+        │   │   │   │   ├── ball_shooter_base.dae
+        │   │   │   │   ├── ball_shooter_launcher.dae
+        │   │   │   │   ├── Launcher_Albedo.png
+        │   │   │   │   └── Launcher_BaseColor.png
+        │   │   │   ├── model.config
+        │   │   │   └── model.sdf
+        │   │   ├── battery
+        │   │   │   ├── mesh
+        │   │   │   │   ├── battery_Albedo.png
+        │   │   │   │   ├── battery.dae
+        │   │   │   │   ├── battery_Metalness.png
+        │   │   │   │   ├── battery_Normal.png
+        │   │   │   │   ├── battery.png
+        │   │   │   │   └── battery_Roughness.png
+        │   │   │   ├── model.config
+        │   │   │   └── model.sdf
+        │   │   ├── blue_projectile
+        │   │   │   ├── model.config
+        │   │   │   └── model.sdf
+        │   │   ├── cpu_cases
+        │   │   │   ├── mesh
+        │   │   │   │   ├── cpu_cases_Albedo.png
+        │   │   │   │   ├── cpu_cases.dae
+        │   │   │   │   ├── cpu_cases_Metalness.png
+        │   │   │   │   ├── cpu_cases_Normal.png
+        │   │   │   │   ├── cpu_cases.png
+        │   │   │   │   └── cpu_cases_Roughness.png
+        │   │   │   ├── model.config
+        │   │   │   └── model.sdf
+        │   │   ├── mono_camera
+        │   │   │   ├── mesh
+        │   │   │   │   ├── mono_camera_Albedo.png
+        │   │   │   │   ├── mono_camera.dae
+        │   │   │   │   ├── mono_camera_Metalness.png
+        │   │   │   │   ├── mono_camera_Normal.png
+        │   │   │   │   ├── mono_camera.png
+        │   │   │   │   └── mono_camera_Roughness.png
+        │   │   │   ├── model.config
+        │   │   │   └── model.sdf
+        │   │   └── sensor_post
+        │   │       ├── mesh
+        │   │       │   ├── sensor_post_arm.dae
+        │   │       │   ├── sensor_post.dae
+        │   │       │   └── sensor_post.png
+        │   │       ├── model.config
+        │   │       └── model.sdf
+        │   ├── package.xml
+        │   ├── scripts
+        │   │   ├── generate_wamv.py
+        │   │   └── __init__.py
+        │   └── src
+        │       └── vrx_gazebo
+        │           ├── compliance.py
+        │           ├── configure_wamv.py
+        │           ├── __init__.py
+        │           └── utils.py
+        ├── wamv_description
+        │   ├── CHANGELOG.rst
+        │   ├── CMakeLists.txt
+        │   ├── hooks
+        │   │   ├── resource_paths.dsv.in
+        │   │   └── resource_paths.sh
+        │   ├── models
+        │   │   ├── engine
+        │   │   │   ├── mesh
+        │   │   │   │   └── engine.dae
+        │   │   │   └── model.config
+        │   │   ├── propeller
+        │   │   │   ├── mesh
+        │   │   │   │   └── propeller.dae
+        │   │   │   └── model.config
+        │   │   └── WAM-V-Base
+        │   │       ├── mesh
+        │   │       │   ├── WAM-V_Albedo.png
+        │   │       │   ├── WAM-V-Base.dae
+        │   │       │   ├── WAM-V_Metalness.png
+        │   │       │   ├── WAM-V_Normal.png
+        │   │       │   ├── WamV.png
+        │   │       │   └── WAM-V_Roughness.png
+        │   │       └── model.config
+        │   ├── package.xml
+        │   └── urdf
+        │       ├── battery.xacro
+        │       ├── cpu_cases.xacro
+        │       ├── thrusters
+        │       │   └── engine.xacro
+        │       └── wamv_base.urdf.xacro
+        └── wamv_gazebo
+            ├── CHANGELOG.rst
+            ├── CMakeLists.txt
+            ├── models
+            │   └── gps
+            │       ├── mesh
+            │       │   ├── gps.dae
+            │       │   └── gps.png
+            │       └── model.config
+            ├── package.xml
+            ├── README.md
+            └── urdf
+                ├── components
+                │   ├── ball_shooter.xacro
+                │   ├── lidar.xacro
+                │   ├── wamv_3d_lidar.xacro
+                │   ├── wamv_camera.xacro
+                │   ├── wamv_gps.xacro
+                │   ├── wamv_imu.xacro
+                │   ├── wamv_p3d.xacro
+                │   ├── wamv_pinger.xacro
+                │   └── wamv_planar_lidar.xacro
+                ├── dynamics
+                │   └── wamv_gazebo_dynamics_plugin.xacro
+                ├── macros.xacro
+                ├── thruster_layouts
+                │   ├── wamv_aft_thrusters.xacro
+                │   ├── wamv_gazebo_thruster_config.xacro
+                │   ├── wamv_t_thrusters.xacro
+                │   └── wamv_x_thrusters.xacro
+                ├── wamv_gazebo.urdf.xacro
+                └── wamv_gazebo.xacro
+
+<<<<<<< HEAD
+222 directories, 774 files
+=======
+224 directories, 783 files
+>>>>>>> 230edd2 (nav2, algo ve mission scriptleri guncellendi)
+

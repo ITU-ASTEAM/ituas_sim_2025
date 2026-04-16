@@ -1,0 +1,37 @@
+[1.852s] Invoking command in '/home/gauss/Desktop/my_robot_ws/src/objectdetect': PYTHONPATH=/home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/objectdetect build --build-base /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build install --record /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/install.log --single-version-externally-managed install_data
+[2.583s] running egg_info
+[2.584s] creating build/objectdetect/objectdetect.egg-info
+[2.588s] writing build/objectdetect/objectdetect.egg-info/PKG-INFO
+[2.589s] writing dependency_links to build/objectdetect/objectdetect.egg-info/dependency_links.txt
+[2.589s] writing entry points to build/objectdetect/objectdetect.egg-info/entry_points.txt
+[2.589s] writing requirements to build/objectdetect/objectdetect.egg-info/requires.txt
+[2.589s] writing top-level names to build/objectdetect/objectdetect.egg-info/top_level.txt
+[2.589s] writing manifest file 'build/objectdetect/objectdetect.egg-info/SOURCES.txt'
+[2.591s] reading manifest file 'build/objectdetect/objectdetect.egg-info/SOURCES.txt'
+[2.594s] writing manifest file 'build/objectdetect/objectdetect.egg-info/SOURCES.txt'
+[2.594s] running build
+[2.594s] running build_py
+[2.595s] creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build
+[2.595s] creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib
+[2.595s] creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib/objectdetect
+[2.595s] copying objectdetect/pcl.py -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib/objectdetect
+[2.595s] copying objectdetect/__init__.py -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib/objectdetect
+[2.596s] running install
+[2.596s] running install_lib
+[2.599s] creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect
+[2.600s] copying /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib/objectdetect/pcl.py -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect
+[2.600s] copying /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build/lib/objectdetect/__init__.py -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect
+[2.601s] byte-compiling /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect/pcl.py to pcl.cpython-310.pyc
+[2.605s] byte-compiling /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect/__init__.py to __init__.cpython-310.pyc
+[2.606s] running install_data
+[2.606s] creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/share/ament_index
+[2.606s] creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/share/ament_index/resource_index
+[2.606s] creating /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/share/ament_index/resource_index/packages
+[2.606s] copying resource/objectdetect -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/share/ament_index/resource_index/packages
+[2.607s] copying package.xml -> /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/share/objectdetect
+[2.607s] running install_egg_info
+[2.612s] Copying build/objectdetect/objectdetect.egg-info to /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages/objectdetect-0.0.0-py3.10.egg-info
+[2.614s] running install_scripts
+[2.669s] Installing objectdetect script to /home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/bin
+[2.671s] writing list of installed files to '/home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/install.log'
+[2.767s] Invoked command in '/home/gauss/Desktop/my_robot_ws/src/objectdetect' returned '0': PYTHONPATH=/home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/gauss/Desktop/my_robot_ws/src/objectdetect/install/objectdetect/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/objectdetect build --build-base /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/build install --record /home/gauss/Desktop/my_robot_ws/src/objectdetect/build/objectdetect/install.log --single-version-externally-managed install_data
