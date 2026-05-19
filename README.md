@@ -97,13 +97,3 @@ source /opt/ros/$ROS_DISTRO/setup.bash
 source install/setup.bash
 ros2 launch boat_navigation boat_nav2.launch.py use_sim_time:=true
 ```
-
-### 3. Görüntü İşleme Modülünü Başlatma
-Harita destekli görüntü işleme scriptini aktifleştirmek için:
-```bash
-cd ~/Desktop/my_robot_ws
-export FASTDDS_BUILTIN_TRANSPORTS=UDPv4
-source /opt/ros/$ROS_DISTRO/setup.bash
-source install/setup.bash
-python3 scripts/goruntuisleme/withmap.py
-```
