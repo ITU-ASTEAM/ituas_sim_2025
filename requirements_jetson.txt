@@ -1,0 +1,39 @@
+# ─── Python Paketleri ───────────────────────────────────────────────
+# pip install -r requirements.txt
+
+# ROS 2 Python API'ları (apt ile kurulur, pip ile değil)
+# sudo apt install ros-humble-desktop
+rclpy==3.3.19
+launch==1.0.13
+launch_ros==0.19.13
+
+# ROS 2 Mesaj Paketleri
+action_msgs==1.2.2
+nav2_msgs==1.1.20
+geometry_msgs==4.9.1
+nav_msgs==4.9.1
+sensor_msgs==4.9.1
+std_msgs==4.9.1
+cv_bridge==3.2.1
+
+# Sayısal / Bilimsel
+numpy==1.26.4
+scipy==1.15.3
+
+# Görüntü İşleme
+opencv-python==4.8.1
+Pillow==12.1.1
+
+# Derin Öğrenme — YOLO
+ultralytics==8.4.14
+
+# Derin Öğrenme — PyTorch
+# Jetson (aarch64, CUDA 12.6) için standart pip çalışmaz.
+# NVIDIA'nın JetPack 6.x wheel'ini kullanın:
+# torch==2.5.0a0+872d972e41.nv24.08  (aarch64 wheel)
+# torchvision==0.20.0a0               (workspace/torchvision klasöründen derle)
+
+# Gazebo Harmonic Python bağlamaları (apt ile kurulur)
+# sudo apt install python3-gz-transport13 python3-gz-msgs10 python3-gz-sim8
+# gz.transport13==13.5.0
+# gz.msgs10==10.3.2
