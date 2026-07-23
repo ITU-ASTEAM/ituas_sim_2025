@@ -1,0 +1,1 @@
+Sadece kritik olan scripts klasörü çünkü kalanlar elle yüklenmesi sakıncalı dosyalar. Bu klasöre PID docs kısmında referans veriyorum.
