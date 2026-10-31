@@ -1,0 +1,97 @@
+{
+  // ==========================================================================
+  // Njord YEDEK Sistemi — Ayarlar (JSONC — yorum satırlı JSON)
+  // ==========================================================================
+  // Bu YEDEK sistem, primary/ (kamera+LiDAR füzyon) sistemi çökerse/kamera arızalanırsa
+  // diye BAĞIMSIZ bir "kamerasız gate geçişi" yedeğidir: SADECE LiDAR + pusula
+  // (Pixhawk odom veya OAK-D'nin IMU topic'i — GÖRÜNTÜ DEĞİL) kullanır, hiçbir
+  // görüntü/renk işleme yapmaz. primary/njord_config.json'a HİÇ bağımlı değildir —
+  // kendi başına eksiksiz bir konfigürasyondur.
+  //
+  // Standart json modülü yorumu desteklemez — yedek_common.py bu dosyayı yüklerken
+  // her satırdaki "//" ve sonrasını atıp json.loads ile parse eder. Kod değiştirmeden,
+  // tek bu dosyayı düzenleyip node'u yeniden başlatarak ayarları değiştirebilirsiniz.
+  // ==========================================================================
+
+  // --- LiDAR ön işleme ---
+  "LIDAR_Z_MIN": -0.30,                  // m, su yüzeyi bandı ALT sınırı (montaj yüksekliğine göre TBD, AS ile aynı)
+  "LIDAR_Z_MAX": 0.30,                   // m, su yüzeyi bandı ÜST sınırı (TBD, AS ile aynı)
+
+  // ⚠️ KRİTİK — primary/njord_config.json'daki LIDAR_CLUSTER_DISTANCE (1.5 m) İLE KARIŞTIRMAYIN:
+  // burada BİLEREK KÜÇÜK tutulur (tek bir dubanın kendi nokta bulutu ölçeğinde, ör. 0.6 m).
+  // Neden: bu değer GATE_MIN_WIDTH_M'e (1.5 m, iki AYRI dubanın arasındaki mesafe) YAKIN
+  // veya BÜYÜK olursa, gate'in iki dubası LiDAR'da TEK bir kümeye birleşir ve
+  // find_gate_candidates hiçbir zaman iki ayrı küme göremeyip çift oluşturamaz — sistem
+  // gate'i asla tespit edemez. Bu değeri GATE_MIN_WIDTH_M'in ALTINDA (rahat pay ile,
+  // örn. yarısından az) tutun.
+  "LIDAR_CLUSTER_DISTANCE": 0.6,         // m, bir noktanın "aynı kümede" sayılması için tohuma azami mesafe
+  "LIDAR_MIN_CLUSTER_POINTS": 2,         // bir kümenin geçerli sayılması için gereken minimum nokta sayısı
+  "MAX_LIDAR_POINTS_PER_SCAN": 8000,     // BİR taramada işlenecek azami nokta — aşılırsa rastgele bu sayıya
+                                          // altörneklenir (kümeleme performansının en kötü durumda bile sınırlı
+                                          // kalmasını garanti eden son çare, AS ile aynı mantık).
+
+  // --- Algılama alanı ("belirli bir mesafe") ---
+  // Gemi merkezli DAİRESEL algılama/okuma yarıçapı. AS'daki MAP_RADIUS_M'den (20 m, TÜM
+  // haritalama alanı) KASITLI OLARAK KÜÇÜK: YEDEK sadece hemen önündeki TEK gate'le
+  // ilgilenir, uzak/alakasız kümelerle uğraşmaz — hem daha hızlı hem daha az yanlış-eşleşme
+  // riski. Aynı zamanda gate-çifti aramasının "ne kadar ileriye bakılsın" (lookahead)
+  // sınırı olarak da kullanılır (bkz. find_gate_candidates).
+  "YEDEK_DETECTION_RADIUS_M": 15.0,      // m
+
+  // --- LiDAR Ego-Motion (GPS'siz konum kestirimi, AS ile birebir aynı anlam) ---
+  "EGO_MATCH_RADIUS_M": 2.0,             // m, kare-arası küme eşleştirme arama yarıçapı (öteleme kestirimi)
+  "MIN_EGO_MATCHES": 2,                  // bundan az eşleşme varsa öteleme güvenilmez sayılır, o kare atlanır
+  "MAX_SHIP_SPEED_MPS": 3.0,             // m/s, bu hızın üstü fiziksel olarak imkansız kabul edilip reddedilir
+  "MAX_SAFE_YAW_RATE_DEG_S": 20.0,        // derece/sn, gemi bundan HIZLI dönüyorsa fused_yaw'ın o anki değeri
+                                          // güvenilmez sayılır (AS ile aynı koruma mantığı).
+
+  // --- Kamerasız Gate-Çifti Tespiti (bu sistemin asıl yeni mantığı) ---
+  // gorev.jpg (9.2 Entering the Strait) spesifikasyonu: her gate'i işaretleyen iki şamandıra
+  // arası mesafe 1.5-3 m (sancakta yeşil, iskelede kırmızı) — ama YEDEK'te kamera OLMADIĞI
+  // için hangi renk hangi tarafta bilinemez, SADECE geometriye (genişlik + simetri) bakılır.
+  "GATE_MIN_WIDTH_M": 1.5,               // m, gorev.jpg — gate'in minimum genişliği
+  "GATE_MAX_WIDTH_M": 3.0,               // m, gorev.jpg — gate'in maksimum genişliği
+  "GATE_WIDTH_MARGIN_M": 0.4,            // m, LiDAR/kümeleme ölçüm gürültüsüne pay — efektif kabul aralığı
+                                          // [GATE_MIN_WIDTH_M - bu, GATE_MAX_WIDTH_M + bu]
+  "GATE_PAIR_DEPTH_TOLERANCE_M": 1.5,    // m, bir çiftin iki dubasının GEMİDEN mesafesi birbirinden bu kadardan
+                                          // fazla farklıysa çift REDDEDİLİR (aksi halde farklı derinlikteki iki
+                                          // alakasız duba yanlışlıkla "aynı gate" sanılabilir).
+  "GATE_CONFIRM_COUNT": 3,               // bir gate adayı, ART ARDA kaç LiDAR taramasında (±GATE_MATCH_RADIUS_M
+                                          // içinde) tutarlı görülürse "kilitli hedef" sayılır — tek karelik
+                                          // gürültü/yanlış küme ani bir dönüşe yol açmasın diye (AS'daki
+                                          // JUMP_CONFIRM_COUNT ile aynı felsefe).
+  "GATE_MATCH_RADIUS_M": 1.5,            // m, iki ardışık taramadaki gate-orta-noktalarının "aynı aday" sayılması
+                                          // için azami mesafe (GATE_CONFIRM_COUNT sayacı için).
+  "WAYPOINT_OFFSET_M": 2.0,              // m, gate orta noktasından hedeflenen ileri ofset (AS ile aynı fikir —
+                                          // momentum gate'in TAM ORTASINDA durmak yerine ileri taşınsın diye).
+  "GOAL_TOLERANCE_M": 1.5,               // m, operatörün 'h' ile girdiği nihai hedefe bu mesafe içindeyse
+                                          // ulaşıldı sayılır (gate geçildikten sonra sistem bu hedefe doğru düz
+                                          // gitmeye devam eder — ayrı bir "gate geçildi, dur" mantığı YOK).
+
+  // --- Kamera/LiDAR node arası poz senkronizasyonu ---
+  // YEDEK TEK process/TEK node olduğu için (AS'daki gibi kamera+lidar arasında topic
+  // üzerinden poz paylaşımına gerek yok) bu bölüm YOKTUR — kasıtlı bir sadeleştirme.
+
+  // --- Yönelim (yaw) kaynak seçimi: OAK IMU + Pixhawk füzyon / tek kaynağa düşme ---
+  "IMU_STALE_TIMEOUT_S": 0.1,            // sn, OAK IMU'dan bu süredir mesaj gelmediyse "yok" sayılır — fused_yaw
+                                          // doğrudan Pixhawk'a (ship_yaw) düşer. NOT: burada sadece OAK-D'nin
+                                          // IMU/pusula TOPIC'i (/oak/imu/data) kullanılır, RGB/derinlik GÖRÜNTÜ
+                                          // topic'lerine bu sistemde HİÇ abone olunmaz.
+  "ODOM_STALE_TIMEOUT_S": 0.1,           // sn, Pixhawk'tan bu süredir mesaj gelmediyse "yok" sayılır — fused_yaw
+                                          // sadece OAK IMU jiroskobundan entegre edilir.
+
+  // --- Sürüş P-Kontrolü (Nav2 YOK — her tick'te hedef yeniden hesaplanıp sürekli sürülür) ---
+  "STEER_KP": 0.8,                       // hedefe bearing hatasından dümen ekseni oransal kazancı
+  "MAX_STEER_AXIS": 1.0,                 // [-1,1], azami dümen ekseni büyüklüğü
+  "MIN_THROTTLE_AXIS": 0.15,             // [0,1], sert dönüşte bile korunan asgari gaz ekseni
+
+  // --- Motor Çıkışı (RC Override — /mavros/rc/override, /cmd_vel YERİNE, AS ile aynı) ---
+  "KANAL_DUMEN": 0,                      // CH1 — ArduPilot'un kendi skid-steer mixer'i alıyor
+  "KANAL_GAZ": 2,                        // CH3
+  "DUMEN_YONU": 1,                       // sol/sağ motorlar ters çalışırsa -1 yapın
+  "RC_PWM_CENTER": 1500,
+  "RC_PWM_SCALE": 400,
+  "RC_PWM_DEADZONE": 30,                 // bu kadar merkeze yakınsa tam nötr (1500) kabul edilir
+  "RC_PWM_MIN": 1100,
+  "RC_PWM_MAX": 1900
+}

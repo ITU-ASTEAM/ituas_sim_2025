@@ -1,0 +1,107 @@
+{
+  "_aciklama": "ITU AS Team - ENTEGRE OTONOM SISTEM ayar dosyasi. Kod bu dosyayi acilista okur; dosya yoksa veya bozuksa firefightv2.py icindeki varsayilan degerlerle calismaya devam eder. Her bolumun icindeki '_aciklama' alanlari sadece insan icin nottur, kod tarafindan okunmaz.",
+
+  "kamera": {
+    "preview_w": 1024,
+    "preview_h": 768,
+    "_aciklama": {
+      "preview_w": "OAK-D RGB onizleme goruntusunun genisligi (piksel). Sekil merkezi (cX) ve yatay hata hesaplari bu degere gore normalize edilir.",
+      "preview_h": "OAK-D RGB onizleme goruntusunun yuksekligi (piksel)."
+    }
+  },
+
+  "gps": {
+    "kalibrasyon_n": 10,
+    "ema_alpha": 0.12,
+    "hedef_toleransi": 1.2,
+    "varsayilan_hiz": 0.5,
+    "_aciklama": {
+      "kalibrasyon_n": "Referans GPS konumu (ref_lat/ref_lon) belirlenmeden once kac ornek toplanip medyani alinacagi. Buyuk deger = daha kararli referans ama baslangicta daha uzun bekleme.",
+      "ema_alpha": "GPS konum filtresi (Exponential Moving Average) agirligi. 0'a yakin = cok yumusak/gecikmeli ama gurultusuz; 1'e yakin = hizli tepki ama gurultuye acik.",
+      "hedef_toleransi": "GUIDED modda hedef GPS noktasina kac metre kala 'ULASILDI' sayilacagi.",
+      "varsayilan_hiz": "MANUEL moddaki motor hizi carpani (0.1-1.0 arasi), '+' ve '-' tuslariyla degistirilir; buradaki deger sadece baslangic degeridir."
+    }
+  },
+
+  "rc": {
+    "kanal_dumen": 0,
+    "kanal_gaz": 2,
+    "dumen_yonu": 1,
+    "_aciklama": {
+      "kanal_dumen": "OverrideRCIn.channels listesinde direksiyon (CH1) icin kullanilan index (0-tabanli, index 0 = CH1).",
+      "kanal_gaz": "OverrideRCIn.channels listesinde gaz (CH3) icin kullanilan index (index 2 = CH3).",
+      "dumen_yonu": "Motorlar ters yonde calisiyorsa -1 yapin; direksiyon isaretini tersine cevirir."
+    }
+  },
+
+  "sekil_servo": {
+    "hedef_mesafe_m": 1.0,
+    "mesafe_tol_m": 0.15,
+    "merkez_tol": 0.08,
+    "kp_steer": 0.9,
+    "kp_mesafe": 0.35,
+    "max_steer": 0.55,
+    "max_yaklasma_hizi": 0.45,
+    "hiz_kesme": 1.0,
+    "onay_kare": 5,
+    "ulasildi_sure_s": 0.6,
+    "depth_timeout_s": 0.4,
+    "pompa_baslama_mesafe_m": 3.0,
+    "_aciklama": {
+      "hedef_mesafe_m": "SEKIL modunda hedefe kac metre mesafede durulacagi (standoff mesafesi). Su sikma menzilinize gore ayarlayin.",
+      "mesafe_tol_m": "hedef_mesafe_m etrafinda kabul edilen sapma (metre). Bu bandin icindeyse ileri/geri komutu verilmez.",
+      "merkez_tol": "Hedefin goruntude yatayda merkezde sayilmasi icin izin verilen normalize hata (0-1 arasi, ornegin 0.08 = ekran genisliginin %8'i).",
+      "kp_steer": "Direksiyon oransal (P) kontrol kazanci. Buyurse hedefe donme daha agresif/salinimli olur.",
+      "kp_mesafe": "Ileri/geri hiz oransal (P) kontrol kazanci (1/metre). Buyurse yaklasma/uzaklasma daha agresif olur.",
+      "max_steer": "Direksiyon komutunun ust siniri (0-1 arasi normalize).",
+      "max_yaklasma_hizi": "Ileri/geri gaz komutunun ust siniri (0-1 arasi normalize).",
+      "hiz_kesme": "Hedef merkezde degilken ileri hizi kisan carpan (1.0 = tam kisma once don sonra yaklas mantigi).",
+      "onay_kare": "Hedefin 'ONAYLANDI' sayilmasi icin ust uste gorulmesi gereken kare sayisi. Yanlis pozitifleri azaltmak icin arttirilabilir.",
+      "ulasildi_sure_s": "Hedefte (merkezde + dogru mesafede) kac saniye kesintisiz kalinirsa 'ULASILDI' kabul edilip HOLD'a gecilecegi.",
+      "depth_timeout_s": "Son gecerli derinlik olcumu bu sureden (saniye) eskiyse gecersiz sayilir, guvenlik icin ileri/geri hareket durur.",
+      "pompa_baslama_mesafe_m": "Onaylanmis hedefe olan mesafe bu deger METRENIN ALTINA dusunce (yaklasma devam ederken) pompa otomatik ateslenir. hedef_mesafe_m'den (1.0) buyuk olmali; pompa bir kez ateslenince program kapanana veya 'o' ile durdurulana kadar acik kalir."
+    }
+  },
+
+  "pompa": {
+    "otomatik_ates": true,
+    "su_sikma_suresi_s": 2.5,
+    "komut_ac": "P",
+    "komut_kapat": "K",
+    "_aciklama": {
+      "otomatik_ates": "true ise hedefe ulasilinca (ULASILDI_SURE dolunca) pompa otomatik ateslenir. false yapilirsa otomatik ates devre disi kalir (ileride manuel tetikleme eklenebilir).",
+      "su_sikma_suresi_s": "Pompa role ile ACILDIKTAN kac saniye sonra otomatik KAPATILACAGI. Yarisma kurallarina/su deposu kapasitesine gore ayarlayin.",
+      "komut_ac": "Arduino sketch'ine role'yu ACMASI icin gonderilen tek karakterlik seri port komutu. Arduino kodunuzdaki bekledigi harfle ayni olmali.",
+      "komut_kapat": "Arduino sketch'ine role'yu KAPATMASI icin gonderilen tek karakterlik seri port komutu. Arduino kodunuzdaki bekledigi harfle ayni olmali."
+    }
+  },
+
+  "baslangic_hareketi": {
+    "guc": 0.7,
+    "sure_s": 2.0,
+    "_aciklama": {
+      "guc": "ARM sonrasi bir kerelik yapilan 'kor' (kameradan bagimsiz) ileri hareketin gaz gucu (0-1 arasi, 0.7 = %70).",
+      "sure_s": "Bu kor ileri hareketin kac saniye surecegi. Sure dolunca normal mod mantigina (MANUAL/SEKIL/GUIDED) donulur."
+    }
+  },
+
+  "gosterge": {
+    "komut_guided": "G",
+    "komut_manual": "M",
+    "_aciklama": {
+      "komut_guided": "GUIDED moda gecildiginde (klavyeden 'g') Arduino'ya gonderilen komut; yesil gosterge LED'ini yakar.",
+      "komut_manual": "MANUAL moda gecildiginde (klavyeden 'm') Arduino'ya gonderilen komut; sari gosterge LED'ini yakar."
+    }
+  },
+
+  "arduino": {
+    "port_secenekleri": ["/dev/ttyACM0", "/dev/ttyACM1"],
+    "baudrate": 115200,
+    "baglanti_timeout_s": 1,
+    "_aciklama": {
+      "port_secenekleri": "Program baslarken kullaniciya secim olarak sunulan seri port aday listesi (Arduino bazen ttyACM0 bazen ttyACM1 olarak enumerate olabiliyor). Listeye yeni port eklemek icin buraya ekleyin; 'elle gir' secenegi her zaman ayrica sunulur.",
+      "baudrate": "Arduino sketch'indeki Serial.begin() ile AYNI olmali (varsayilan 115200).",
+      "baglanti_timeout_s": "pyserial okuma/yazma islemleri icin zaman asimi (saniye)."
+    }
+  }
+}
