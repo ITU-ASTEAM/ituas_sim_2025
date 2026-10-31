@@ -84,8 +84,8 @@
 
 <!-- .dae
 <include>
-  <uri>model://golet</uri>
-  <name>golet_parkur</name>
+  <uri>model://itu_lake</uri>
+  <name>itu_lake</name>
   <pose>0 20 -20 +1.5708 0 0</pose> 
 </include>
 
@@ -93,8 +93,8 @@
 
 <!-- parkur.dae-->
 <include>
-      <uri>file:///home/jetson/Desktop/my_robot_ws/src/my_robot_description/models/parkur</uri>
-      <name>parkur_engeli</name>
+      <uri>file:///home/jetson/Desktop/my_robot_ws/src/my_robot_description/models/teknofest_course</uri>
+      <name>teknofest_course</name>
       <pose>10 0 0 0 0 0</pose> </include>
       
       

@@ -72,8 +72,8 @@ my_robot_ws/
 |---|---|
 | `models/boat/model.sdf` | ⭐ Ana tekne SDF modeli (sensörler, motorlar, fizik) |
 | `models/boat/meshes/` | 3D mesh dosyaları (STL) |
-| `models/golet/` | Gölet parkur modeli |
-| `models/parkur/` | Yarışma parkuru modeli |
+| `models/itu_lake/` | Gölet parkur modeli |
+| `models/teknofest_course/` | Yarışma parkuru modeli |
 | `worlds/boat_world.sdf` | Basit su dünyası (test için) |
 | `worlds/final_boat_hydro.sdf` | ⭐ Ana simülasyon dünyası (parkur dahil) |
 | `launch/spawn_boat.launch.py` | ROS 2 launch: Gazebo + spawn |
@@ -118,7 +118,7 @@ final_boat_hydro.sdf (dünya)
   │                 ├── RGB Camera → /camera/image_raw
   │                 └── Depth Camera → /camera/depth/image_raw
   │
-  ├── includes → models/parkur/ (engel parkuru)
+  ├── includes → models/teknofest_course/ (engel parkuru)
   ├── Buoyancy System Plugin
   ├── Physics (DART) Plugin
   └── Sensors System Plugin

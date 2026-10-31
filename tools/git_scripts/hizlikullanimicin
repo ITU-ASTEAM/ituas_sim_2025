@@ -1,9 +1,0 @@
-Github kodlarını hızlıca çekmek için yazdığım .sh ve .desktop dosyalarını text editör ile açıp klasörleri kendinie uyarlayarak kullanabilirsiniz böylece bi çıft tıklamayla kodun güncel haline ulaşıp bi çift tıklama ile de kodu güncelleyebilirsiniz.
-
-.Desktop dosyalarına sağ tıklayıp çalıştırılabilir hale getirmeniz gerekecek.
-	chmod +x ~/Desktop/githubsal/ros2_codes/gitkullanim/git_cek.sh
-
-
-
-Eğer böyle github alanında tıkanırsanız ve elinizde dosyaların yedekleri de varsa kaba kuvvet kullanarak şöyle push edebilirsiniz:
-git push -u origin main --force

@@ -1,7 +1,7 @@
 <?xml 
 version="1.0"?>
 <sdf version="1.6">
-  <model name="golet">
+  <model name="itu_lake">
     <static>true</static>
     <link name="link">
       <pose>0 0 0 0 0 0</pose>
@@ -9,7 +9,7 @@ version="1.0"?>
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>file:///home/jetson/Desktop/my_robot_ws/src/my_robot_description/models/golet/meshes/golet.dae</uri>
+            <uri>file:///home/jetson/Desktop/my_robot_ws/src/my_robot_description/models/itu_lake/meshes/golet.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -18,7 +18,7 @@ version="1.0"?>
       <visual name="visual">
         <geometry>
           <mesh>
-            <uri>file:///home/jetson/Desktop/my_robot_ws/src/my_robot_description/models/golet/meshes/golet.dae</uri>
+            <uri>file:///home/jetson/Desktop/my_robot_ws/src/my_robot_description/models/itu_lake/meshes/golet.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
