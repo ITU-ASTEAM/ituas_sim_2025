@@ -143,7 +143,7 @@ target_right = BACK_THRUST   # -100
 
 **Sebep:** Motor kalibrasyonu veya hidrodinamik asimetri.
 
-**Çözüm:** `test edilmeli/boat_keyboard.py`'deki trim sistemiyle ayar yap (`+` / `-` tuşları) veya `kontrol.py`'ye trim offset ekle.
+**Çözüm:** `untested/boat_keyboard.py`'deki trim sistemiyle ayar yap (`+` / `-` tuşları) veya `kontrol.py`'ye trim offset ekle.
 
 ---
 
@@ -156,10 +156,10 @@ target_right = BACK_THRUST   # -100
 **Çözüm:**
 ```bash
 # Dosyanın mevcut olduğunu kontrol et
-ls -la scripts/goruntuisleme/best29jan.pt
+ls -la scripts/vision/best29jan.pt
 
 # Script'i doğru dizinden çalıştır
-cd scripts/goruntuisleme
+cd scripts/vision
 python3 withmap.py  # cwd önemli! YOLO göreceli path kullanıyor
 ```
 
@@ -274,7 +274,7 @@ echo 'source ~/Desktop/my_robot_ws/install/setup.bash' >> ~/.bashrc
 | Sensör verisi yok | Sensors plugin yok | `boat_world.sdf` yerine `final_boat_hydro.sdf` |
 | Motor çalışmıyor | Play basılmamış | ▶ Play butonuna bas veya `-r` flag |
 | Yaw değeri yanlış | Quaternion hatası | `position.py` quaternion_to_yaw kontrol et |
-| YOLO bulamıyor | Yanlış dizin | `cd scripts/goruntuisleme` sonra çalıştır |
+| YOLO bulamıyor | Yanlış dizin | `cd scripts/vision` sonra çalıştır |
 | Topic bulunamadı | Dünya adı farklı | `gz topic -l` ile gerçek adı bul |
 | Script çöküyor | `source` unutulmuş | `source /opt/ros/humble/setup.bash && source install/setup.bash` |
 | Costmap hatalı | numpy ≥ 2.0 | `pip install "numpy<2.0"` |

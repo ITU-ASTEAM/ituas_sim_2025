@@ -18,7 +18,7 @@ import math
 # ============================================================
 
 # Aşama 1 — boat_navigator.py yolu
-BOAT_NAVIGATOR_PATH = '/home/jetson/Desktop/my_robot_ws/scripts/missions/yarıotonom/boat_navigator.py'
+BOAT_NAVIGATOR_PATH = '/home/jetson/Desktop/my_robot_ws/scripts/missions/semi_autonomous/boat_navigator.py'
 
 # Aşama 2 — waypoint_generator ROS2 paketi
 WAYPOINT_PKG     = 'algo'

@@ -34,7 +34,7 @@ Bu projede ROS 2 bridge kullanılmadan doğrudan Gazebo Transport (`gz.transport
 
 ### Eski/Alternatif Topic'ler
 
-Bu topic'ler `test edilmeli/` klasöründeki eski scriptlerde kullanılır:
+Bu topic'ler `untested/` klasöründeki eski scriptlerde kullanılır:
 
 | Topic | Kullanan | Not |
 |---|---|---|

@@ -21,7 +21,7 @@ my_robot_ws/
 │   ├── nav.py                    # Waypoint navigasyonu
 │   ├── read_me.txt               # Eski açıklama notu
 │   │
-│   ├── goruntuisleme/            # 👁️ Görüntü işleme modülleri
+│   ├── vision/                   # 👁️ Görüntü işleme modülleri
 │   │   ├── kamera_modulu.py      # Kamera veri alıcı (RGB + Depth)
 │   │   ├── lidar_modulu.py       # LiDAR veri alıcı
 │   │   ├── position.py           # Pozisyon okuyucu modülü
@@ -30,7 +30,7 @@ my_robot_ws/
 │   │   ├── forrecord.py          # Video kayıt (5dk)
 │   │   ├── test.py               # Yaw testi
 │   │   ├── best29jan.pt          # YOLO model ağırlıkları
-│   │   └── bi sn/                # Yedek model dosyaları
+│   │   └── old_weights/          # Yedek model dosyaları
 │   │
 │   ├── lidar/                    # 📡 Bağımsız LiDAR test
 │   │   ├── lidar.py              # Matplotlib ile LiDAR görselleştirme
@@ -44,7 +44,7 @@ my_robot_ws/
 │   │   └── aciklama.txt          # Kullanım notları
 │   │
 │   ├── missions/                 # 🎯 Görev scriptleri
-│   │   └── yarıotonom/
+│   │   └── semi_autonomous/
 │   │       └── boat_navigator.py # Waypoint takipli rota navigasyonu
 │   │
 │   ├── record/                   # 📹 Video kayıt sistemi
@@ -52,7 +52,7 @@ my_robot_ws/
 │   │   ├── kamera_modulu.py      # Kamera modülü (kayıt için kopya)
 │   │   └── aciklama.txt          # Açıklama
 │   │
-│   └── test edilmeli/            # 🧪 Test/eski scriptler
+│   └── untested/                 # 🧪 Test/eski scriptler
 │       ├── boat_keyboard.py      # Eski klavye kontrol (subprocess ile)
 │       ├── boat_mission.py       # Açık döngü görev (zaman tabanlı)
 │       ├── boat_pid_goto.py      # PID ile hedef noktaya gitme

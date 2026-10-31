@@ -6,9 +6,9 @@ Projede farklı otonom navigasyon yaklaşımları mevcuttur. Basit açık döng�
 
 ---
 
-## 1. `missions/yarıotonom/boat_navigator.py` ⭐ (En Güncel)
+## 1. `missions/semi_autonomous/boat_navigator.py` ⭐ (En Güncel)
 
-**Konum:** `scripts/missions/yarıotonom/boat_navigator.py`  
+**Konum:** `scripts/missions/semi_autonomous/boat_navigator.py`  
 **İletişim:** Gazebo Transport (native)  
 **Kontrol:** Pulse-based (darbe tabanlı) hareket
 
@@ -109,9 +109,9 @@ Daha basit, sürekli itki tabanlı navigasyon. Pulse yerine sürekli motor komut
 
 ---
 
-## 3. `test edilmeli/boat_mission.py` - Açık Döngü Görev
+## 3. `untested/boat_mission.py` - Açık Döngü Görev
 
-**Konum:** `scripts/test edilmeli/boat_mission.py`
+**Konum:** `scripts/untested/boat_mission.py`
 
 Feedback olmadan zamana dayalı hareket. Hassas değil ama basit test için uygundur.
 
@@ -130,9 +130,9 @@ Feedback olmadan zamana dayalı hareket. Hassas değil ama basit test için uygu
 
 ---
 
-## 4. `test edilmeli/boat_pid_goto.py` - PID Navigasyonu
+## 4. `untested/boat_pid_goto.py` - PID Navigasyonu
 
-**Konum:** `scripts/test edilmeli/boat_pid_goto.py`
+**Konum:** `scripts/untested/boat_pid_goto.py`
 
 En gelişmiş kontrol yaklaşımı ama `subprocess` kullandığı için yavaş.
 

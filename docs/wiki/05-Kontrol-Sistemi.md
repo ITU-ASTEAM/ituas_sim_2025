@@ -6,7 +6,7 @@ Projede üç farklı kontrol yaklaşımı mevcuttur:
 
 1. **Klavye Kontrolü** (`kontrol.py`) - Manuel kontrol
 2. **Waypoint Navigasyonu** (`nav.py`) - Otonom rota takibi
-3. **Eski/Test Scriptleri** (`test edilmeli/`) - Alternatif yöntemler
+3. **Eski/Test Scriptleri** (`untested/`) - Alternatif yöntemler
 
 ---
 
@@ -103,17 +103,17 @@ yaw = atan2(2.0 * (qw * qz + qx * qy), 1.0 - 2.0 * (qy * qy + qz * qz))
 
 ## 3. Eski/Alternatif Kontrol Scriptleri
 
-### `test edilmeli/boat_keyboard.py`
+### `untested/boat_keyboard.py`
 - `subprocess` ile `gz topic` komutu çalıştırarak motor kontrolü yapar
 - `kontrol.py`'ye göre **daha yavaş** (her komut ayrı bir process başlatır)
 - Trim ayarı desteği var (`+` / `-` tuşları)
 
-### `test edilmeli/boat_mission.py`
+### `untested/boat_mission.py`
 - **Açık döngü** görev sistemi (feedback yok)
 - Zamana dayalı hareket: "6 saniye ileri git, 0.8 saniye sola dön..."
 - Hassas kontrol için **uygun değil**, sadece proof-of-concept
 
-### `test edilmeli/boat_pid_goto.py`
+### `untested/boat_pid_goto.py`
 - PID kontrol ile hedef noktaya gitme
 - `subprocess` ile pozisyon okur (JSON parse) ve motor komutları gönderir
 - Aktif frenleme ve anti-windup özelliği var

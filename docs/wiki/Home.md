@@ -96,7 +96,7 @@ cd ~/Desktop/my_robot_ws/scripts
 python3 kontrol.py
 
 # Terminal 3: (Opsiyonel) Görüntü işleme + SLAM
-cd ~/Desktop/my_robot_ws/scripts/goruntuisleme
+cd ~/Desktop/my_robot_ws/scripts/vision
 python3 withmap.py
 ```
 
