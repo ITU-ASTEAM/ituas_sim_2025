@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=GitHub'dan Çek
-Comment=Ros2 kodlarını günceller (Pull)
-Exec=/home/gauss/Desktop/githubsal/ros2_codes/gitkullanim/git_cek.sh
-Icon=emblem-downloads
-Terminal=false
-Type=Application
-Categories=Utility;Development;
