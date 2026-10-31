@@ -1,3 +1,0 @@
-Bu python scriptleri beraber çalıştırıldıklarında simülasyon içerisinde kodda belirlenen süre kadar bir video kaydeder.
-Görüntü işleme verisi üretmek için kullanıldı.
-

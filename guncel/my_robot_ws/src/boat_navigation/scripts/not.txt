@@ -1,2 +1,0 @@
-map_tracker_test gemiden gelen konum verilerini .yaml dosyasındaki kaydırmaları
-yaparak kendi bulunduğu konumu kırmızıya boyayarak /maps içine .png kaydeder. Test kodu olarak düşünebilirsiniz.
