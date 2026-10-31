@@ -30,8 +30,8 @@ Kuruluma başlamadan önce sisteminizde aşağıdaki yapılandırmaların tamaml
 
 ```bash
 cd ~/Desktop
-git clone [https://github.com/ITU-ASTEAM/gazebo-ros2](https://github.com/ITU-ASTEAM/gazebo-ros2)
-cd gazebo
+git clone https://github.com/ITU-ASTEAM/ituas_sim_2025.git
+cd ituas_sim_2025
 ```
 
 Ardından kurulum scriptini yönetici yetkileriyle başlatın:

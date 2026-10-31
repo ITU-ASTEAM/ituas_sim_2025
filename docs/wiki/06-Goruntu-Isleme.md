@@ -113,7 +113,7 @@ Haritasız, sadece YOLO tespiti yapan basit versiyon.
 
 ## `forrecord.py` - Video Kayıt
 
-**Konum:** `scripts/vision/forrecord.py`
+**Konum:** `scripts/record/forrecord.py`
 
 Simülasyon görüntüsünü AVI formatında kaydeder. YOLO eğitim verisi toplamak için kullanılır.
 

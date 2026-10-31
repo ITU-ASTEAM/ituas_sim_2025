@@ -18,7 +18,7 @@ rviz2 -d tools/rviz/gazebov2.rviz --ros-args -p use_sim_time:=true
 | `forcamera.rviz` | `oak_rgb_camera_optical_frame` | PointCloud2 `/mistik_points`, LaserScan `/scan`, Map `/map` | OAK-D ile tespit edilen nesnelerin nokta bulutunu kamera çerçevesinde görmek. |
 | `velocity.rviz` | `velodyne` | PointCloud2 `/velodyne` | Gerçek Velodyne VLP-16 lidarın ham nokta bulutunu sensör çerçevesinde görmek. Adı "velocity" olsa da Velodyne içindir. |
 
-- `/mistik_points`: `objectdetect/pcl.py`'nin yayınladığı, YOLO ile tespit edilen nesnelerin derinlik kamerasından üretilmiş nokta bulutu.
+- `/mistik_points`: `my_robot_ws/src/objectdetect/objectdetect/pcl.py`'nin yayınladığı, YOLO ile tespit edilen nesnelerin derinlik kamerasından üretilmiş nokta bulutu.
 - `gazebov2.rviz` dışındaki dosyalarda RobotModel ekranı var, ama description topic'i boş olduğu için robot modeli görünmez.
 
 ## Ortak araçlar
