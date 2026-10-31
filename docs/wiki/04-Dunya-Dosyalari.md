@@ -21,7 +21,7 @@ Bu en güncel ve tam özellikli dünya dosyasıdır. İçerir:
 
 **Dahil Edilen Modeller:**
 - `boat` - Ana tekne (spawn pozisyonu: -55.7, 4.2, 0.3)
-- `parkur` - Engel parkuru (pozisyon: 10, 0, 0)
+- `teknofest_course` - Engel parkuru (pozisyon: 10, 0, 0)
 
 **Aktif Eklentiler:**
 - `gz::sim::systems::Physics` - Fizik simülasyonu
@@ -87,17 +87,17 @@ Minimal okyanus ortamı. Launch dosyalarından referans edilir ancak güncel kul
 
 ## Parkur ve Gölet Modelleri
 
-### Parkur (`models/parkur/`)
+### Parkur (`models/teknofest_course/`)
 Yarışma engel parkuru. `final_boat_hydro.sdf` dünyasında (10, 0, 0) konumunda dahil edilmiştir.
 
-### Gölet (`models/golet/`)
+### Gölet (`models/itu_lake/`)
 Alternatif gölet parkuru. Şu an yorumlanmış durumda. Aktifleştirmek için `final_boat_hydro.sdf` içinde yorum kaldırılmalı:
 
 ```xml
 <!-- Bu satırların yorumunu kaldır: -->
 <include>
-  <uri>model://golet</uri>
-  <name>golet_parkur</name>
+  <uri>model://itu_lake</uri>
+  <name>itu_lake</name>
   <pose>0 20 -20 +1.5708 0 0</pose>
 </include>
 ```

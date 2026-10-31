@@ -26,8 +26,8 @@ gazeboda final_boat açıyor
 
 <!-- GOLET PARKUR 
 <include>
-<uri>file:///home/beequeen/Downloads/my_robot_ws/src/my_robot_description/models/golet</uri>
-<name>golet_parkur</name>
+<uri>file:///home/beequeen/Downloads/my_robot_ws/src/my_robot_description/models/itu_lake</uri>
+<name>itu_lake</name>
 <pose>0 0 0 0 0 0</pose>
 </include>
 
