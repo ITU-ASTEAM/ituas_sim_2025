@@ -214,7 +214,7 @@ python3 kontrol.py
 
 ### Adım 4: (Opsiyonel) Görüntü İşleme + SLAM
 ```bash
-cd ~/Desktop/my_robot_ws/scripts/goruntuisleme
+cd ~/Desktop/my_robot_ws/scripts/vision
 python3 withmap.py   # Tam SLAM sistemi
 # veya
 python3 calistir2.py  # Sadece YOLO tespiti
@@ -265,7 +265,7 @@ cd ~/Desktop/my_robot_ws/scripts
 python3 kontrol.py
 
 # Terminal 3: Görüntü İşleme (opsiyonel)
-cd ~/Desktop/my_robot_ws/scripts/goruntuisleme
+cd ~/Desktop/my_robot_ws/scripts/vision
 python3 withmap.py
 
 # Terminal 4: Navigasyon (opsiyonel)

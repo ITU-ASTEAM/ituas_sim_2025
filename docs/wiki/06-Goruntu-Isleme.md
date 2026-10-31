@@ -2,13 +2,13 @@
 
 ## Genel Bakış
 
-Görüntü işleme sistemi `scripts/goruntuisleme/` klasöründe yer alır. YOLO nesne algılama, derinlik kamerası ile mesafe ölçümü ve LiDAR ile sensör füzyonu yaparak gerçek zamanlı SLAM haritası oluşturur.
+Görüntü işleme sistemi `scripts/vision/` klasöründe yer alır. YOLO nesne algılama, derinlik kamerası ile mesafe ölçümü ve LiDAR ile sensör füzyonu yaparak gerçek zamanlı SLAM haritası oluşturur.
 
 ---
 
 ## `withmap.py` - Mistik SLAM v6 ⭐ (Ana Sistem)
 
-**Konum:** `scripts/goruntuisleme/withmap.py`  
+**Konum:** `scripts/vision/withmap.py`  
 **Sınıf:** `MistikHaritaSistemi`
 
 Bu projennin en kapsamlı scriptidir. Tüm sensör verilerini birleştirerek gerçek zamanlı harita oluşturur.
@@ -92,7 +92,7 @@ Program kapandığında tüm tespit edilen nesnelerin listesini yazdırır:
 
 ## `calistir2.py` - Basit YOLO Tespiti
 
-**Konum:** `scripts/goruntuisleme/calistir2.py`  
+**Konum:** `scripts/vision/calistir2.py`  
 **Sınıf:** `MistikVizyonSistemi`
 
 Haritasız, sadece YOLO tespiti yapan basit versiyon.
@@ -113,7 +113,7 @@ Haritasız, sadece YOLO tespiti yapan basit versiyon.
 
 ## `forrecord.py` - Video Kayıt
 
-**Konum:** `scripts/goruntuisleme/forrecord.py`
+**Konum:** `scripts/vision/forrecord.py`
 
 Simülasyon görüntüsünü AVI formatında kaydeder. YOLO eğitim verisi toplamak için kullanılır.
 
@@ -125,7 +125,7 @@ Simülasyon görüntüsünü AVI formatında kaydeder. YOLO eğitim verisi topla
 | Çözünürlük | Kamera çözünürlüğü (640x480) |
 
 ```bash
-cd scripts/goruntuisleme
+cd scripts/vision
 python3 forrecord.py
 # Çıktı: egitim_5dk.avi
 ```

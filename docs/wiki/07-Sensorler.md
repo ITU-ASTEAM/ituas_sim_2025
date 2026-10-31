@@ -8,7 +8,7 @@ Sensör verilerini Gazebo Transport üzerinden okuyan yeniden kullanılabilir Py
 
 ## `kamera_modulu.py` - Kamera Modülü
 
-**Konum:** `scripts/goruntuisleme/kamera_modulu.py`  
+**Konum:** `scripts/vision/kamera_modulu.py`  
 **Sınıf:** `KameraModulu`
 
 Gazebo'daki RGB ve derinlik kameralarından görüntü alan modül.
@@ -55,7 +55,7 @@ Topic adında `"depth"` kelimesi varsa otomatik olarak derinlik moduna geçer:
 
 ## `lidar_modulu.py` - LiDAR Modülü
 
-**Konum:** `scripts/goruntuisleme/lidar_modulu.py`  
+**Konum:** `scripts/vision/lidar_modulu.py`  
 **Sınıf:** `LidarModulu`
 
 Gazebo'daki GPU LiDAR sensöründen veri okuyan ve işleyen modül.
@@ -116,7 +116,7 @@ Greedy nearest-neighbor kümeleme:
 
 ## `position.py` - Pozisyon Modülü
 
-**Konum:** `scripts/goruntuisleme/position.py`  
+**Konum:** `scripts/vision/position.py`  
 **Sınıf:** `PozisyonModulu`
 
 Teknenin Gazebo'daki anlık pozisyonunu (x, y, yaw) okuyan modül.
