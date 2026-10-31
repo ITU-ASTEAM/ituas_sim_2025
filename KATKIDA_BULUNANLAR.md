@@ -23,14 +23,14 @@
     <td align="center">
       <a href="https://github.com/metehanllc">
         <img src="https://github.com/metehanllc.png?size=200" width="100" alt="metehanllc"/><br/>
-        <sub><b>metehanllc</b></sub>
+        <sub><b>Metin Metehan Lüleci</b></sub>
       </a><br/>
       <sub>@metehanllc</sub>
     </td>
     <td align="center">
       <a href="https://github.com/barbarossa2733">
         <img src="https://github.com/barbarossa2733.png?size=200" width="100" alt="barbarossa2733"/><br/>
-        <sub><b>barbarossa2733</b></sub>
+        <sub><b>Barbaros Efe Çiçekci</b></sub>
       </a><br/>
       <sub>@barbarossa2733</sub>
     </td>
