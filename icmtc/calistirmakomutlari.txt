@@ -1,0 +1,5 @@
+TERMİNAL 3:      
+ros2 launch depthai_ros_driver camera.launch.py
+
+TERMİNAL 4:
+ros2 launch velodyne velodyne-all-nodes-VLP16-launch.py

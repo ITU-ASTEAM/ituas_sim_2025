@@ -1,0 +1,3 @@
+.pt dosyasının .engine dosyasına çevirimi kodun çalışacağı cihazda yapılmalıdır.
+Gereken kütüphaneleri JETSON ORİN NX için yükledim. Yazdığımız kod hem pt hem engine dosyasıyla stabil çalışır.
+Sadece .engine dosyası binary dönüştürülmüş bir formda olduğundan 2-5 kat daha hızlı ve optimize çalışabilir.

@@ -1,0 +1,115 @@
+{
+  // Bu dosya JSONC'dir (yorum satırlı JSON) — standart JSON yorumu desteklemez,
+  // oak_common.py bu dosyayı yüklerken her satırdaki "//" ve sonrasını atıp
+  // json.loads ile parse eder (bkz. oak_common._load_config). Kod değiştirmeden,
+  // tek bu dosyayı düzenleyip node'ları yeniden başlatarak ayarları değiştirebilirsiniz.
+
+  // --- LiDAR ön işleme ---
+  "LIDAR_Z_MIN": -0.30,                  // m, su yüzeyi bandı ALT sınırı (montaj yüksekliğine göre TBD)
+  "LIDAR_Z_MAX": 0.30,                   // m, su yüzeyi bandı ÜST sınırı (TBD)
+  "LIDAR_CLUSTER_DISTANCE": 1.5,         // m, bir noktanın "aynı kümede" sayılması için tohuma azami mesafe
+  "LIDAR_MIN_CLUSTER_POINTS": 2,         // bir kümenin geçerli sayılması için gereken minimum nokta sayısı
+  "MAX_LIDAR_POINTS_PER_SCAN": 8000,     // BİR taramada işlenecek azami nokta — aşılırsa (sahil/yağmur/sıçrama
+                                          // gibi anormal yoğun sahnelerde) rastgele bu sayıya altörneklenir.
+                                          // Kümeleme performansının en kötü durumda bile sınırlı kalmasını
+                                          // garanti eden son çare — normal/seyrek taramalarda devreye girmez.
+
+  // --- Algılama/haritalama alanı ---
+  "MAP_RADIUS_M": 20.0,                  // m, gemi merkezli DAİRESEL algılama yarıçapı (yönlü kutu YERİNE).
+                                          // Sadece hangi YENİ LiDAR noktalarının kümelemeye dahil edileceğini
+                                          // belirler — onaylanmış (bkz. CONFIRMED_TRACK_MIN_CONFIDENCE) bir
+                                          // track bu alanın dışına çıksa da SİLİNMEZ.
+
+  // --- LiDAR Ego-Motion (GPS'siz konum kestirimi) ---
+  "EGO_MATCH_RADIUS_M": 2.0,             // m, kare-arası küme eşleştirme arama yarıçapı (öteleme kestirimi)
+  "MIN_EGO_MATCHES": 2,                  // bundan az eşleşme varsa öteleme güvenilmez sayılır, o kare atlanır
+  "MAX_SHIP_SPEED_MPS": 3.0,             // m/s, bu hızın üstü fiziksel olarak imkansız kabul edilip reddedilir
+  "MAX_SAFE_YAW_RATE_DEG_S": 20.0,        // derece/sn, gemi bundan HIZLI dönüyorsa (örn. tam güçle sert dönüş)
+                                          // fused_yaw'ın o anki değeri güvenilmez sayılır — VAR OLAN duba
+                                          // track'lerinin konumu bu tur sırasında GÜNCELLENMEZ (donuk kalır,
+                                          // ama SİLİNMEZ). Dönüş yavaşlayınca normale döner. Bu, "arkada kalan
+                                          // duba birden yanımıza savruluyor" sorununun birincil çözümüdür.
+
+  // --- Kalıcı Duba Takibi ---
+  "TRACK_MATCH_RADIUS_M": 2.5,           // m, yeni LiDAR kümesinin hangi mesafeye kadar var olan ID'ye bağlanacağı
+  "STALE_TRACK_MAX_AGE_S": 5.0,          // sn, RENGİ KİLİTLENMEMİŞ (kamera onayı olmayan — ham/gürültü/tanımsız)
+                                          // track bu süre görülmezse silinir. confidence yüksek olsa bile (sırf
+                                          // LiDAR'da tekrar tekrar görülmüş olsa bile) kamera rengi YOKSA bu
+                                          // kısa süreye tabidir — aksi halde gürültü haritayı şişirir.
+  "MAX_TRACK_CONFIDENCE": 50,            // bir track'in confidence sayacının doyacağı (saturate) üst sınır
+  "CONFIRMED_TRACK_MIN_CONFIDENCE": 5,   // Sadece RViz'de ham/tekrar-görülmüş ayrımı VE APF/costmap'in bir
+                                          // track'i "dikkate almaya değer" sayması için kullanılır — ARTIK
+                                          // KALICILIK ANLAMINA GELMİYOR (bkz. CONFIRMED_TRACK_RETENTION_S).
+  "CONFIRMED_TRACK_RETENTION_S": 300.0,  // sn (5 dk), RENGİ KİLİTLENMİŞ (kamera tarafından gerçekten onaylanmış)
+                                          // bir track bu süre görülmezse silinir. Kalıcılık artık "sonsuza dek"
+                                          // değil "çok uzun ama sonlu" — görev süresi (max ~10dk) düşünülerek
+                                          // seçildi: gemi ne kadar uzaklaşırsa uzaklaşsın dubayı unutmaz, ama
+                                          // gürültüden gelen sahte track'ler sonsuza dek birikmez.
+  "MAX_TOTAL_TRACKS": 300,               // Yukarıdakiler bir şekilde yetersiz kalırsa (aşırı gürültülü sahne)
+                                          // son çare güvenlik tavanı — bu sayı aşılırsa en eski görülen
+                                          // (önce renksiz, sonra gerekirse renkli) track'ler silinir.
+  "MAX_TRACK_JUMP_M": 1.2,                // m, dubalar SABİTTİR — var olan bir track için yeni ölçüm bu kadar
+                                          // "sıçrarsa" hemen kabul edilmez (muhtemelen anlık yaw hatası,
+                                          // dubanın gerçekten yer değiştirmesi DEĞİL). BİLEREK
+                                          // TRACK_MATCH_RADIUS_M(2.5)'ten KÜÇÜK — aksi halde bir sıçrama zaten
+                                          // eşleşme yarıçapını aşıp bambaşka/yeni bir track açardı, bu korumaya
+                                          // hiç sıra gelmezdi. Bu, MAX_SAFE_YAW_RATE_DEG_S'in yakalayamadığı
+                                          // (yavaş dönüş ama yine de küçük yaw sapması gibi) durumlar için
+                                          // İKİNCİL bir güvenlik ağıdır. Bkz. JUMP_CONFIRM_COUNT.
+  "JUMP_CONFIRM_COUNT": 3,               // MAX_TRACK_JUMP_M'i aşan bir sıçrama, ART ARDA bu kadar kez AYNI
+                                          // yeni konumda tutarlı gelirse gerçek bir yeniden-konumlama (yaw artık
+                                          // düzeldi) sayılıp kabul edilir — tek seferlik anlık hata değilse.
+  "FUSION_DISTANCE_M": 2.5,              // m, kamera+derinlik adayının bir LiDAR track'ine bağlanma eşiği
+  "FUSION_AMBIGUITY_MARGIN_M": 0.5,      // m, en yakın İKİ track adayı birbirine bu mesafeden daha yakınsa
+                                          // (hangisi olduğu belirsizse) kamera oyu HİÇBİRİNE verilmez — küçük
+                                          // bir kamera/derinlik kayması (~30cm) oyun yanlış/komşu bir kümeye
+                                          // "savrulmasını" önler.
+  "COLOR_VOTE_THRESHOLD": 5,             // bir renk bu kadar oy alınca kilitlenir (basit N-oy şeması)
+
+  // --- Kamera/LiDAR node arası poz senkronizasyonu ---
+  "EGO_POSE_STALE_WARN_S": 1.0,          // sn, kamera node'un elindeki /njord/ego_pose bu süreden eskiyse
+                                          // (LiDAR node yavaşlamış/düşmüş olabilir) uyarı loglanır — tespit
+                                          // yine de üretilir, sadece bilgilendirme amaçlıdır.
+
+  // --- Yönelim (yaw) kaynak seçimi: OAK IMU + Pixhawk füzyon / tek kaynağa düşme ---
+  "IMU_STALE_TIMEOUT_S": 0.1,            // sn, OAK IMU'dan bu süredir mesaj gelmediyse "yok" sayılır —
+                                          // fused_yaw doğrudan Pixhawk'a (ship_yaw) düşer (füzyon KAPANIR,
+                                          // ama yönelim ASLA donuk kalmaz). Durum değişimi loglanır.
+                                          // (OAK IMU ~85Hz yayınlıyor, yani 0.1sn ~8-9 mesajlık pay bırakır.)
+  "ODOM_STALE_TIMEOUT_S": 0.1,           // sn, Pixhawk'tan bu süredir mesaj gelmediyse "yok" sayılır —
+                                          // fused_yaw sadece OAK IMU jiroskobundan entegre edilir (mutlak
+                                          // referans yok, zamanla kayabilir ama donuk kalmaktan iyidir).
+                                          // Durum değişimi loglanır.
+
+  // --- Gate-Geçiş Navigasyonu (waypoint_generator.py mantığı — Nav2/GPS YOK) ---
+  // Renk şeması: SARI = orta/engel, KIRMIZI+YEŞİL (ikisi birlikte) = kenar/gate dubası.
+  "LOOK_AHEAD_M": 20.0,                  // m, önde aranacak sarı (engel) için azami mesafe
+  "WAYPOINT_OFFSET_M": 2.0,              // m, kapı ortasından hedeflenen ileri ofset
+  "GOAL_TOLERANCE_M": 1.5,               // m, bu mesafe içindeyse hedefe ulaşıldı sayılır
+  "MIN_SAFE_DIST_M": 2.5,                // m, hesaplanan ara hedef bir dubaya bu kadardan
+                                          // yakınsa dubadan uzağa doğru düzeltilir
+  "SIDE_EDGE_MAX_M": 8.0,                // m, bir kenar (kırmızı/yeşil) dubasının "bu sarıya
+                                          // ait" sayılması için azami mesafe
+
+  // --- Sürüş P-Kontrolü (Nav2 YOK — her tick'te hedef yeniden hesaplanıp sürekli sürülür) ---
+  "STEER_KP": 0.8,                       // hedefe bearing hatasından dümen ekseni oransal kazancı
+  "MAX_STEER_AXIS": 1.0,                 // [-1,1], azami dümen ekseni büyüklüğü
+  "MIN_THROTTLE_AXIS": 0.15,             // [0,1], sert dönüşte bile korunan asgari gaz ekseni
+
+  // --- Motor Çıkışı (RC Override — /mavros/rc/override, /cmd_vel YERİNE) ---
+  // Gerçek Jetson testinde /cmd_vel'in hiçbir şeyi sürmediği, tekneyi asıl
+  // /mavros/rc/override'ın sürdüğü anlaşıldı — RC-override script'indeki mixing/PWM
+  // matematiği birebir buraya taşındı (bkz. oak_common.calculate_pwm/mix_gaz_dumen).
+  "KANAL_DUMEN": 0,                      // CH1 — ArduPilot'un kendi skid-steer mixer'i alıyor
+  "KANAL_GAZ": 2,                        // CH3
+  "DUMEN_YONU": 1,                       // sol/sağ motorlar ters çalışırsa -1 yapın
+  "RC_PWM_CENTER": 1500,
+  "RC_PWM_SCALE": 400,
+  "RC_PWM_DEADZONE": 30,                 // bu kadar merkeze yakınsa tam nötr (1500) kabul edilir
+  "RC_PWM_MIN": 1100,
+  "RC_PWM_MAX": 1900,
+
+  // --- Local Costmap ---
+  "COSTMAP_RES": 0.2,                    // m/hücre, costmap çözünürlüğü
+  "COSTMAP_SIZE": 20.0                   // m, kare costmap'in kenar uzunluğu
+}
