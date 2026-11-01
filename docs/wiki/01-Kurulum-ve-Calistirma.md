@@ -56,6 +56,8 @@ Q. Çıkış
 
 ### Full Otomatik Kurulum (Önerilen)
 
+> ⚠️ **Bilinen hata:** `A` seçeneği şu an 6. adımda `TypeError` ile duruyor (`setup.py` 6. adımı `step_6_rename(auto=True)` diye çağırıyor, fonksiyon parametre almıyor). Arşivde kod düzeltilmedi; adımları menüden tek tek (1 → 7) çalıştır.
+
 Menüden **`A`** seçeneğini gir. Script sırasıyla:
 
 | Adım | İşlem | Açıklama |
@@ -128,15 +130,17 @@ source install/setup.bash
 
 ### Adım 6: İsim/Yol Düzenle
 
-SDF ve launch dosyalarındaki hardcoded yollar özgün geliştiricinin kullanıcı adını (`gauss`) içerir. Senin sisteminde çalışması için bu yolların güncellenmesi gerekir.
+`my_robot_description` içindeki SDF dosyalarında sabit yollar Jetson'daki kullanıcı adını (`jetson`) içerir. Senin sisteminde çalışması için bu yolların güncellenmesi gerekir.
 
-`setup.py` bunu otomatik yapar (menü seçenek **6**). Elle yapmak istersen:
+`setup.py` bunu otomatik yapar (menü seçenek **6**). Eski isim sorulduğunda `jetson` yaz; varsayılan değer olan `gauss` hiçbir dosyayı değiştirmez. Elle yapmak istersen:
 
 ```bash
-# Örnek: /home/gauss/ → /home/senin_adin/
+# Örnek: /home/jetson/ → /home/senin_adin/
 find src/my_robot_description -name "*.sdf" -o -name "*.launch.py" | \
-  xargs sed -i 's|/home/gauss/|/home/SENIN_ADIN/|g'
+  xargs sed -i 's|/home/jetson/|/home/SENIN_ADIN/|g'
 ```
+
+Bu adım yalnızca `my_robot_description` klasörüne dokunur. Diğer klasörlerdeki eski yollar ana README'deki **Bilinen Eski Yollar** bölümünde listeli.
 
 > ⚠️ **ÖNEMLİ:** Bu adım yapılmazsa Gazebo mesh/model dosyalarını bulamaz ve tekne görünmez!
 
@@ -252,7 +256,7 @@ rm -rf /dev/shm/ign-* /dev/shm/gz-* /tmp/.ignition /tmp/.gz
 # === İLK KURULUM (tek sefer) ===
 cd ~/Desktop
 sudo python3 setup.py
-# Menüden 'A' seçerek full otomatik kurulum yap
+# Menüden 1'den 7'ye kadar adımları tek tek çalıştır ('A' şu an 6. adımda duruyor)
 # Terminali kapat ve yenisini aç
 
 # === GÜNLÜK KULLANIM ===
