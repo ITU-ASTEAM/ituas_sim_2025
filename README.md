@@ -14,6 +14,7 @@ GitHub'ın dosya boyutu limitleri (100MB) ve veri seti saklama politikaları ned
 | :--- | :--- | :--- |
 | **Golet.dae** | 100MB limitini aştığı için Drive üzerinden sunulmaktadır. | [İndir](https://drive.google.com/drive/folders/1548BU8YdyO9oBsV8xFsSzGwSMaZHzrnU?usp=sharing) |
 | **Eğitim Datası** | Simülasyon görüntü işleme eğitim veri seti (YOLO/Vision). | [İndir](https://drive.google.com/drive/folders/1XHSol1CxVLURtLInUD2BIfSHCaRn7t5O?usp=drive_link) |
+| **VeloView 5.1.0** | Velodyne VLP-16 lidarının orijinal yazılımı (508 MB). Eskiden `tools/veloview` altındaydı, ayrı repoya taşındı. | [Repo](https://github.com/ITU-ASTEAM/velodyne_orjinal_yazilim) |
 
 
 ## 🛠️ Ön Hazırlık
