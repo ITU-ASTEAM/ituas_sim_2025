@@ -78,7 +78,7 @@ ls ~/Desktop/setup.py   # Bu dosya MUTLAKA olmalı!
 # 2. Kurulumu başlat
 cd ~/Desktop
 sudo python3 setup.py
-# Menüden 'A' seç → Full Otomatik Kurulum (Adım 1-7)
+# Menüden 1'den 7'ye kadar adımları tek tek çalıştır ('A' şu an 6. adımda duruyor)
 ```
 
 Kurulum bittikten sonra terminali kapat ve yenisini aç.
